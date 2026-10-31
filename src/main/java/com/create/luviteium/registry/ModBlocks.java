@@ -2,6 +2,7 @@ package com.create.luviteium.registry;
 
 import com.create.luviteium.CreateLuviteium;
 import com.create.luviteium.content.CastingTableBlock;
+import com.create.luviteium.content.BiomassGeneratorBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -23,9 +24,9 @@ public final class ModBlocks {
             "casting_table",
             () -> new CastingTableBlock(BlockBehaviour.Properties.of().strength(2.5f, 6.0f).sound(SoundType.METAL)));
 
-    public static final DeferredBlock<Block> BIOMASS_GENERATOR = BLOCKS.registerSimpleBlock(
+    public static final DeferredBlock<BiomassGeneratorBlock> BIOMASS_GENERATOR = BLOCKS.register(
             "biomass_generator",
-            BlockBehaviour.Properties.of().strength(3.0f, 6.0f).sound(SoundType.METAL));
+            () -> new BiomassGeneratorBlock(BlockBehaviour.Properties.of().strength(3.0f, 6.0f).sound(SoundType.METAL)));
 
     private ModBlocks() {}
 }

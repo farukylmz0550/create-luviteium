@@ -75,9 +75,21 @@ shapes. The tool tier centralizes the 1,250 durability, 7.5 mining speed, 4.5 at
 bonus, enchantability, and Luviteium-ingot repair values. Cast armor outputs are real
 helmet, chestplate, leggings, and boots with an 18-point total defense target,
 toughness, knockback resistance, and the same ingot repair ingredient. Hot ingots and
-all hot tool heads have Create bulk-washing recipes; cooled ingots produce panels via
-the Mechanical Press. JSON validation, the full Gradle build, and dedicated-server
-recipe loading all pass; the server reaches `Done` with 2,842 recipes loaded.
+all hot tool heads have Create bulk-washing recipes; hot ingots produce panels via the
+Mechanical Press after the cooled-ingot intermediate was removed from the product
+family. JSON validation, the full Gradle build, and dedicated-server recipe loading
+all pass; the server reaches `Done` with 2,841 recipes loaded.
+
+## Milestone 7 status
+
+**Complete for the current generator implementation scope.** The Biomass Generator is
+now a Create directional kinetic block with a real generating block entity, one-slot
+fuel inventory capped at 64 items, automatic restart, no redstone gate, 64 RPM output,
+and 512 SU stress capacity. Fuel acceptance is an explicit organic whitelist; coal,
+charcoal, lava, and bone meal are excluded. Burn durations use the documented nearest
+whole-tick rounding for the specified fractional values, and the inventory capability
+is exposed for Create Funnel/Chute insertion. Full survival interaction and cumulative
+64-stack timing checks remain Milestone 8 QA.
 
 ## Completed in this pass
 
@@ -107,10 +119,9 @@ recipe loading all pass; the server reaches `Done` with 2,842 recipes loaded.
 - Added the remaining eight Deployer mold recipes and explicit casting amount mapping:
   tool heads at 288 mB, helmet/boots at 432 mB, chestplate at 576 mB, and leggings at
   720 mB. Placeholder hot-head/armor output items and basic palette assets are present.
-- Added Create fan washing recipes that convert hot ingots and tool heads into cooled parts,
-  plus a Mechanical Press recipe that converts one cooled ingot into one Luviteium Panel.
-  The cooled items currently reuse the first-pass palette models; dedicated polished textures
-  remain a later visual pass.
+- Added Create fan washing recipes that convert hot tool heads into cooled parts, plus a
+  Mechanical Press recipe that converts one hot ingot into one Luviteium Panel. The separate
+  cooled-ingot item was removed during Milestone 7.
 - Replaced the first-pass placeholder art with recolored 1.21.1 vanilla-style 16x16 item
   silhouettes for tools, armor, ingots, raw material, panels, and molds. Cool Luviteium uses
   a green palette; hot variants retain a distinct orange heat palette.
@@ -136,6 +147,6 @@ recipe loading all pass; the server reaches `Done` with 2,842 recipes loaded.
 The Casting Table currently implements all ten mold paths as registered outputs but has
 no player GUI; actual tool/armor attributes, hot armor cooling, and casting-table visual
 polish remain. Create Depot recipes, gear/material registration, dedicated item/block
-textures, and kinetic Biomass Generator behavior remain Milestones 6–7. The Biomass
-Generator is still a placeholder and must not be presented as functional until
-implemented and tested.
+textures remain a later visual pass. The Biomass Generator now has its functional kinetic
+and fuel implementation; its machine assets remain documented placeholders until the final
+texture pass.

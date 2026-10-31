@@ -1,1 +1,1 @@
-{"variants":{"":{"model":"luviteium:block/biomass_generator"}}}
+{"variants":{"facing=north":{"model":"luviteium:block/biomass_generator"},"facing=south":{"model":"luviteium:block/biomass_generator","y":180},"facing=east":{"model":"luviteium:block/biomass_generator","y":90},"facing=west":{"model":"luviteium:block/biomass_generator","y":270},"facing=up":{"model":"luviteium:block/biomass_generator","x":270},"facing=down":{"model":"luviteium:block/biomass_generator","x":90}}}

@@ -32,6 +32,8 @@ public final class CreateLuviteium {
                 (table, side) -> table.getFluidHandler(side));
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, ModBlockEntities.CASTING_TABLE.get(),
                 (table, side) -> table.getItemHandler(side));
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, ModBlockEntities.BIOMASS_GENERATOR.get(),
+                (generator, side) -> generator.getItemHandler(side));
     }
 
     private void rejectDamagedMoldSamples(DeployerRecipeSearchEvent event) {

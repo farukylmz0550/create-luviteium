@@ -67,6 +67,18 @@ contract that native Create JSON ingredients cannot express. JSON validation, th
 Gradle build, and a dedicated-server startup/reload pass all succeed. Survival-world
 Deployer interaction remains part of the final gameplay QA pass.
 
+## Milestone 6 status
+
+**Complete for the products and processing scope.** Cooled tool heads now craft into
+functional Luviteium pickaxe, axe, shovel, hoe, and sword items using the vanilla
+shapes. The tool tier centralizes the 1,250 durability, 7.5 mining speed, 4.5 attack
+bonus, enchantability, and Luviteium-ingot repair values. Cast armor outputs are real
+helmet, chestplate, leggings, and boots with an 18-point total defense target,
+toughness, knockback resistance, and the same ingot repair ingredient. Hot ingots and
+all hot tool heads have Create bulk-washing recipes; cooled ingots produce panels via
+the Mechanical Press. JSON validation, the full Gradle build, and dedicated-server
+recipe loading all pass; the server reaches `Done` with 2,842 recipes loaded.
+
 ## Completed in this pass
 
 - Gradle/NeoForge project skeleton and Create Maven repositories.

@@ -19,6 +19,7 @@ public final class CreateLuviteium {
     public CreateLuviteium(IEventBus modBus) {
         ModBlocks.BLOCKS.register(modBus);
         ModItems.ITEMS.register(modBus);
+        ModItems.ARMOR_MATERIALS.register(modBus);
         ModFluids.FLUID_TYPES.register(modBus);
         ModFluids.FLUIDS.register(modBus);
         ModBlockEntities.BLOCK_ENTITIES.register(modBus);

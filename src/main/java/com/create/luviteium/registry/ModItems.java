@@ -1,13 +1,41 @@
 package com.create.luviteium.registry;
 
 import com.create.luviteium.CreateLuviteium;
+import com.create.luviteium.content.LuviteiumTier;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.DiggerItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.SwordItem;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.resources.ResourceLocation;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.List;
+import java.util.Map;
+
 public final class ModItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(CreateLuviteium.MOD_ID);
+    public static final DeferredRegister<ArmorMaterial> ARMOR_MATERIALS =
+            DeferredRegister.create(BuiltInRegistries.ARMOR_MATERIAL, CreateLuviteium.MOD_ID);
+
+    public static final DeferredHolder<ArmorMaterial, ArmorMaterial> LUVITEIUM_ARMOR_MATERIAL =
+            ARMOR_MATERIALS.register("luviteium", () -> new ArmorMaterial(
+                    Map.of(
+                            ArmorItem.Type.HELMET, 3,
+                            ArmorItem.Type.CHESTPLATE, 8,
+                            ArmorItem.Type.LEGGINGS, 6,
+                            ArmorItem.Type.BOOTS, 3),
+                    18,
+                    net.minecraft.sounds.SoundEvents.ARMOR_EQUIP_DIAMOND,
+                    () -> Ingredient.of(ModItems.LUVITEIUM_INGOT.get()),
+                    List.of(new ArmorMaterial.Layer(ResourceLocation.fromNamespaceAndPath(CreateLuviteium.MOD_ID, "luviteium"))),
+                    2.0f,
+                    0.1f));
 
     public static final DeferredItem<BlockItem> LUVITEIUM_ORE = ITEMS.registerSimpleBlockItem("luviteium_ore", ModBlocks.LUVITEIUM_ORE);
     public static final DeferredItem<BlockItem> LUVITEIUM_BLOCK = ITEMS.registerSimpleBlockItem("luviteium_block", ModBlocks.LUVITEIUM_BLOCK);
@@ -29,10 +57,15 @@ public final class ModItems {
     public static final DeferredItem<Item> LUVITEIUM_SHOVEL_HEAD = ITEMS.registerSimpleItem("luviteium_shovel_head");
     public static final DeferredItem<Item> LUVITEIUM_HOE_HEAD = ITEMS.registerSimpleItem("luviteium_hoe_head");
     public static final DeferredItem<Item> LUVITEIUM_SWORD_BLADE = ITEMS.registerSimpleItem("luviteium_sword_blade");
-    public static final DeferredItem<Item> LUVITEIUM_HELMET = ITEMS.registerSimpleItem("luviteium_helmet");
-    public static final DeferredItem<Item> LUVITEIUM_CHESTPLATE = ITEMS.registerSimpleItem("luviteium_chestplate");
-    public static final DeferredItem<Item> LUVITEIUM_LEGGINGS = ITEMS.registerSimpleItem("luviteium_leggings");
-    public static final DeferredItem<Item> LUVITEIUM_BOOTS = ITEMS.registerSimpleItem("luviteium_boots");
+    public static final DeferredItem<Item> LUVITEIUM_PICKAXE = ITEMS.register("luviteium_pickaxe", () -> new DiggerItem(LuviteiumTier.INSTANCE, net.minecraft.tags.BlockTags.MINEABLE_WITH_PICKAXE, new Item.Properties()));
+    public static final DeferredItem<Item> LUVITEIUM_AXE = ITEMS.register("luviteium_axe", () -> new DiggerItem(LuviteiumTier.INSTANCE, net.minecraft.tags.BlockTags.MINEABLE_WITH_AXE, new Item.Properties()));
+    public static final DeferredItem<Item> LUVITEIUM_SHOVEL = ITEMS.register("luviteium_shovel", () -> new DiggerItem(LuviteiumTier.INSTANCE, net.minecraft.tags.BlockTags.MINEABLE_WITH_SHOVEL, new Item.Properties()));
+    public static final DeferredItem<Item> LUVITEIUM_HOE = ITEMS.register("luviteium_hoe", () -> new DiggerItem(LuviteiumTier.INSTANCE, net.minecraft.tags.BlockTags.MINEABLE_WITH_HOE, new Item.Properties()));
+    public static final DeferredItem<Item> LUVITEIUM_SWORD = ITEMS.register("luviteium_sword", () -> new SwordItem(LuviteiumTier.INSTANCE, new Item.Properties()));
+    public static final DeferredItem<Item> LUVITEIUM_HELMET = ITEMS.register("luviteium_helmet", () -> new ArmorItem(LUVITEIUM_ARMOR_MATERIAL, ArmorItem.Type.HELMET, new Item.Properties()));
+    public static final DeferredItem<Item> LUVITEIUM_CHESTPLATE = ITEMS.register("luviteium_chestplate", () -> new ArmorItem(LUVITEIUM_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+    public static final DeferredItem<Item> LUVITEIUM_LEGGINGS = ITEMS.register("luviteium_leggings", () -> new ArmorItem(LUVITEIUM_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+    public static final DeferredItem<Item> LUVITEIUM_BOOTS = ITEMS.register("luviteium_boots", () -> new ArmorItem(LUVITEIUM_ARMOR_MATERIAL, ArmorItem.Type.BOOTS, new Item.Properties()));
     public static final DeferredItem<Item> BLANK_MOLD = ITEMS.registerSimpleItem("blank_mold");
 
     // The ten intentionally supported mold shapes. Source mappings are recorded in docs/molds.md.

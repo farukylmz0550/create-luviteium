@@ -1,4 +1,4 @@
-# Mold contract (Milestone 1)
+# Mold contract (Milestones 4–5)
 
 The first implementation keeps the mold family deliberately finite and explicit:
 

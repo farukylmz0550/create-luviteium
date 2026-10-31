@@ -44,6 +44,18 @@ are registered separately on the client. JSON validation, the full Gradle build,
 dedicated-server reload pass all succeed; the server reaches `Done` and loads the mixing
 recipe without parse errors.
 
+## Milestone 4 status
+
+**Complete for the casting-table and blank-mold scope.** The Casting Table uses the
+specified DBD/BKB/DBD recipe, keeps an exact-capacity molten-fluid tank selected by the
+current mold, casts at 20 ticks per 144 mB with proportional timing, persists inventory,
+fluid, and progress through NBT, and prevents mold extraction while fluid or progress is
+active. The ten explicit mold shapes and output mappings are registered, and the DDD/III
+blank-mold recipe is present. Item and fluid capabilities expose the table to Create
+automation. Undamaged sample enforcement for specialized mold creation is intentionally
+tracked under Milestone 5 because it requires a custom validation path beyond the native
+Create deploying JSON contract.
+
 ## Completed in this pass
 
 - Gradle/NeoForge project skeleton and Create Maven repositories.

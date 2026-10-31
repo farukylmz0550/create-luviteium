@@ -1,6 +1,7 @@
 package com.create.luviteium.registry;
 
 import com.create.luviteium.CreateLuviteium;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -8,10 +9,10 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public final class ModItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(CreateLuviteium.MOD_ID);
 
-    public static final DeferredItem<Item> LUVITEIUM_ORE = ITEMS.registerSimpleBlockItem("luviteium_ore", ModBlocks.LUVITEIUM_ORE);
-    public static final DeferredItem<Item> LUVITEIUM_BLOCK = ITEMS.registerSimpleBlockItem("luviteium_block", ModBlocks.LUVITEIUM_BLOCK);
-    public static final DeferredItem<Item> CASTING_TABLE = ITEMS.registerSimpleBlockItem("casting_table", ModBlocks.CASTING_TABLE);
-    public static final DeferredItem<Item> BIOMASS_GENERATOR = ITEMS.registerSimpleBlockItem("biomass_generator", ModBlocks.BIOMASS_GENERATOR);
+    public static final DeferredItem<BlockItem> LUVITEIUM_ORE = ITEMS.registerSimpleBlockItem("luviteium_ore", ModBlocks.LUVITEIUM_ORE);
+    public static final DeferredItem<BlockItem> LUVITEIUM_BLOCK = ITEMS.registerSimpleBlockItem("luviteium_block", ModBlocks.LUVITEIUM_BLOCK);
+    public static final DeferredItem<BlockItem> CASTING_TABLE = ITEMS.registerSimpleBlockItem("casting_table", ModBlocks.CASTING_TABLE);
+    public static final DeferredItem<BlockItem> BIOMASS_GENERATOR = ITEMS.registerSimpleBlockItem("biomass_generator", ModBlocks.BIOMASS_GENERATOR);
 
     public static final DeferredItem<Item> RAW_LUVITEIUM = ITEMS.registerSimpleItem("raw_luviteium");
     public static final DeferredItem<Item> LUVITEIUM_INGOT = ITEMS.registerSimpleItem("luviteium_ingot");

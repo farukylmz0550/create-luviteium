@@ -1,12 +1,12 @@
 {
   "parent":"minecraft:block/cube",
   "textures":{
-    "up":"create:block/basin",
-    "down":"create:block/andesite_casing",
-    "north":"create:block/fluid_tank",
-    "south":"create:block/brass_casing",
-    "east":"create:block/brass_casing",
-    "west":"create:block/brass_casing",
-    "particle":"create:block/brass_casing"
+    "up":"luviteium:block/casting_table_top",
+    "down":"luviteium:block/casting_table_bottom",
+    "north":"luviteium:block/casting_table_tank",
+    "south":"luviteium:block/casting_table_side",
+    "east":"luviteium:block/casting_table_side",
+    "west":"luviteium:block/casting_table_side",
+    "particle":"luviteium:block/casting_table_side"
   }
 }

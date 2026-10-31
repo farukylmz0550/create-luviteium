@@ -1,12 +1,12 @@
 {
   "parent":"minecraft:block/cube",
   "textures":{
-    "up":"create:block/brass_casing",
-    "down":"create:block/andesite_casing",
-    "north":"create:block/fan_casing",
-    "south":"create:block/andesite_casing",
-    "east":"create:block/encased_pipe",
-    "west":"create:block/encased_pipe",
-    "particle":"create:block/andesite_casing"
+    "up":"luviteium:block/biomass_generator_top",
+    "down":"luviteium:block/biomass_generator_bottom",
+    "north":"luviteium:block/biomass_generator_front",
+    "south":"luviteium:block/biomass_generator_side",
+    "east":"luviteium:block/biomass_generator_pipe",
+    "west":"luviteium:block/biomass_generator_pipe",
+    "particle":"luviteium:block/biomass_generator_side"
   }
 }

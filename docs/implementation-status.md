@@ -53,10 +53,10 @@ the committed wrapper performs the Gradle sync without a globally installed Grad
 - Rebuilt the recolored PNGs with explicit vanilla alpha masks after palette tuning, avoiding
   accidental grayscale flattening and keeping the final green material shaded rather than
   emissive-looking.
-- Updated the Casting Table and Biomass Generator block models to use Create's own casing,
-  basin, fluid-tank, fan, and encased-pipe textures. The Casting Table's north face is now
-  visually tank-like for fluid piping, while its existing fluid capability remains the actual
-  automation connection point.
+- Copied the selected Create casing, basin, fluid-tank, fan, and encased-pipe PNGs into the
+  mod's own `textures/block` namespace and updated both machine models to consume those local
+  PNG assets. The Casting Table's north face is now visually tank-like for fluid piping, while
+  its existing fluid capability remains the actual automation connection point.
 
 ## Not yet implemented
 

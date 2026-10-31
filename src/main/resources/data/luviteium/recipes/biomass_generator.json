@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["DPD", "SMS", "DBP"],
+  "key": {
+    "D": {"item": "minecraft:iron_ingot"},
+    "P": {"item": "luviteium:luviteium_panel"},
+    "S": {"item": "create:shaft"},
+    "M": {"item": "create:mechanical_bearing"},
+    "B": {"item": "minecraft:blaze_rod"}
+  },
+  "result": {"id": "luviteium:biomass_generator", "count": 1}
+}

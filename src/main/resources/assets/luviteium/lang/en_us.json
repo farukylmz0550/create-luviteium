@@ -1,0 +1,20 @@
+{
+  "block.luviteium.luviteium_ore": "Luviteium Ore",
+  "block.luviteium.luviteium_block": "Luviteium Block",
+  "block.luviteium.casting_table": "Casting Table",
+  "block.luviteium.biomass_generator": "Biomass Generator",
+  "item.luviteium.raw_luviteium": "Raw Luviteium",
+  "item.luviteium.luviteium_ingot": "Luviteium Ingot",
+  "item.luviteium.luviteium_panel": "Luviteium Panel",
+  "item.luviteium.blank_mold": "Blank Mold",
+  "item.luviteium.ingot_mold": "Luviteium Ingot Mold",
+  "item.luviteium.pickaxe_head_mold": "Luviteium Pickaxe Head Mold",
+  "item.luviteium.axe_head_mold": "Luviteium Axe Head Mold",
+  "item.luviteium.shovel_head_mold": "Luviteium Shovel Head Mold",
+  "item.luviteium.hoe_head_mold": "Luviteium Hoe Head Mold",
+  "item.luviteium.sword_blade_mold": "Luviteium Sword Blade Mold",
+  "item.luviteium.helmet_mold": "Luviteium Helmet Mold",
+  "item.luviteium.chestplate_mold": "Luviteium Chestplate Mold",
+  "item.luviteium.leggings_mold": "Luviteium Leggings Mold",
+  "item.luviteium.boots_mold": "Luviteium Boots Mold"
+}

@@ -1,1 +1,1 @@
-{"type":"create:deploying","ingredients":[{"item":"luviteium:blank_mold"},{"item":"minecraft:iron_boots"}],"results":[{"id":"luviteium:boots_mold"}]}
+{"type":"create:deploying","ingredients":[{"item":"luviteium:blank_mold"},{"tag":"minecraft:foot_armor"}],"results":[{"id":"luviteium:boots_mold"}]}

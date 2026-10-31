@@ -1,1 +1,1 @@
-{"type":"create:deploying","ingredients":[{"item":"luviteium:blank_mold"},{"item":"minecraft:iron_chestplate"}],"results":[{"id":"luviteium:chestplate_mold"}]}
+{"type":"create:deploying","ingredients":[{"item":"luviteium:blank_mold"},{"tag":"minecraft:chest_armor"}],"results":[{"id":"luviteium:chestplate_mold"}]}

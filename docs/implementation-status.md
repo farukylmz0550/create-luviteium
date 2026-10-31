@@ -56,6 +56,17 @@ automation. Undamaged sample enforcement for specialized mold creation is intent
 tracked under Milestone 5 because it requires a custom validation path beyond the native
 Create deploying JSON contract.
 
+## Milestone 5 status
+
+**Complete for the current data-driven Deployer scope.** All ten mold recipes are
+registered: the ingot mold uses an iron ingot, while tool and armor molds accept the
+corresponding vanilla item tags. The deployer sample is consumed because the recipes
+do not keep the held item. A `DeployerRecipeSearchEvent` listener rejects damaged
+tools and armor when a blank mold is being formed, enforcing the full-durability
+contract that native Create JSON ingredients cannot express. JSON validation, the full
+Gradle build, and a dedicated-server startup/reload pass all succeed. Survival-world
+Deployer interaction remains part of the final gameplay QA pass.
+
 ## Completed in this pass
 
 - Gradle/NeoForge project skeleton and Create Maven repositories.
@@ -111,8 +122,8 @@ Create deploying JSON contract.
 ## Not yet implemented
 
 The Casting Table currently implements all ten mold paths as registered outputs but has
-no player GUI; undamaged-sample enforcement, actual tool/armor attributes, hot armor
-cooling, and casting-table visual polish remain. Create Depot recipes, gear/material
-registration, dedicated item/block textures, and kinetic Biomass Generator behavior remain
-Milestones 5–7. The Biomass Generator is still a placeholder and must not be presented as
-functional until implemented and tested.
+no player GUI; actual tool/armor attributes, hot armor cooling, and casting-table visual
+polish remain. Create Depot recipes, gear/material registration, dedicated item/block
+textures, and kinetic Biomass Generator behavior remain Milestones 6–7. The Biomass
+Generator is still a placeholder and must not be presented as functional until
+implemented and tested.

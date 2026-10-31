@@ -2,7 +2,7 @@
   "type": "create:deploying",
   "ingredients": [
     {"item": "luviteium:blank_mold"},
-    {"item": "minecraft:iron_pickaxe"}
+    {"tag": "minecraft:pickaxes"}
   ],
   "results": [
     {"id": "luviteium:pickaxe_head_mold"}

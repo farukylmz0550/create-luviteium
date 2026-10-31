@@ -16,8 +16,7 @@ The first implementation keeps the mold family deliberately finite and explicit:
 | Boots Mold | any vanilla boots | 432 mB | Luviteium boots |
 
 The sample is consumed and must have full durability. The specialized mold is reusable.
-The first two deployer recipe files now exist and use Create 6.0.10's `create:deploying`
-contract. Create's native JSON recipe format does not expose a durability predicate, so
-the full-durability requirement is currently documented but not enforced by those data
-recipes. A custom recipe condition/implementation remains required before this can be
-marked complete.
+All ten deployer recipe files use Create 6.0.10's `create:deploying` contract. Tool and
+armor samples are matched through vanilla item tags; a `DeployerRecipeSearchEvent`
+listener rejects a damaged sample when the depot input is a blank mold, because native
+Create JSON ingredients do not expose a durability predicate.

@@ -2,6 +2,7 @@ package com.create.luviteium;
 
 import com.create.luviteium.registry.ModBlocks;
 import com.create.luviteium.registry.ModItems;
+import com.create.luviteium.registry.ModFluids;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 
@@ -12,5 +13,7 @@ public final class CreateLuviteium {
     public CreateLuviteium(IEventBus modBus) {
         ModBlocks.BLOCKS.register(modBus);
         ModItems.ITEMS.register(modBus);
+        ModFluids.FLUID_TYPES.register(modBus);
+        ModFluids.FLUIDS.register(modBus);
     }
 }

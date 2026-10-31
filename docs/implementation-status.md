@@ -27,11 +27,15 @@ the committed wrapper performs the Gradle sync without a globally installed Grad
 - Corrected the NeoForge 1.21.1 userdev DSL, mod constructor event-bus API, and
   block-item generic types against the actual mappings. Both `./gradlew compileJava`
   and `./gradlew build` pass.
+- Registered source and flowing Molten Luviteium fluids with NeoForge `FluidType`
+  metadata and client still/flowing textures.
+- Added the verified Create 6.0.10 heated mixing recipe: 1 Raw Luviteium to 144 mB
+  Molten Luviteium. Recipe resources use the 1.21.1 singular `recipe` directory.
 
 ## Not yet implemented
 
-Block entities, fluids, Create heated mixing, Create Deployer/Depot recipes, casting
-progress/state persistence, gear/material registration, textures, cooling/
+Block entities, casting-table state, Create Deployer/Depot recipes, casting
+progress/state persistence, gear/material registration, item/block textures, cooling/
 washing, Mechanical Press integration, and kinetic Biomass Generator behavior remain
 Milestones 2–7. The four registered machine blocks are intentionally placeholders and
 must not be presented as functional until those systems are implemented and tested.

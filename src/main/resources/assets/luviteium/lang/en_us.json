@@ -16,5 +16,6 @@
   "item.luviteium.helmet_mold": "Luviteium Helmet Mold",
   "item.luviteium.chestplate_mold": "Luviteium Chestplate Mold",
   "item.luviteium.leggings_mold": "Luviteium Leggings Mold",
-  "item.luviteium.boots_mold": "Luviteium Boots Mold"
+  "item.luviteium.boots_mold": "Luviteium Boots Mold",
+  "fluid.luviteium.molten_luviteium": "Molten Luviteium"
 }

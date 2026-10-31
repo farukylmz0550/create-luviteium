@@ -30,5 +30,8 @@ Once Java 21 is installed, run:
 ```
 
 The first Gradle sync downloads and decompiles Minecraft/NeoForge dependencies.
-The current working tree is an early implementation scaffold; machine behavior,
-fluid integration, and the actual Create processing chain are not complete yet.
+The current implementation includes the casting table, Create fluid processing,
+Deployer mold flow, product recipes, and the Biomass Generator. See
+[`docs/implementation-status.md`](docs/implementation-status.md) and
+[`docs/qa-report.md`](docs/qa-report.md) for verified behavior and remaining manual
+gameplay checks.

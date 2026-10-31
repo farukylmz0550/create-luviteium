@@ -91,6 +91,14 @@ whole-tick rounding for the specified fractional values, and the inventory capab
 is exposed for Create Funnel/Chute insertion. Full survival interaction and cumulative
 64-stack timing checks remain Milestone 8 QA.
 
+## Milestone 8 status
+
+**Complete for automated QA and packaging.** A clean Gradle build, JSON validation,
+dedicated-server startup, recipe loading, stale cooled-ingot reference audit, and jar
+content inspection all pass. The final artifact is `build/libs/luviteium-0.1.0.jar`.
+The remaining items are explicitly documented in `docs/qa-report.md` as manual client
+or survival-world checks; they are not represented as automatically verified.
+
 ## Completed in this pass
 
 - Gradle/NeoForge project skeleton and Create Maven repositories.

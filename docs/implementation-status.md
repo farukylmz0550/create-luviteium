@@ -47,6 +47,9 @@ the committed wrapper performs the Gradle sync without a globally installed Grad
 - Replaced the first-pass placeholder art with recolored 1.21.1 vanilla-style 16x16 item
   silhouettes for tools, armor, ingots, raw material, panels, and molds. Cool Luviteium uses
   a green palette; hot variants retain a distinct orange heat palette.
+- Preserved transparent alpha backgrounds during recoloring and separated the cast tool-head
+  icons from their vanilla handles; pickaxe, axe, shovel, and hoe head outputs now show only
+  the cast head shape.
 
 ## Not yet implemented
 

@@ -53,10 +53,11 @@ the committed wrapper performs the Gradle sync without a globally installed Grad
 - Rebuilt the recolored PNGs with explicit vanilla alpha masks after palette tuning, avoiding
   accidental grayscale flattening and keeping the final green material shaded rather than
   emissive-looking.
-- Copied the selected Create casing, basin, fluid-tank, fan, and encased-pipe PNGs into the
-  mod's own `textures/block` namespace and updated both machine models to consume those local
-  PNG assets. The Casting Table's north face is now visually tank-like for fluid piping, while
-  its existing fluid capability remains the actual automation connection point.
+- Replaced the temporary referenced/vendor art with original 16x16 pixel textures authored for
+  this mod. The machine art borrows Create's visual language—brass trim, dark casing, tank
+  windows, fan hub, and pipe ports—without copying Create or vanilla PNG files. The Casting
+  Table's north face is visually tank-like for fluid piping, while its existing fluid
+  capability remains the actual automation connection point.
 
 ## Not yet implemented
 

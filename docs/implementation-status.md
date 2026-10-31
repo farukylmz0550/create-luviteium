@@ -21,11 +21,14 @@ are treated as compile-verified.
 - Initial English localization, model/blockstate stubs, blank mold/casting-table/generator
   shaped recipes, and Fortune ore loot table.
 - Explicit mold mapping in `docs/molds.md`.
+- First-pass data-driven ore placement from Y 0 through Y 32, with single-block
+  veins, stone/deepslate replacement, iron-tool gating, Fortune raw drops, and
+  Silk Touch ore drops.
 
 ## Not yet implemented
 
 Block entities, fluids, Create heated mixing, Create Deployer/Depot recipes, casting
-progress/state persistence, gear/material registration, worldgen, textures, cooling/
+progress/state persistence, gear/material registration, textures, cooling/
 washing, Mechanical Press integration, and kinetic Biomass Generator behavior remain
 Milestones 2–7. The four registered machine blocks are intentionally placeholders and
 must not be presented as functional until those systems are implemented and tested.

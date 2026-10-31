@@ -14,6 +14,13 @@ See [`docs/implementation-status.md`](docs/implementation-status.md) for the
 current milestone status and known compatibility gaps. The original design
 specification remains in [`create-luviteium-implementation-spec.md`](create-luviteium-implementation-spec.md).
 
+## Texture status
+
+The current 16x16 item and machine textures are placeholders. They are included
+to validate silhouettes, transparency, face orientation, and Create-style machine
+readability. They are expected to be replaced with the final art later without
+changing the registry names or model-facing texture paths.
+
 ## Build
 
 Once Java 21 is installed, run:

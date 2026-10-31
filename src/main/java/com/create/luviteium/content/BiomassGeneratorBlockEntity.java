@@ -5,12 +5,11 @@ import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.ItemStackHandler;
 
@@ -77,46 +76,33 @@ public class BiomassGeneratorBlockEntity extends GeneratingKineticBlockEntity {
         return inventory;
     }
 
-    public static boolean isValidFuel(ItemStack stack) {
-        return !stack.isEmpty() && (stack.is(ItemTags.LOGS) || stack.is(ItemTags.PLANKS)
-                || stack.is(ItemTags.LEAVES) || stack.is(ItemTags.SAPLINGS)
-                || stack.is(ItemTags.FLOWERS) || stack.is(Items.STICK)
-                || stack.is(Items.WHEAT_SEEDS) || stack.is(Items.BEETROOT_SEEDS)
-                || stack.is(Items.MELON_SEEDS) || stack.is(Items.PUMPKIN_SEEDS)
-                || stack.is(Items.TORCHFLOWER_SEEDS) || stack.is(Items.PITCHER_POD)
-                || stack.is(Items.WHEAT) || stack.is(Items.BEETROOT)
-                || stack.is(Items.CARROT) || stack.is(Items.POTATO)
-                || stack.is(Items.CACTUS) || stack.is(Items.BAMBOO)
-                || stack.is(Items.SUGAR_CANE) || stack.is(Items.VINE)
-                || stack.is(Items.MOSS_BLOCK) || stack.is(Items.MOSS_CARPET)
-                || stack.is(Items.DRIED_KELP_BLOCK) || stack.is(Items.HAY_BLOCK));
-    }
+    /**
+     * Fuel governance is purely data-driven through existing vanilla item tags:
+     * the whitelist and burn values below are the only fuel source of truth, so
+     * other mods can opt into the generator by matching these tags, and new
+     * vanilla entries are picked up automatically.
+     */
+    private static final List<TagKey<Item>> FUEL_TAGS = List.of(
+            ItemTags.LOGS_THAT_BURN,        // 150 ticks: logs, wood, and stripped variants
+            ItemTags.PLANKS,                // 38 ticks
+            ItemTags.SAPLINGS,              // 75 ticks
+            ItemTags.LEAVES,                // 15 ticks
+            ItemTags.FLOWERS,               // 15 ticks
+            ItemTags.VILLAGER_PLANTABLE_SEEDS); // 15 ticks: seeds, carrots, potatoes
 
-    /** Stripped logs/wood have no dedicated item tag in 1.21.1, so detect them by item id. */
-    private static boolean isStrippedWood(ItemStack stack) {
-        ResourceLocation id = BuiltInRegistries.ITEM.getKey(stack.getItem());
-        String path = id.getPath();
-        return id.getNamespace().equals(ResourceLocation.DEFAULT_NAMESPACE)
-                && (path.startsWith("stripped_") && (path.endsWith("_log") || path.endsWith("_wood")));
+    private static final int[] FUEL_TICKS = {150, 38, 75, 15, 15, 15};
+
+    public static boolean isValidFuel(ItemStack stack) {
+        return !stack.isEmpty() && burnTimeFor(stack) > 0;
     }
 
     private static int burnTimeFor(ItemStack stack) {
-        if (stack.is(Items.STICK)) return 19;
-        if (stack.is(Items.DRIED_KELP_BLOCK)) return 300;
-        if (stack.is(Items.HAY_BLOCK)) return 270;
-        if (stack.is(Items.MOSS_BLOCK)) return 120;
-        if (isStrippedWood(stack)) return 120;
-        if (stack.is(Items.MOSS_CARPET) || stack.is(ItemTags.LEAVES) || stack.is(ItemTags.FLOWERS)
-                || stack.is(Items.VINE)) return 15;
-        if (stack.is(ItemTags.SAPLINGS)) return 75;
-        if (stack.is(ItemTags.PLANKS) || stack.is(Items.CACTUS) || stack.is(Items.BAMBOO)) return 38;
-        if (stack.is(Items.WHEAT_SEEDS) || stack.is(Items.BEETROOT_SEEDS)
-                || stack.is(Items.MELON_SEEDS) || stack.is(Items.PUMPKIN_SEEDS)
-                || stack.is(Items.TORCHFLOWER_SEEDS) || stack.is(Items.PITCHER_POD)) return 15;
-        if (stack.is(Items.WHEAT) || stack.is(Items.BEETROOT) || stack.is(Items.CARROT)
-                || stack.is(Items.POTATO) || stack.is(Items.SUGAR_CANE)) return 30;
-        if (stack.is(ItemTags.LOGS)) return 150;
-        return 15;
+        for (int i = 0; i < FUEL_TAGS.size(); i++) {
+            if (stack.is(FUEL_TAGS.get(i))) {
+                return FUEL_TICKS[i];
+            }
+        }
+        return 0;
     }
 
     @Override

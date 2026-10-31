@@ -42,6 +42,6 @@
   "tooltip.luviteium.cool_hint": "Still hot. Cool with a Create fan and water before crafting.",
   "tooltip.luviteium.blank_mold": "Create an undamaged sample with a Deployer on a Depot to imprint a reusable mold.",
   "tooltip.luviteium.mold_hint": "Reusable mold. Casts from Molten Luviteium.",
-  "tooltip.luviteium.generator_fuels": "Burns organic biomass only. Rejects coal, charcoal, lava and bone meal.",
+  "tooltip.luviteium.generator_fuels": "Burns plant biomass only (wood, planks, saplings, leaves, flowers, seeds). Rejects coal, charcoal, lava and bone meal.",
   "tooltip.luviteium.generator_insertion": "Insert fuel through a Create Funnel or Chute."
 }

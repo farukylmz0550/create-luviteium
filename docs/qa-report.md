@@ -33,6 +33,15 @@
 
 ## Implementation decisions recorded
 
+- Fuel governance update from the accuracy pass: the biomass whitelist and burn
+  values are now sourced exclusively from existing vanilla 1.21.1 item tags
+  (`logs_that_burn` 150, `planks` 38, `saplings` 75, `leaves` 15, `flowers` 15,
+  `villager_plantable_seeds` 15). Hard-coded `Items.X` checks and the
+  registry-id stripped-wood detection were removed; stripped logs/wood burn at
+  the unified 150-tick log value, and untagged plant items (sticks, moss, hay,
+  dried kelp, cactus, bamboo, sugar cane, vines, melon/pumpkin seeds,
+  wheat/beetroot produce) are no longer fuels. Other mods opt into the
+  generator simply by matching the same vanilla tags.
 - Fractional fuel durations are rounded to the nearest whole tick: 1.875 s → 38
   ticks, 0.9375 s → 19 ticks, and 0.75 s → 15 ticks.
 - Product flow update from the accuracy pass: cooled-ingot crafting via fan

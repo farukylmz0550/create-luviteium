@@ -44,6 +44,9 @@ the committed wrapper performs the Gradle sync without a globally installed Grad
   plus a Mechanical Press recipe that converts one cooled ingot into one Luviteium Panel.
   The cooled items currently reuse the first-pass palette models; dedicated polished textures
   remain a later visual pass.
+- Replaced the first-pass placeholder art with recolored 1.21.1 vanilla-style 16x16 item
+  silhouettes for tools, armor, ingots, raw material, panels, and molds. Cool Luviteium uses
+  a green palette; hot variants retain a distinct orange heat palette.
 
 ## Not yet implemented
 

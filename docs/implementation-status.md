@@ -22,6 +22,18 @@ runtime setup uses the documented non-transitive slim dependency plus Ponder, Fl
 and Registrate runtime/development dependencies. The 1.21.1 fluid-result field was also
 corrected so startup loads the Luviteium mixing recipe without a parse error.
 
+## Milestone 2 status
+
+**Complete for the current data-driven scope.** Luviteium Ore is registered with an
+iron-tool harvest gate, generates as size-one individual blocks three times per chunk
+within the uniform Y 0–32 range, and targets both stone and deepslate ore replaceables.
+The loot table provides Silk Touch ore drops and Fortune-aware raw-material drops.
+Mineable/needs-iron tags, block/item models, English names, raw material registration,
+and the specified green/raw/highlight palette are present. JSON validation and the full
+Gradle build pass; the dedicated server also loads the world-generation data successfully.
+The exact rarity tuning remains an intentionally easy-to-adjust data value and should be
+rebalanced after a longer survival-world sampling pass.
+
 ## Completed in this pass
 
 - Gradle/NeoForge project skeleton and Create Maven repositories.

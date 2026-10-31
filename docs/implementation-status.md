@@ -50,6 +50,9 @@ the committed wrapper performs the Gradle sync without a globally installed Grad
 - Preserved transparent alpha backgrounds during recoloring and separated the cast tool-head
   icons from their vanilla handles; pickaxe, axe, shovel, and hoe head outputs now show only
   the cast head shape.
+- Rebuilt the recolored PNGs with explicit vanilla alpha masks after palette tuning, avoiding
+  accidental grayscale flattening and keeping the final green material shaded rather than
+  emissive-looking.
 
 ## Not yet implemented
 

@@ -1,0 +1,10 @@
+{
+  "type": "create:deploying",
+  "ingredients": [
+    {"item": "luviteium:blank_mold"},
+    {"item": "minecraft:iron_ingot"}
+  ],
+  "results": [
+    {"id": "luviteium:ingot_mold"}
+  ]
+}

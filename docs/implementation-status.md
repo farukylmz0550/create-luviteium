@@ -35,12 +35,14 @@ the committed wrapper performs the Gradle sync without a globally installed Grad
   144 mB exact-capacity tank, reusable ingot mold slot, hot ingot output slot,
   deterministic 20-tick casting, NBT save/load, and NeoForge fluid/item handler
   capabilities for Create pipe and transport automation.
+- Added Ingot Mold and Pickaxe Head Mold Create Deployer recipes, plus dynamic casting
+  amounts/timing for 144 mB/20 ticks and 288 mB/40 ticks respectively.
 
 ## Not yet implemented
 
-The Casting Table currently implements only the ingot mold path and has no player GUI;
-the other nine mold products, deployer imprint recipes, hot-product cooling, and
-casting-table visual polish remain. Create Deployer/Depot recipes, gear/material
+The Casting Table currently implements ingot and pickaxe-head mold paths and has no
+player GUI; the other eight mold products, undamaged-sample enforcement, hot-product
+cooling, and casting-table visual polish remain. Create Deployer/Depot recipes, gear/material
 registration, item/block textures, cooling/washing, Mechanical Press integration, and
 kinetic Biomass Generator behavior remain Milestones 5–7. The Biomass Generator is
 still a placeholder and must not be presented as functional until implemented and

@@ -16,12 +16,12 @@ import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.neoforge.items.ItemStackHandler;
 
 public class CastingTableBlockEntity extends BlockEntity {
-    public static final int CAPACITY = 144;
-    public static final int TICKS_PER_CAST = 20;
+    public static final int INGOT_AMOUNT = 144;
+    public static final int PICKAXE_HEAD_AMOUNT = 288;
     private static final int MOLD_SLOT = 0;
     private static final int OUTPUT_SLOT = 1;
 
-    private final FluidTank fluidTank = new FluidTank(CAPACITY,
+    private final FluidTank fluidTank = new FluidTank(0,
             stack -> stack.getFluid() == ModFluids.MOLTEN_LUVITEIUM.get()) {
         @Override
         protected void onContentsChanged() {
@@ -32,7 +32,7 @@ public class CastingTableBlockEntity extends BlockEntity {
     private final ItemStackHandler inventory = new ItemStackHandler(2) {
         @Override
         public boolean isItemValid(int slot, ItemStack stack) {
-            return slot == MOLD_SLOT && stack.is(ModItems.INGOT_MOLD.get());
+            return slot == MOLD_SLOT && (stack.is(ModItems.INGOT_MOLD.get()) || stack.is(ModItems.PICKAXE_HEAD_MOLD.get()));
         }
 
         @Override
@@ -42,7 +42,18 @@ public class CastingTableBlockEntity extends BlockEntity {
 
         @Override
         protected void onContentsChanged(int slot) {
+            if (slot == MOLD_SLOT) {
+                fluidTank.setCapacity(requiredAmount());
+            }
             setChanged();
+        }
+
+        @Override
+        public ItemStack extractItem(int slot, int amount, boolean simulate) {
+            if (slot == MOLD_SLOT && (!fluidTank.isEmpty() || progress > 0)) {
+                return ItemStack.EMPTY;
+            }
+            return super.extractItem(slot, amount, simulate);
         }
     };
 
@@ -55,7 +66,7 @@ public class CastingTableBlockEntity extends BlockEntity {
     public static void serverTick(net.minecraft.world.level.Level level, BlockPos pos, BlockState state, CastingTableBlockEntity table) {
         if (table.canCastIngot()) {
             table.progress++;
-            if (table.progress >= TICKS_PER_CAST) {
+            if (table.progress >= table.requiredTicks()) {
                 table.completeIngotCast();
             }
         } else {
@@ -64,22 +75,43 @@ public class CastingTableBlockEntity extends BlockEntity {
     }
 
     private boolean canCastIngot() {
-        return inventory.getStackInSlot(MOLD_SLOT).is(ModItems.INGOT_MOLD.get())
-                && fluidTank.getFluidAmount() >= CAPACITY
+        return requiredAmount() > 0
+                && fluidTank.getFluidAmount() >= requiredAmount()
                 && (inventory.getStackInSlot(OUTPUT_SLOT).isEmpty()
-                || inventory.getStackInSlot(OUTPUT_SLOT).is(ModItems.HOT_LUVITEIUM_INGOT.get()));
+                || inventory.getStackInSlot(OUTPUT_SLOT).is(outputItem()));
     }
 
     private void completeIngotCast() {
-        fluidTank.drain(CAPACITY, IFluidHandler.FluidAction.EXECUTE);
+        fluidTank.drain(requiredAmount(), IFluidHandler.FluidAction.EXECUTE);
         ItemStack output = inventory.getStackInSlot(OUTPUT_SLOT);
         if (output.isEmpty()) {
-            inventory.setStackInSlot(OUTPUT_SLOT, new ItemStack(ModItems.HOT_LUVITEIUM_INGOT.get()));
+            inventory.setStackInSlot(OUTPUT_SLOT, new ItemStack(outputItem()));
         } else {
             output.grow(1);
         }
         progress = 0;
         setChanged();
+    }
+
+    private int requiredAmount() {
+        ItemStack mold = inventory.getStackInSlot(MOLD_SLOT);
+        if (mold.is(ModItems.INGOT_MOLD.get())) {
+            return INGOT_AMOUNT;
+        }
+        if (mold.is(ModItems.PICKAXE_HEAD_MOLD.get())) {
+            return PICKAXE_HEAD_AMOUNT;
+        }
+        return 0;
+    }
+
+    private int requiredTicks() {
+        return requiredAmount() / INGOT_AMOUNT * 20;
+    }
+
+    private net.minecraft.world.item.Item outputItem() {
+        return inventory.getStackInSlot(MOLD_SLOT).is(ModItems.PICKAXE_HEAD_MOLD.get())
+                ? ModItems.HOT_LUVITEIUM_PICKAXE_HEAD.get()
+                : ModItems.HOT_LUVITEIUM_INGOT.get();
     }
 
     public ItemStackHandler getItemHandler(Direction side) {

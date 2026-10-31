@@ -34,6 +34,16 @@ Gradle build pass; the dedicated server also loads the world-generation data suc
 The exact rarity tuning remains an intentionally easy-to-adjust data value and should be
 rebalanced after a longer survival-world sampling pass.
 
+## Milestone 3 status
+
+**Complete for the current processing scope.** The Create heated-mixing recipe converts
+one Raw Luviteium into exactly 144 mB of Molten Luviteium. NeoForge source/flowing fluid
+registries and FluidType metadata are present, and the casting-table fluid capability is
+available for Create pipe transfer. Client still/flowing textures and the green fluid tint
+are registered separately on the client. JSON validation, the full Gradle build, and a
+dedicated-server reload pass all succeed; the server reaches `Done` and loads the mixing
+recipe without parse errors.
+
 ## Completed in this pass
 
 - Gradle/NeoForge project skeleton and Create Maven repositories.

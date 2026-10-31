@@ -3,7 +3,7 @@
   "textures":{
     "up":"luviteium:block/casting_table_top",
     "down":"luviteium:block/casting_table_bottom",
-    "north":"luviteium:block/casting_table_tank",
+    "north":"luviteium:block/casting_table_front",
     "south":"luviteium:block/casting_table_side",
     "east":"luviteium:block/casting_table_side",
     "west":"luviteium:block/casting_table_side",

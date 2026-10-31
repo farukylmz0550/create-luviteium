@@ -58,6 +58,9 @@ the committed wrapper performs the Gradle sync without a globally installed Grad
   windows, fan hub, and pipe ports—without copying Create or vanilla PNG files. The Casting
   Table's north face is visually tank-like for fluid piping, while its existing fluid
   capability remains the actual automation connection point.
+- Split the machine surfaces into explicit front, side, bottom, and top PNG assets. Casting
+  Table now has a dedicated front panel in addition to its side, top, and bottom textures;
+  Biomass Generator keeps distinct front fan, side casing, pipe-port, top, and bottom faces.
 
 ## Not yet implemented
 

@@ -1,1 +1,12 @@
-{"parent":"minecraft:block/cube_all","textures":{"all":"luviteium:block/biomass_generator"}}
+{
+  "parent":"minecraft:block/cube",
+  "textures":{
+    "up":"create:block/brass_casing",
+    "down":"create:block/andesite_casing",
+    "north":"create:block/fan_casing",
+    "south":"create:block/andesite_casing",
+    "east":"create:block/encased_pipe",
+    "west":"create:block/encased_pipe",
+    "particle":"create:block/andesite_casing"
+  }
+}

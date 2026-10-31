@@ -17,6 +17,7 @@ public final class ModItems {
     public static final DeferredItem<Item> RAW_LUVITEIUM = ITEMS.registerSimpleItem("raw_luviteium");
     public static final DeferredItem<Item> LUVITEIUM_INGOT = ITEMS.registerSimpleItem("luviteium_ingot");
     public static final DeferredItem<Item> LUVITEIUM_PANEL = ITEMS.registerSimpleItem("luviteium_panel");
+    public static final DeferredItem<Item> HOT_LUVITEIUM_INGOT = ITEMS.registerSimpleItem("hot_luviteium_ingot");
     public static final DeferredItem<Item> BLANK_MOLD = ITEMS.registerSimpleItem("blank_mold");
 
     // The ten intentionally supported mold shapes. Source mappings are recorded in docs/molds.md.

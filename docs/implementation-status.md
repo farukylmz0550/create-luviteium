@@ -31,11 +31,17 @@ the committed wrapper performs the Gradle sync without a globally installed Grad
   metadata and client still/flowing textures.
 - Added the verified Create 6.0.10 heated mixing recipe: 1 Raw Luviteium to 144 mB
   Molten Luviteium. Recipe resources use the 1.21.1 singular `recipe` directory.
+- Added the first functional Casting Table slice: a persistent block entity with a
+  144 mB exact-capacity tank, reusable ingot mold slot, hot ingot output slot,
+  deterministic 20-tick casting, NBT save/load, and NeoForge fluid/item handler
+  capabilities for Create pipe and transport automation.
 
 ## Not yet implemented
 
-Block entities, casting-table state, Create Deployer/Depot recipes, casting
-progress/state persistence, gear/material registration, item/block textures, cooling/
-washing, Mechanical Press integration, and kinetic Biomass Generator behavior remain
-Milestones 2–7. The four registered machine blocks are intentionally placeholders and
-must not be presented as functional until those systems are implemented and tested.
+The Casting Table currently implements only the ingot mold path and has no player GUI;
+the other nine mold products, deployer imprint recipes, hot-product cooling, and
+casting-table visual polish remain. Create Deployer/Depot recipes, gear/material
+registration, item/block textures, cooling/washing, Mechanical Press integration, and
+kinetic Biomass Generator behavior remain Milestones 5–7. The Biomass Generator is
+still a placeholder and must not be presented as functional until implemented and
+tested.

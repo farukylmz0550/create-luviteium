@@ -37,11 +37,14 @@ the committed wrapper performs the Gradle sync without a globally installed Grad
   capabilities for Create pipe and transport automation.
 - Added Ingot Mold and Pickaxe Head Mold Create Deployer recipes, plus dynamic casting
   amounts/timing for 144 mB/20 ticks and 288 mB/40 ticks respectively.
+- Added the remaining eight Deployer mold recipes and explicit casting amount mapping:
+  tool heads at 288 mB, helmet/boots at 432 mB, chestplate at 576 mB, and leggings at
+  720 mB. Placeholder hot-head/armor output items and basic palette assets are present.
 
 ## Not yet implemented
 
-The Casting Table currently implements ingot and pickaxe-head mold paths and has no
-player GUI; the other eight mold products, undamaged-sample enforcement, hot-product
+The Casting Table currently implements all ten mold paths as registered outputs but has
+no player GUI; undamaged-sample enforcement, actual tool/armor attributes, hot-product
 cooling, and casting-table visual polish remain. Create Deployer/Depot recipes, gear/material
 registration, item/block textures, cooling/washing, Mechanical Press integration, and
 kinetic Biomass Generator behavior remain Milestones 5–7. The Biomass Generator is

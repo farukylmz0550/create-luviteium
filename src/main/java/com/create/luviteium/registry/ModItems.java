@@ -19,6 +19,14 @@ public final class ModItems {
     public static final DeferredItem<Item> LUVITEIUM_PANEL = ITEMS.registerSimpleItem("luviteium_panel");
     public static final DeferredItem<Item> HOT_LUVITEIUM_INGOT = ITEMS.registerSimpleItem("hot_luviteium_ingot");
     public static final DeferredItem<Item> HOT_LUVITEIUM_PICKAXE_HEAD = ITEMS.registerSimpleItem("hot_luviteium_pickaxe_head");
+    public static final DeferredItem<Item> HOT_LUVITEIUM_AXE_HEAD = ITEMS.registerSimpleItem("hot_luviteium_axe_head");
+    public static final DeferredItem<Item> HOT_LUVITEIUM_SHOVEL_HEAD = ITEMS.registerSimpleItem("hot_luviteium_shovel_head");
+    public static final DeferredItem<Item> HOT_LUVITEIUM_HOE_HEAD = ITEMS.registerSimpleItem("hot_luviteium_hoe_head");
+    public static final DeferredItem<Item> HOT_LUVITEIUM_SWORD_BLADE = ITEMS.registerSimpleItem("hot_luviteium_sword_blade");
+    public static final DeferredItem<Item> LUVITEIUM_HELMET = ITEMS.registerSimpleItem("luviteium_helmet");
+    public static final DeferredItem<Item> LUVITEIUM_CHESTPLATE = ITEMS.registerSimpleItem("luviteium_chestplate");
+    public static final DeferredItem<Item> LUVITEIUM_LEGGINGS = ITEMS.registerSimpleItem("luviteium_leggings");
+    public static final DeferredItem<Item> LUVITEIUM_BOOTS = ITEMS.registerSimpleItem("luviteium_boots");
     public static final DeferredItem<Item> BLANK_MOLD = ITEMS.registerSimpleItem("blank_mold");
 
     // The ten intentionally supported mold shapes. Source mappings are recorded in docs/molds.md.

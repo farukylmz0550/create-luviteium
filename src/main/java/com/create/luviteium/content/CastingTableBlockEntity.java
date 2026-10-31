@@ -32,7 +32,7 @@ public class CastingTableBlockEntity extends BlockEntity {
     private final ItemStackHandler inventory = new ItemStackHandler(2) {
         @Override
         public boolean isItemValid(int slot, ItemStack stack) {
-            return slot == MOLD_SLOT && (stack.is(ModItems.INGOT_MOLD.get()) || stack.is(ModItems.PICKAXE_HEAD_MOLD.get()));
+            return slot == MOLD_SLOT && isSupportedMold(stack);
         }
 
         @Override
@@ -98,8 +98,19 @@ public class CastingTableBlockEntity extends BlockEntity {
         if (mold.is(ModItems.INGOT_MOLD.get())) {
             return INGOT_AMOUNT;
         }
-        if (mold.is(ModItems.PICKAXE_HEAD_MOLD.get())) {
+        if (mold.is(ModItems.PICKAXE_HEAD_MOLD.get()) || mold.is(ModItems.AXE_HEAD_MOLD.get())
+                || mold.is(ModItems.SHOVEL_HEAD_MOLD.get()) || mold.is(ModItems.HOE_HEAD_MOLD.get())
+                || mold.is(ModItems.SWORD_BLADE_MOLD.get())) {
             return PICKAXE_HEAD_AMOUNT;
+        }
+        if (mold.is(ModItems.HELMET_MOLD.get()) || mold.is(ModItems.BOOTS_MOLD.get())) {
+            return 432;
+        }
+        if (mold.is(ModItems.CHESTPLATE_MOLD.get())) {
+            return 576;
+        }
+        if (mold.is(ModItems.LEGGINGS_MOLD.get())) {
+            return 720;
         }
         return 0;
     }
@@ -109,9 +120,25 @@ public class CastingTableBlockEntity extends BlockEntity {
     }
 
     private net.minecraft.world.item.Item outputItem() {
-        return inventory.getStackInSlot(MOLD_SLOT).is(ModItems.PICKAXE_HEAD_MOLD.get())
-                ? ModItems.HOT_LUVITEIUM_PICKAXE_HEAD.get()
-                : ModItems.HOT_LUVITEIUM_INGOT.get();
+        ItemStack mold = inventory.getStackInSlot(MOLD_SLOT);
+        if (mold.is(ModItems.PICKAXE_HEAD_MOLD.get())) return ModItems.HOT_LUVITEIUM_PICKAXE_HEAD.get();
+        if (mold.is(ModItems.AXE_HEAD_MOLD.get())) return ModItems.HOT_LUVITEIUM_AXE_HEAD.get();
+        if (mold.is(ModItems.SHOVEL_HEAD_MOLD.get())) return ModItems.HOT_LUVITEIUM_SHOVEL_HEAD.get();
+        if (mold.is(ModItems.HOE_HEAD_MOLD.get())) return ModItems.HOT_LUVITEIUM_HOE_HEAD.get();
+        if (mold.is(ModItems.SWORD_BLADE_MOLD.get())) return ModItems.HOT_LUVITEIUM_SWORD_BLADE.get();
+        if (mold.is(ModItems.HELMET_MOLD.get())) return ModItems.LUVITEIUM_HELMET.get();
+        if (mold.is(ModItems.CHESTPLATE_MOLD.get())) return ModItems.LUVITEIUM_CHESTPLATE.get();
+        if (mold.is(ModItems.LEGGINGS_MOLD.get())) return ModItems.LUVITEIUM_LEGGINGS.get();
+        if (mold.is(ModItems.BOOTS_MOLD.get())) return ModItems.LUVITEIUM_BOOTS.get();
+        return ModItems.HOT_LUVITEIUM_INGOT.get();
+    }
+
+    private static boolean isSupportedMold(ItemStack stack) {
+        return stack.is(ModItems.INGOT_MOLD.get()) || stack.is(ModItems.PICKAXE_HEAD_MOLD.get())
+                || stack.is(ModItems.AXE_HEAD_MOLD.get()) || stack.is(ModItems.SHOVEL_HEAD_MOLD.get())
+                || stack.is(ModItems.HOE_HEAD_MOLD.get()) || stack.is(ModItems.SWORD_BLADE_MOLD.get())
+                || stack.is(ModItems.HELMET_MOLD.get()) || stack.is(ModItems.CHESTPLATE_MOLD.get())
+                || stack.is(ModItems.LEGGINGS_MOLD.get()) || stack.is(ModItems.BOOTS_MOLD.get());
     }
 
     public ItemStackHandler getItemHandler(Direction side) {

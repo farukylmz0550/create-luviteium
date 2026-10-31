@@ -12,6 +12,16 @@ These choices are based on the NeoForged 1.21.1 setup documentation and Create's
 NeoForge 1.21.1 dependency guide. The environment now has Temurin Java 21.0.13;
 the committed wrapper performs the Gradle sync without a globally installed Gradle.
 
+## Milestone 1 status
+
+**Complete.** The project, verified Create development dependencies, core registries,
+and dedicated-server startup are now validated together. `./gradlew compileJava`,
+`./gradlew build`, and `./gradlew runServer` all pass; the dedicated server loads
+NeoForge 21.1.229, Create 6.0.10, and Luviteium 0.1.0 and reaches `Done`. The Create
+runtime setup uses the documented non-transitive slim dependency plus Ponder, Flywheel,
+and Registrate runtime/development dependencies. The 1.21.1 fluid-result field was also
+corrected so startup loads the Luviteium mixing recipe without a parse error.
+
 ## Completed in this pass
 
 - Gradle/NeoForge project skeleton and Create Maven repositories.
@@ -53,6 +63,8 @@ the committed wrapper performs the Gradle sync without a globally installed Grad
 - Rebuilt the recolored PNGs with explicit vanilla alpha masks after palette tuning, avoiding
   accidental grayscale flattening and keeping the final green material shaded rather than
   emissive-looking.
+- Corrected Create's 1.21.1 fluid-result field in the heated mixing recipe and verified that
+  the NeoForge dedicated development server reaches the `Done` state with Luviteium loaded.
 - Replaced the temporary referenced/vendor art with original 16x16 pixel textures authored for
   this mod. The machine art borrows Create's visual language—brass trim, dark casing, tank
   windows, fan hub, and pipe ports—without copying Create or vanilla PNG files. The Casting

@@ -4,7 +4,7 @@
     {"item": "luviteium:raw_luviteium"}
   ],
   "results": [
-    {"amount": 144, "fluid": "luviteium:molten_luviteium"}
+    {"amount": 144, "id": "luviteium:molten_luviteium"}
   ],
   "heat_requirement": "heated"
 }

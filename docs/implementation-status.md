@@ -40,13 +40,16 @@ the committed wrapper performs the Gradle sync without a globally installed Grad
 - Added the remaining eight Deployer mold recipes and explicit casting amount mapping:
   tool heads at 288 mB, helmet/boots at 432 mB, chestplate at 576 mB, and leggings at
   720 mB. Placeholder hot-head/armor output items and basic palette assets are present.
+- Added Create fan washing recipes that convert hot ingots and tool heads into cooled parts,
+  plus a Mechanical Press recipe that converts one cooled ingot into one Luviteium Panel.
+  The cooled items currently reuse the first-pass palette models; dedicated polished textures
+  remain a later visual pass.
 
 ## Not yet implemented
 
 The Casting Table currently implements all ten mold paths as registered outputs but has
-no player GUI; undamaged-sample enforcement, actual tool/armor attributes, hot-product
-cooling, and casting-table visual polish remain. Create Deployer/Depot recipes, gear/material
-registration, item/block textures, cooling/washing, Mechanical Press integration, and
-kinetic Biomass Generator behavior remain Milestones 5–7. The Biomass Generator is
-still a placeholder and must not be presented as functional until implemented and
-tested.
+no player GUI; undamaged-sample enforcement, actual tool/armor attributes, hot armor
+cooling, and casting-table visual polish remain. Create Depot recipes, gear/material
+registration, dedicated item/block textures, and kinetic Biomass Generator behavior remain
+Milestones 5–7. The Biomass Generator is still a placeholder and must not be presented as
+functional until implemented and tested.

@@ -1,0 +1,5 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [{"item": "luviteium:luviteium_block"}],
+  "result": {"id": "luviteium:luviteium_ingot", "count": 9}
+}

@@ -16,10 +16,12 @@ specification remains in [`create-luviteium-implementation-spec.md`](create-luvi
 
 ## Texture status
 
-The current 16x16 item and machine textures are placeholders. They are included
-to validate silhouettes, transparency, face orientation, and Create-style machine
-readability. They are expected to be replaced with the final art later without
-changing the registry names or model-facing texture paths.
+The current 16x16 item and machine textures are placeholder-quality originals
+in Create's visual language; worn armor already uses the dedicated green
+`luviteium_layer_1`/`luviteium_layer_2` files. Textures exist to validate
+silhouettes, transparency, face orientation, and machine readability, and are
+expected to be replaced with final art later without changing the registry
+names or model-facing texture paths.
 
 ## Build
 
@@ -30,8 +32,11 @@ Once Java 21 is installed, run:
 ```
 
 The first Gradle sync downloads and decompiles Minecraft/NeoForge dependencies.
-The current implementation includes the casting table, Create fluid processing,
-Deployer mold flow, product recipes, and the Biomass Generator. See
+The current implementation includes the casting table with hand-based mold
+insertion and output extraction, Create fluid processing, Deployer mold flow,
+the cooled-ingot product loop (fan splashing, panel pressing, block packing),
+tool and armor sets with real vanilla tool classes, the 18-point armor set, the
+Biomass Generator, and a Luviteium creative tab. See
 [`docs/implementation-status.md`](docs/implementation-status.md) and
 [`docs/qa-report.md`](docs/qa-report.md) for verified behavior and remaining manual
 gameplay checks.

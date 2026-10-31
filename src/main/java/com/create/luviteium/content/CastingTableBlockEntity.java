@@ -8,6 +8,10 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.Containers;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.fluids.FluidStack;
@@ -75,10 +79,11 @@ public class CastingTableBlockEntity extends BlockEntity {
     }
 
     private boolean canCastIngot() {
+        ItemStack output = inventory.getStackInSlot(OUTPUT_SLOT);
         return requiredAmount() > 0
                 && fluidTank.getFluidAmount() >= requiredAmount()
-                && (inventory.getStackInSlot(OUTPUT_SLOT).isEmpty()
-                || inventory.getStackInSlot(OUTPUT_SLOT).is(outputItem()));
+                && (output.isEmpty()
+                || (output.is(outputItem()) && output.getCount() < output.getMaxStackSize()));
     }
 
     private void completeIngotCast() {
@@ -149,6 +154,46 @@ public class CastingTableBlockEntity extends BlockEntity {
         return fluidTank;
     }
 
+    /**
+     * Manual right-click interaction: insert a supported reusable mold into the empty mold slot,
+     * or remove a finished cast product from the output slot into the player inventory.
+     */
+    public boolean interactWithPlayer(Player player, InteractionHand hand) {
+        ItemStack held = player.getItemInHand(hand);
+        ItemStack moldSlot = inventory.getStackInSlot(MOLD_SLOT);
+        if (isSupportedMold(held)) {
+            if (!moldSlot.isEmpty() || !fluidTank.isEmpty() || progress > 0) {
+                return false;
+            }
+            ItemStack remaining = inventory.insertItem(MOLD_SLOT, held.copyWithCount(1), false);
+            if (remaining.isEmpty()) {
+                held.shrink(1);
+                setChanged();
+                return true;
+            }
+            return false;
+        }
+        ItemStack output = inventory.extractItem(OUTPUT_SLOT, inventory.getStackInSlot(OUTPUT_SLOT).getCount(), false);
+        if (!output.isEmpty()) {
+            if (!player.getInventory().add(output)) {
+                player.drop(output, false);
+            }
+            setChanged();
+            return true;
+        }
+        return false;
+    }
+
+    public void dropContents(Level level, BlockPos pos) {
+        for (int slot = 0; slot < inventory.getSlots(); slot++) {
+            ItemStack stack = inventory.getStackInSlot(slot);
+            if (!stack.isEmpty()) {
+                Containers.dropItemStack(level, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack);
+            }
+        }
+        fluidTank.drain(Integer.MAX_VALUE, IFluidHandler.FluidAction.EXECUTE);
+    }
+
     @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
@@ -163,5 +208,6 @@ public class CastingTableBlockEntity extends BlockEntity {
         inventory.deserializeNBT(registries, tag.getCompound("Inventory"));
         fluidTank.readFromNBT(registries, tag.getCompound("Fluid"));
         progress = tag.getInt("Progress");
+        fluidTank.setCapacity(requiredAmount());
     }
 }

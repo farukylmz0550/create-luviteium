@@ -1,0 +1,6 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["XXX", "XXX", "XXX"],
+  "key": {"X": {"item": "luviteium:luviteium_ingot"}},
+  "result": {"id": "luviteium:luviteium_block", "count": 1}
+}

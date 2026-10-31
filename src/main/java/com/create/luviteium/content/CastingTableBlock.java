@@ -3,6 +3,10 @@ package com.create.luviteium.content;
 import com.mojang.serialization.MapCodec;
 import com.create.luviteium.registry.ModBlockEntities;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -14,6 +18,7 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
 public class CastingTableBlock extends BaseEntityBlock {
@@ -26,6 +31,40 @@ public class CastingTableBlock extends BaseEntityBlock {
     @Override
     public MapCodec<CastingTableBlock> codec() {
         return CODEC;
+    }
+
+    @Override
+    public net.minecraft.world.ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
+                                       Player player, InteractionHand hand, BlockHitResult hit) {
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        if (blockEntity instanceof CastingTableBlockEntity table) {
+            if (level.isClientSide || table.interactWithPlayer(player, hand)) {
+                return net.minecraft.world.ItemInteractionResult.sidedSuccess(level.isClientSide);
+            }
+        }
+        return super.useItemOn(stack, state, level, pos, player, hand, hit);
+    }
+
+    @Override
+    public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        if (blockEntity instanceof CastingTableBlockEntity table) {
+            if (level.isClientSide || table.interactWithPlayer(player, InteractionHand.MAIN_HAND)) {
+                return InteractionResult.sidedSuccess(level.isClientSide);
+            }
+        }
+        return super.useWithoutItem(state, level, pos, player, hit);
+    }
+
+    @Override
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
+        if (!state.is(newState.getBlock())) {
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof CastingTableBlockEntity table) {
+                table.dropContents(level, pos);
+            }
+        }
+        super.onRemove(state, level, pos, newState, movedByPiston);
     }
 
     @Override

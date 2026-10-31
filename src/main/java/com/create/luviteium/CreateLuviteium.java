@@ -3,6 +3,7 @@ package com.create.luviteium;
 import com.create.luviteium.registry.ModBlocks;
 import com.create.luviteium.registry.ModItems;
 import com.create.luviteium.registry.ModFluids;
+import com.create.luviteium.registry.ModCreativeTabs;
 import com.create.luviteium.registry.ModBlockEntities;
 import com.simibubi.create.content.kinetics.deployer.DeployerRecipeSearchEvent;
 import net.neoforged.neoforge.capabilities.Capabilities;
@@ -23,6 +24,7 @@ public final class CreateLuviteium {
         ModFluids.FLUID_TYPES.register(modBus);
         ModFluids.FLUIDS.register(modBus);
         ModBlockEntities.BLOCK_ENTITIES.register(modBus);
+        ModCreativeTabs.TABS.register(modBus);
         modBus.addListener(this::registerCapabilities);
         NeoForge.EVENT_BUS.addListener(this::rejectDamagedMoldSamples);
     }

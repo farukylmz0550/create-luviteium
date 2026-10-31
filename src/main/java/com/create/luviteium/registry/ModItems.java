@@ -5,7 +5,10 @@ import com.create.luviteium.content.LuviteiumTier;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.DiggerItem;
+import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.item.HoeItem;
+import net.minecraft.world.item.PickaxeItem;
+import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SwordItem;
@@ -27,8 +30,8 @@ public final class ModItems {
             ARMOR_MATERIALS.register("luviteium", () -> new ArmorMaterial(
                     Map.of(
                             ArmorItem.Type.HELMET, 3,
-                            ArmorItem.Type.CHESTPLATE, 8,
-                            ArmorItem.Type.LEGGINGS, 6,
+                            ArmorItem.Type.CHESTPLATE, 7,
+                            ArmorItem.Type.LEGGINGS, 5,
                             ArmorItem.Type.BOOTS, 3),
                     18,
                     net.minecraft.sounds.SoundEvents.ARMOR_EQUIP_DIAMOND,
@@ -56,10 +59,10 @@ public final class ModItems {
     public static final DeferredItem<Item> LUVITEIUM_SHOVEL_HEAD = ITEMS.registerSimpleItem("luviteium_shovel_head");
     public static final DeferredItem<Item> LUVITEIUM_HOE_HEAD = ITEMS.registerSimpleItem("luviteium_hoe_head");
     public static final DeferredItem<Item> LUVITEIUM_SWORD_BLADE = ITEMS.registerSimpleItem("luviteium_sword_blade");
-    public static final DeferredItem<Item> LUVITEIUM_PICKAXE = ITEMS.register("luviteium_pickaxe", () -> new DiggerItem(LuviteiumTier.INSTANCE, net.minecraft.tags.BlockTags.MINEABLE_WITH_PICKAXE, new Item.Properties()));
-    public static final DeferredItem<Item> LUVITEIUM_AXE = ITEMS.register("luviteium_axe", () -> new DiggerItem(LuviteiumTier.INSTANCE, net.minecraft.tags.BlockTags.MINEABLE_WITH_AXE, new Item.Properties()));
-    public static final DeferredItem<Item> LUVITEIUM_SHOVEL = ITEMS.register("luviteium_shovel", () -> new DiggerItem(LuviteiumTier.INSTANCE, net.minecraft.tags.BlockTags.MINEABLE_WITH_SHOVEL, new Item.Properties()));
-    public static final DeferredItem<Item> LUVITEIUM_HOE = ITEMS.register("luviteium_hoe", () -> new DiggerItem(LuviteiumTier.INSTANCE, net.minecraft.tags.BlockTags.MINEABLE_WITH_HOE, new Item.Properties()));
+    public static final DeferredItem<Item> LUVITEIUM_PICKAXE = ITEMS.register("luviteium_pickaxe", () -> new PickaxeItem(LuviteiumTier.INSTANCE, new Item.Properties()));
+    public static final DeferredItem<Item> LUVITEIUM_AXE = ITEMS.register("luviteium_axe", () -> new AxeItem(LuviteiumTier.INSTANCE, new Item.Properties()));
+    public static final DeferredItem<Item> LUVITEIUM_SHOVEL = ITEMS.register("luviteium_shovel", () -> new ShovelItem(LuviteiumTier.INSTANCE, new Item.Properties()));
+    public static final DeferredItem<Item> LUVITEIUM_HOE = ITEMS.register("luviteium_hoe", () -> new HoeItem(LuviteiumTier.INSTANCE, new Item.Properties()));
     public static final DeferredItem<Item> LUVITEIUM_SWORD = ITEMS.register("luviteium_sword", () -> new SwordItem(LuviteiumTier.INSTANCE, new Item.Properties()));
     public static final DeferredItem<Item> LUVITEIUM_HELMET = ITEMS.register("luviteium_helmet", () -> new ArmorItem(LUVITEIUM_ARMOR_MATERIAL, ArmorItem.Type.HELMET, new Item.Properties()));
     public static final DeferredItem<Item> LUVITEIUM_CHESTPLATE = ITEMS.register("luviteium_chestplate", () -> new ArmorItem(LUVITEIUM_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Properties()));

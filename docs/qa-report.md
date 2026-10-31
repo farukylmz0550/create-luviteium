@@ -14,13 +14,36 @@
   `LUVITEIUM_INGOT_COOLED` references remain in source, resources, or docs.
 - Git worktree and resource diff checks: clean after the final commit.
 
+## Documentation-accuracy pass verification
+
+- `./gradlew build`: passed after all accuracy fixes.
+- Dedicated development server restarted fresh and reached `Done` with
+  Luviteium 0.1.0 and Create 6.0.10 loaded; no missing-model or missing-data
+  errors appear after the `loot_table`/`tags` directory renames.
+- Resource JSON re-validated with `jq` after the ore predicate rewrite and the
+  three new block loot tables, splashing, pressing, and block recipes.
+- 1.21.1 directory-contract audit: no `loot_tables`, `tags/blocks`, or
+  `tags/items` paths remain under `data/`.
+- Tool-item audit: pickaxe, axe, shovel, and hoe instances extend
+  `PickaxeItem`, `AxeItem`, `ShovelItem`, and `HoeItem` respectively.
+- Interaction audit: Casting Table `useItemOn` returns
+  `net.minecraft.world.ItemInteractionResult` and `useWithoutItem` returns
+  `net.minecraft.world.InteractionResult`, matching the 1.21.1
+  `BlockBehaviour` signatures.
+
 ## Implementation decisions recorded
 
 - Fractional fuel durations are rounded to the nearest whole tick: 1.875 s → 38
   ticks, 0.9375 s → 19 ticks, and 0.75 s → 15 ticks.
-- The separate cooled-ingot item is not part of the final product set. Hot ingots
-  are pressed directly into panels; hot tool heads still use the existing washing
-  recipes before tool crafting.
+- Product flow update from the accuracy pass: cooled-ingot crafting via fan
+  splashing was reintroduced (hot ingot → Luviteium Ingot), while panel
+  pressing consumes the cooled ingot. The earlier direct hot-ingot pressing is
+  superseded; tool heads still use the existing washing recipes before tool
+  crafting.
+- Slots removed by hand, world drops, and block removal all preserve contents
+  because the Casting Table drops its mold, output, and drains molten fluid in
+  `onRemove`, and host loot tables (`casting_table`, `biomass_generator`,
+  `luviteium_block`) were added in the same pass.
 - Biomass fuel insertion uses the generator's NeoForge item capability, which is the
   standard inventory path used by Create Funnel/Chute transport.
 
@@ -33,4 +56,6 @@ automatically verified here:
 - physical Create pipe, Funnel/Chute, Depot, Deployer, and Mechanical Press behavior;
 - casting interruption, chunk unload/reload, and inventory automation;
 - cumulative timing of a full 64-item fuel stack and visible kinetic output;
-- armor/tool visuals and final texture replacement.
+- final texture art replacement (armor already renders with the dedicated
+  `luviteium_layer_1/2` textures; item and machine art remains
+  placeholder-quality).

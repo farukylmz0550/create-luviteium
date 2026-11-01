@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="src/main/resources/logo.png" width="192" height="192" alt="Create: Luviteium — a green ingot inside a brass-trimmed gear">
+</p>
+
 # Create: Luviteium
 
 **Melt ore. Cast parts. Build with Create.**

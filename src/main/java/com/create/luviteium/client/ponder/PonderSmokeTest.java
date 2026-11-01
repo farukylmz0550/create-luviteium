@@ -30,6 +30,10 @@ public final class PonderSmokeTest {
     private static int screenshotIndex;
     private static int screenshotTicks;
     private static final String[] ITEMS = {"casting_table", "blank_mold", "biomass_generator"};
+    private static final String[] SHOTS = {"casting_table", "blank_mold", "biomass_generator",
+            "biomass_generator-turning", "biomass_generator-stopped", "biomass_generator-stopped-later"};
+    private static final int[] SHOT_TIMES = {150, 270, 150, 157, 360, 365};
+    private static float previousShaftAngle;
 
     @SubscribeEvent
     public static void tick(ClientTickEvent.Post event) {
@@ -83,22 +87,41 @@ public final class PonderSmokeTest {
     }
 
     private static void showScene(Minecraft mc) {
-        PonderUI ui = PonderUI.of(ResourceLocation.fromNamespaceAndPath("luviteium", ITEMS[screenshotIndex]));
+        PonderUI ui = PonderUI.of(ResourceLocation.fromNamespaceAndPath("luviteium", ITEMS[Math.min(screenshotIndex, 2)]));
         mc.setScreen(ui);
-        ui.seekToTime(screenshotIndex == 1 ? 270 : 150);
+        ui.seekToTime(SHOT_TIMES[screenshotIndex]);
         screenshotTicks = 0;
     }
 
     private static void capture(Minecraft mc) {
-        if (screenshotIndex >= ITEMS.length) return;
+        if (screenshotIndex >= SHOTS.length) return;
         if (++screenshotTicks < 25) return;
+        if (screenshotIndex >= 2) {
+            var ui = (PonderUI) mc.screen;
+            var generator = (com.create.luviteium.content.BiomassGeneratorBlockEntity)
+                    ui.getActiveScene().getWorld().getBlockEntity(new net.minecraft.core.BlockPos(3, 1, 3));
+            if (!(mc.getBlockEntityRenderDispatcher().getRenderer(generator)
+                    instanceof com.create.luviteium.client.BiomassGeneratorRenderer))
+                throw new IllegalStateException("Missing generator shaft renderer");
+            float expectedSpeed = screenshotIndex >= 4 ? 0 : 64;
+            if (generator.getSpeed() != expectedSpeed)
+                throw new IllegalStateException("Expected shaft speed " + expectedSpeed + ", got " + generator.getSpeed());
+            float angle = com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer.getAngleForBe(
+                    generator, generator.getBlockPos(), net.minecraft.core.Direction.Axis.X);
+            if (screenshotIndex == 3 && angle == previousShaftAngle)
+                throw new IllegalStateException("Powered shaft angle did not advance");
+            if (screenshotIndex == 5 && angle != previousShaftAngle)
+                throw new IllegalStateException("Stopped shaft angle changed");
+            previousShaftAngle = angle;
+            LogUtils.getLogger().info("LUVITEIUM_SHAFT_RENDER_PASS {} speed={} angle={}", SHOTS[screenshotIndex], expectedSpeed, angle);
+        }
         try (var image = Screenshot.takeScreenshot(mc.getMainRenderTarget())) {
             Files.createDirectories(Path.of("screenshots"));
-            image.writeToFile(Path.of("screenshots", "ponder-" + ITEMS[screenshotIndex] + ".png"));
+            image.writeToFile(Path.of("screenshots", "ponder-" + SHOTS[screenshotIndex] + ".png"));
         } catch (java.io.IOException e) {
             throw new IllegalStateException("Could not save Ponder evidence", e);
         }
-        if (++screenshotIndex < ITEMS.length) {
+        if (++screenshotIndex < SHOTS.length) {
             showScene(mc);
         } else {
             LogUtils.getLogger().info("LUVITEIUM_PONDER_ALL_PASS (including UI rendering)");

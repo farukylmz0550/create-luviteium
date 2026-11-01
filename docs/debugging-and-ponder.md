@@ -65,13 +65,16 @@ and Ponder 1.0.82. The build succeeds and **all six required GameTests pass**:
 
 The opt-in desktop client test creates a uniquely named flat world inside
 `runs/client/saves/`, compiles and plays each scene twice, asserts each machine
-exists and playback finishes, opens Ponder UI, captures three screenshots, and
+exists and playback finishes, opens Ponder UI, captures six screenshots, and
 exits. It reports `LUVITEIUM_PONDER_ALL_PASS`; ordinary startup never invokes it.
 Screenshots are locally generated evidence, ignored by Git:
 
 - `runs/client/screenshots/ponder-casting_table.png`
 - `runs/client/screenshots/ponder-blank_mold.png`
 - `runs/client/screenshots/ponder-biomass_generator.png`
+- `runs/client/screenshots/ponder-biomass_generator-turning.png`
+- `runs/client/screenshots/ponder-biomass_generator-stopped.png`
+- `runs/client/screenshots/ponder-biomass_generator-stopped-later.png`
 
 Screenshots were visually inspected for machines, text and missing textures. The
 client test exercises English UI rendering; Turkish caption keys have resource
@@ -98,7 +101,19 @@ with the existing six facing variants, matching `hasShaftTowards`. The item mode
 inherits the same geometry. The existing original 16×16 textures supply the
 surfaces; no replacement PNGs or borrowed artwork were added. The collars project
 two model pixels out from the casing and meet the center of a connected shaft.
-They are static socket housings; the attached Create shaft supplies rotation.
+The socket housings are static. The generator now also renders Create's own
+`AllPartialModels.SHAFT_HALF` at both ends, protruding four pixels from the casing
+so the ends remain visible beyond the two-pixel collars. These are runtime
+references to Create's models/textures; no vendor files are copied into the mod.
+The client-only `BiomassGeneratorRenderer` uses Create's normal kinetic rotation
+transform and synchronized `getSpeed()`. Powered ends turn with the network;
+at zero speed they stay visible and stationary, including an overstressed network.
+There is no burn-time-only animation that could continue while the network stops.
+The renderer uses the regular block-entity path without a separate Flywheel visual,
+so there is only one owner drawing the generator's shaft ends.
 The light-metal UV region comes from the existing Blank Mold texture. Resource
 references and model bounds were checked; `build runClient -PponderSmokeTest`
 passes and the generator's Ponder screenshot was visually inspected.
+The client smoke test checks renderer registration, 64 RPM moving snapshots with
+different angles, and two zero-RPM snapshots with identical angles. This verifies
+the visible/stationary behavior without hiding the shaft when fuel runs out.

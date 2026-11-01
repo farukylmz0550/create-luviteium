@@ -63,3 +63,11 @@ scenes, captures screenshots in `runs/client/screenshots/`, and exits.
 Ordinary client startup does not run this test. See
 [`docs/debugging-and-ponder.md`](docs/debugging-and-ponder.md) for fixes, test
 coverage and remaining gameplay checks. Machine and item art is still placeholder.
+
+## Local delivery preference
+
+After each verified new build, copy `build/libs/luviteium-0.1.0.jar` to
+`/home/farukylmz/Documents/curseforge/minecraft/Instances/deneme/mods/`.
+This is the user's requested test-instance destination for every new version.
+Keep the copy on the desktop updated as well. Do not leave multiple versions of
+this mod in the instance's `mods` directory. Restart Minecraft to load a new JAR.

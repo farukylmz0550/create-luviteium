@@ -1,91 +1,117 @@
 # Create: Luviteium
 
-Create: Luviteium is a Minecraft 1.21.1 NeoForge addon built around a rare,
-green-tinted material and Create automation.
+**Melt ore. Cast parts. Build with Create.**
 
-## Metal processing
+Create: Luviteium is a Minecraft addon that brings a rare green metal, reusable
+casting molds and biomass-powered machinery to Create. Turn raw Luviteium into
+molten metal, cast it into hot components, then cool and assemble your equipment.
 
-**Raw ore → heated Basin + Mechanical Mixer → Molten Luviteium → Casting
-Machine + mold → hot product → Encased Fan blowing through water → cooled item.**
+**Status: early development · 0.1.0.** All current textures are **placeholders**
+and will be replaced. Recipes, balance and visuals may change as development continues.
 
-All casts, including armor, must be cooled. Tools use one cooled head plus sticks;
-the sword uses one cooled blade plus one stick. See
-[`docs/processing.md`](docs/processing.md) for setup, exact amounts and validation.
+![The Casting Machine producing a hot Luviteium ingot in its in-game Ponder tutorial](docs/images/casting-ponder.png)
 
-## Development baseline
+*An in-game preview of casting. The artwork shown is temporary.*
 
-- Java 21
-- Minecraft 1.21.1
-- NeoForge 21.1.229
-- Create 6.0.10 (development artifact `6.0.10-280`)
+## Features
 
-See [`docs/implementation-status.md`](docs/implementation-status.md) for the
-current milestone status and known compatibility gaps. The original design
-specification remains in [`create-luviteium-implementation-spec.md`](create-luviteium-implementation-spec.md).
+- **Luviteium ore and equipment:** a new material with five tools, a full armor
+  set, pressed panels and a storage block.
+- **Mold-based casting:** ten reusable molds for ingots, tool heads, a sword
+  blade and armor pieces. The Casting Machine accepts exactly the molten metal
+  required by its mold.
+- **Create automation:** heated mixing, fluid pipes, Deployer mold imprinting,
+  fan cooling and mechanical pressing form one production chain.
+- **Biomass power:** a fuel-burning generator supplies **64 RPM / 512 SU** and
+  accepts automated fuel input through a Chute.
+- **Working machine animations:** visible molds and molten fill, a short product
+  ejection animation, rotating generator drive wheels and combustion smoke.
+- **In-game guidance:** three Ponder tutorials, with English and Turkish text.
 
-## Texture status
+## Requirements and installation
 
-**All current textures, including the refreshed set, are still placeholders.**
-The user will replace them with final artwork later. The refreshed 16x16 item
-and machine PNGs use dark metal, brass details and restrained green accents in
-Create's visual language; worn armor uses the dedicated green
-`luviteium_layer_1`/`luviteium_layer_2` files. Textures exist to validate
-silhouettes, transparency, face orientation, and machine readability, and are
-expected to be replaced with final art later without changing the registry
-names or model-facing texture paths.
-See [`docs/textures.md`](docs/textures.md) for the source atlases, exact imagegen
-prompts, extraction command and replacement guidance. The refresh is not a final
-art milestone.
+The current development build is tested with:
 
-## Build
+| Component | Version |
+| --- | --- |
+| Minecraft | 1.21.1 |
+| Mod loader | NeoForge 21.1.229 |
+| Create | 6.0.10 |
+| Java | 21 |
 
-Once Java 21 is installed, run:
+1. Set up a Minecraft 1.21.1 instance with NeoForge and the matching Create mod.
+2. [Build the Luviteium JAR](#build-from-source) and place it in the instance's
+   `mods` folder. Keep only one version of Luviteium installed.
+3. Start Minecraft. For multiplayer, install the mod and its required
+   dependencies on both the client and server.
+
+These are the verified versions; compatibility with other Minecraft versions or
+mod loaders has not been established.
+
+## From ore to equipment
+
+1. **Melt:** put Raw Luviteium in a Basin heated by a fueled Blaze Burner. A
+   powered Mechanical Mixer converts each raw item into **144 mB of Molten Luviteium**.
+2. **Prepare a mold:** place a Blank Mold on a Depot and use a powered Deployer
+   holding the corresponding sample item. The sample is consumed; tools and
+   armor samples must be undamaged. The resulting mold is reusable.
+3. **Cast:** insert the mold into a Casting Machine and pump in molten metal.
+   Once the required amount arrives, the machine produces a hot item.
+4. **Cool:** use a powered Encased Fan blowing **through water** onto the hot
+   item on a Depot or belt. Every cast, including armor, needs this cooling step.
+5. **Assemble:** craft one cooled tool head with two sticks, or one cooled sword
+   blade with one stick. Cooled armor is ready to equip. Ingots can also be
+   pressed into panels or crafted into storage blocks.
+
+Hover over a **Casting Machine**, **Blank Mold** or **Biomass Generator** and
+hold the Ponder key (default **W**) for an animated walkthrough.
+
+See the [processing guide](docs/processing.md) for quantities and casting times,
+or the [mold reference](docs/molds.md) for sample items.
+
+## Development status
+
+The current build passes ten Minecraft GameTests covering production, equipment,
+generator behavior and animation synchronization. Client checks also play and
+replay all three Ponder scenes and verify machine rendering.
+
+A complete survival automation line and extended multiplayer gameplay still need
+further testing. The [QA notes](docs/qa-report.md) and
+[implementation history](docs/implementation-status.md) describe coverage and
+remaining checks. Artwork remains provisional; see the
+[texture notes](docs/textures.md) for provenance and replacement guidance.
+
+## Build from source
+
+Install a **Java 21 JDK**, clone this repository and run from its root:
 
 ```sh
 ./gradlew build
 ```
 
-The first Gradle sync downloads and decompiles Minecraft/NeoForge dependencies.
-The current implementation includes the casting table with hand-based mold
-insertion and output extraction, a Molten Luviteium Bucket for pouring or
-drawing molten charges by hand, Create fluid processing, Deployer mold flow,
-the cooled-ingot product loop (fan splashing, panel pressing, block packing),
-tool and armor sets with real vanilla tool classes and complete tool icons,
-the 18-point armor set, the Biomass Generator, and a Luviteium creative tab.
-See
-[`docs/implementation-status.md`](docs/implementation-status.md) and
-[`docs/qa-report.md`](docs/qa-report.md) for verified behavior and remaining manual
-gameplay checks.
+On Windows, use `gradlew.bat build`. The included Gradle Wrapper downloads the
+required build tools and dependencies on first use; a separate Gradle installation
+is not needed. The mod JAR is written to `build/libs/`.
 
-## Create Ponder
+To run the development client:
 
-Hover over a Casting Table, Blank Mold or Biomass Generator and hold the
-Ponder key (default **W**) to open its tutorial. Three animated scenes explain
-casting and pipe input, Deployer mold imprinting and fan washing, and biomass
-power with Chute input. Scene text is available in English and Turkish.
+```sh
+./gradlew runClient
+```
 
-## Regression checks
-
-Machine animations show the inserted mold, molten fill and completed hot product;
-the generator has rotating drive wheels and combustion smoke. Effects follow real
-processing/network state. See [`docs/animations.md`](docs/animations.md).
+To run automated checks:
 
 ```sh
 ./gradlew build runGameTestServer
 ./gradlew runClient -PponderSmokeTest
 ```
 
-The first command runs ten Minecraft GameTests. The second requires a desktop,
-creates a separate disposable flat world, plays and replays all three Ponder
-scenes, captures screenshots in `runs/client/screenshots/`, and exits.
-Ordinary client startup does not run this test. See
-[`docs/debugging-and-ponder.md`](docs/debugging-and-ponder.md) for fixes, test
-coverage and remaining gameplay checks. Machine and item art is still placeholder.
+The Ponder check requires a graphical desktop. It creates a disposable flat world,
+captures screenshots in `runs/client/screenshots/` and exits automatically.
+See [animation documentation](docs/animations.md) for the current render checks.
 
-## Local delivery preference
+## Reporting issues
 
-After each verified new build, copy `build/libs/luviteium-0.1.0.jar` to
-`/home/farukylmz/Documents/curseforge/minecraft/Instances/deneme/mods/`.
-This is the user's requested test-instance destination for every new version.
-Keep the copy on the desktop updated as well. Do not leave multiple versions of
-this mod in the instance's `mods` directory. Restart Minecraft to load a new JAR.
+Include your Minecraft, NeoForge, Create and Luviteium versions, steps to reproduce
+the problem, and the relevant log or crash report. Screenshots help with visual
+issues. Remove personal information from logs before sharing them.

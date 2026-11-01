@@ -81,5 +81,4 @@ This is a visual check, not a physical automation integration test. The tests ab
 exercise Create's recipe implementations directly; a complete survival line with
 powered Mixer, pumps, belts and Fan still needs a separate end-to-end gameplay pass.
 
-New verified builds are copied to the user's CurseForge `deneme/mods` directory
-and desktop, as recorded in the README.
+Build and installation instructions are available in the [README](../README.md).

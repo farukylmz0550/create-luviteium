@@ -63,7 +63,7 @@ holding a Blank Mold, and the resulting mold can be reused indefinitely.
 
 ## Verification
 
-`./gradlew build runGameTestServer` runs **ten** required GameTests, including
+`./gradlew build runGameTestServer` runs **eleven** required GameTests, including
 the six earlier machine/gear regressions, the later animation-sync regression
 described in [animations.md](animations.md), and these three production tests:
 

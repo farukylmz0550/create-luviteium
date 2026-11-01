@@ -44,7 +44,7 @@ models. There is no full-bright glow, new sound loop or additional dependency.
 
 ## Validation
 
-`./gradlew build runGameTestServer` runs ten required tests. The new animation
+`./gradlew build runGameTestServer` runs eleven required tests. The new animation
 sync test checks initial partial-fill synchronization, progress and completion
 updates, blocked-output detection, and that 40 client animation ticks cannot
 advance production or create an output. The nine previous production/gear/kinetic
@@ -58,7 +58,7 @@ entity standing in for the output. Screenshots are saved under
 Capture runs after rendering the frame, so a short completion effect is not
 mistakenly documented with the previous frame's image.
 
-Validation on 2026-11-01: all ten GameTests passed; all three Ponder scenes passed
+Validation on 2026-11-01: all eleven GameTests passed; all three Ponder scenes passed
 playback and replay, and both machine renderers passed the real client checks.
 Powered shaft angles changed between captures; both stopped captures held the
 same angle. The completed hot cast was captured during its upward motion.

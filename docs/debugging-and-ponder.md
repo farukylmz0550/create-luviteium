@@ -1,7 +1,7 @@
 # Runtime debugging and Create Ponder
 
 This records the initial debugging pass. The later unified hot-cast production
-chain is described in [`processing.md`](processing.md). The current ten-test suite
+chain is described in [`processing.md`](processing.md). The current eleven-test suite
 also includes the [animation sync regression](animations.md).
 
 ## Fixes
@@ -98,7 +98,7 @@ interaction remain separate QA work. NBT round-trip and Ponder playback do not
 replace those checks. The Casting Table still has no dedicated GUI, and breaking
 it discards stored molten fluid while dropping mold/output items.
 
-The distributable is `build/libs/luviteium-1.0.0.jar`.
+The distributable is `build/libs/luviteium-1.0.1.jar`.
 
 ## Shaft connection visibility
 

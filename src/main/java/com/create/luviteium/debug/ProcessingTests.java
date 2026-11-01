@@ -7,6 +7,7 @@ import com.create.luviteium.registry.ModItems;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.kinetics.fan.processing.AllFanProcessingTypes;
 import com.simibubi.create.content.kinetics.mixer.MixingRecipe;
+import com.simibubi.create.content.kinetics.press.PressingRecipe;
 import com.simibubi.create.content.processing.basin.BasinBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinRecipe;
 import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
@@ -18,6 +19,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
@@ -125,6 +127,23 @@ public final class ProcessingTests {
             h.assertFalse(recipe.matches(net.minecraft.world.item.crafting.CraftingInput.of(1, ingredients.size(), ingredients), h.getLevel()),
                     "Hot heads must be cooled before assembly");
         }
+        h.succeed();
+    }
+
+    @GameTest(template = "empty")
+    public static void mechanicalPressConvertsIngotToPanel(GameTestHelper h) {
+        PressingRecipe recipe = (PressingRecipe) h.getLevel().getRecipeManager()
+                .byKey(ResourceLocation.fromNamespaceAndPath("luviteium", "pressing/luviteium_panel"))
+                .orElseThrow(() -> new AssertionError("Missing Luviteium panel pressing recipe"))
+                .value();
+        h.assertTrue(recipe.matches(new SingleRecipeInput(ModItems.LUVITEIUM_INGOT.toStack()), h.getLevel()),
+                "Mechanical Press must accept a cooled Luviteium Ingot");
+        var results = recipe.getRollableResultsAsItemStacks();
+        h.assertTrue(results.size() == 1 && results.getFirst().is(ModItems.LUVITEIUM_PANEL.get())
+                        && results.getFirst().getCount() == 1,
+                "Mechanical Press must output exactly one Luviteium Panel");
+        h.assertFalse(recipe.matches(new SingleRecipeInput(ModItems.HOT_LUVITEIUM_INGOT.toStack()), h.getLevel()),
+                "Mechanical Press must reject a hot ingot");
         h.succeed();
     }
 }

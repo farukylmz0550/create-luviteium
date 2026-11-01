@@ -40,8 +40,9 @@ For a sword, put **one cooled blade above one stick**. Hot heads cannot substitu
 for cooled ones. Older recipes incorrectly required multiple complete heads;
 those extra heads are no longer needed.
 
-Panel pressing (ordinary ingot → panel) and storage block packing/unpacking remain
-downstream uses of cooled metal, not additional steps needed to cool a cast.
+Panel pressing uses Create's Mechanical Press: one cooled Luviteium Ingot becomes
+one Luviteium Panel. Storage block packing/unpacking remains a downstream use of
+cooled metal, not an additional step needed to cool a cast.
 Mold imprinting is unchanged: a Deployer consumes an undamaged sample over a Depot
 holding a Blank Mold, and the resulting mold can be reused indefinitely.
 

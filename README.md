@@ -31,6 +31,7 @@ and will be replaced. Recipes, balance and visuals may change as development con
 - **Working machine animations:** visible molds and molten fill, a short product
   ejection animation, rotating generator drive wheels and combustion smoke.
 - **In-game guidance:** three Ponder tutorials, with English and Turkish text.
+- **Languages:** English (US), English (UK), Türkçe and Deutsch.
 
 <details>
 <summary>Armor preview (placeholder artwork)</summary>
@@ -105,7 +106,8 @@ mod loaders has not been established.
    item on a Depot or belt. Every cast, including armor, needs this cooling step.
 5. **Assemble:** craft one cooled tool head with two sticks, or one cooled sword
    blade with one stick. Cooled armor is ready to equip. Ingots can also be
-   pressed into panels or crafted into storage blocks.
+   be pressed with Create's Mechanical Press into Luviteium Panels, or crafted
+   into storage blocks.
 
 Hover over a **Casting Machine**, **Blank Mold** or **Biomass Generator** and
 hold the Ponder key (default **W**) for an animated walkthrough.

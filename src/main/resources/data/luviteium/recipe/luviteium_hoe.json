@@ -1,1 +1,1 @@
-{"type":"minecraft:crafting_shaped","pattern":["PP"," S"," S"],"key":{"P":{"item":"luviteium:luviteium_hoe_head"},"S":{"item":"minecraft:stick"}},"result":{"id":"luviteium:luviteium_hoe","count":1}}
+{"type":"minecraft:crafting_shaped","pattern":["P","S","S"],"key":{"P":{"item":"luviteium:luviteium_hoe_head"},"S":{"item":"minecraft:stick"}},"result":{"id":"luviteium:luviteium_hoe","count":1}}

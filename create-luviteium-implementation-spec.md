@@ -6,6 +6,12 @@ This document is both the implementation specification and an actionable prompt 
 
 The implementation must preserve the design decisions below. Items explicitly marked **Unresolved** are intentional technical questions that must be verified during implementation rather than silently guessed.
 
+**Later user-directed processing revision:** the current contract is
+[docs/processing.md](docs/processing.md). All casts, including armor, leave the
+machine hot and require Encased Fan + water cooling. Tools retain head + stick
+assembly, using one cooled head (or blade) per tool. These requirements supersede
+the original direct-armor outputs and multi-head vanilla-shaped assembly below.
+
 ---
 
 ## 1. Project definition

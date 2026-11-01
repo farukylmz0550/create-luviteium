@@ -1,5 +1,8 @@
 # Runtime debugging and Create Ponder
 
+This records the initial debugging pass. The later unified hot-cast production
+chain and current nine-test coverage are described in [`processing.md`](processing.md).
+
 ## Fixes
 
 - **Generator stress capacity:** Create multiplies the source's capacity by RPM.
@@ -65,7 +68,7 @@ and Ponder 1.0.82. The build succeeds and **all six required GameTests pass**:
 
 The opt-in desktop client test creates a uniquely named flat world inside
 `runs/client/saves/`, compiles and plays each scene twice, asserts each machine
-exists and playback finishes, opens Ponder UI, captures six screenshots, and
+exists and playback finishes, opens Ponder UI, captures nine screenshots, and
 exits. It reports `LUVITEIUM_PONDER_ALL_PASS`; ordinary startup never invokes it.
 Screenshots are locally generated evidence, ignored by Git:
 
@@ -75,6 +78,9 @@ Screenshots are locally generated evidence, ignored by Git:
 - `runs/client/screenshots/ponder-biomass_generator-turning.png`
 - `runs/client/screenshots/ponder-biomass_generator-stopped.png`
 - `runs/client/screenshots/ponder-biomass_generator-stopped-later.png`
+- `runs/client/screenshots/ponder-processing-mixing.png`
+- `runs/client/screenshots/ponder-processing-hot-cast.png`
+- `runs/client/screenshots/ponder-processing-cooling.png`
 
 Screenshots were visually inspected for machines, text and missing textures. The
 client test exercises English UI rendering; Turkish caption keys have resource

@@ -3,6 +3,8 @@
 Latest gameplay fixes and Ponder coverage are recorded in
 [`debugging-and-ponder.md`](debugging-and-ponder.md). Earlier milestone entries
 describe implementation scope, not proof that every survival interaction passed.
+The latest production-chain revision is in [`processing.md`](processing.md): all
+casts now come out hot, including armor, and each tool uses just one cooled head.
 
 ## Verified baseline
 
@@ -74,11 +76,11 @@ Deployer interaction remains part of the final gameplay QA pass.
 ## Milestone 6 status
 
 **Complete for the products and processing scope.** Cooled tool heads now craft into
-functional Luviteium pickaxe, axe, shovel, hoe, and sword items using the vanilla
-shapes. The tool tier centralizes the 1,250 durability, 7.5 mining speed,
+functional Luviteium pickaxe, axe, shovel, hoe, and sword items using one cooled
+head/blade and sticks in a vertical assembly recipe. The tool tier centralizes the 1,250 durability, 7.5 mining speed,
 enchantability, and Luviteium-ingot repair values. Explicit tool attributes now
-give the pickaxe 4.5 total attack damage (tier bonus 2.5). Cast armor outputs are real
-helmet, chestplate, leggings, and boots with an 18-point total defense target,
+give the pickaxe 4.5 total attack damage (tier bonus 2.5). Hot armor casts must now
+be washed into helmet, chestplate, leggings, and boots with an 18-point total defense target,
 toughness, knockback resistance, and the same ingot repair ingredient. Hot ingots and
 all hot tool heads have Create bulk-washing recipes; hot ingots wash into the
 ordinary Luviteium Ingot, which the Mechanical Press turns into a panel. There is
@@ -267,7 +269,7 @@ wired through the model 1.21.1 actually uses.
 ## Remaining validation and polish
 
 The Casting Table has hand interaction and automation capabilities, but no
-dedicated GUI. Armor is cast as finished armor and requires no cooling step.
+dedicated GUI. Armor is now cast hot and requires fan/water cooling before use.
 Deployer recipes, gear/material registration and three Ponder scenes are present.
 Longer survival progression, physical pipe/Funnel integration, real chunk
 unload/reload and ore rarity sampling still need validation. Machine and item

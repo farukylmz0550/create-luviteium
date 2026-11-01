@@ -13,7 +13,10 @@ public final class LuviteiumPonderPlugin implements PonderPlugin {
 
     @Override
     public void registerScenes(PonderSceneRegistrationHelper<ResourceLocation> helper) {
-        helper.forComponents(id("casting_table"), id("raw_luviteium"), id("luviteium_bucket"), id("ingot_mold"))
+        helper.forComponents(id("casting_table"), id("raw_luviteium"), id("luviteium_bucket"), id("ingot_mold"),
+                id("hot_luviteium_ingot"), id("hot_luviteium_helmet"), id("hot_luviteium_chestplate"),
+                id("hot_luviteium_leggings"), id("hot_luviteium_boots"), id("helmet_mold"),
+                id("chestplate_mold"), id("leggings_mold"), id("boots_mold"))
                 .addStoryBoard("workshop", LuviteiumScenes::casting);
         helper.forComponents(id("blank_mold"), id("pickaxe_head_mold"), id("hot_luviteium_pickaxe_head"),
                 id("luviteium_pickaxe_head"), id("luviteium_pickaxe"))

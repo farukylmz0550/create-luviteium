@@ -24,39 +24,61 @@ public final class LuviteiumScenes {
 
     public static void casting(SceneBuilder builder, SceneBuildingUtil util) {
         CreateSceneBuilder scene = new CreateSceneBuilder(builder);
-        scene.title("casting", "Casting Luviteium with reusable molds");
+        scene.title("casting", "Luviteium: mix, cast, cool");
         scene.configureBasePlate(0, 0, 7);
+        scene.scaleSceneView(0.8f);
         scene.showBasePlate();
-        BlockPos table = util.grid().at(4, 1, 3);
-        scene.world().setBlock(table, ModBlocks.CASTING_TABLE.get().defaultBlockState(), false);
-        scene.world().showSection(util.select().position(table), Direction.DOWN);
+        BlockPos basin = util.grid().at(1, 2, 3);
+        BlockPos mixer = basin.above(2);
+        BlockPos table = util.grid().at(4, 2, 3);
+        scene.world().setBlock(basin.below(), AllBlocks.BLAZE_BURNER.getDefaultState()
+                .setValue(com.simibubi.create.content.processing.burner.BlazeBurnerBlock.HEAT_LEVEL,
+                        com.simibubi.create.content.processing.burner.BlazeBurnerBlock.HeatLevel.KINDLED), false);
+        scene.world().setBlock(basin, AllBlocks.BASIN.getDefaultState(), false);
+        scene.world().setBlock(mixer, AllBlocks.MECHANICAL_MIXER.getDefaultState(), false);
+        scene.world().showSection(util.select().fromTo(1, 1, 3, 1, 4, 3), Direction.DOWN);
+        scene.world().setKineticSpeed(util.select().position(mixer), 32);
+        scene.world().modifyBlockEntity(basin, com.simibubi.create.content.processing.basin.BasinBlockEntity.class,
+                be -> be.getInputInventory().insertItem(0, ModItems.RAW_LUVITEIUM.toStack(), false));
+        scene.world().modifyBlockEntity(mixer, com.simibubi.create.content.kinetics.mixer.MechanicalMixerBlockEntity.class,
+                be -> { be.running = true; be.runningTicks = 20; });
         scene.idle(20);
-        scene.overlay().showControls(util.vector().topOf(table), Pointing.DOWN, 60)
-                .rightClick().withItem(ModItems.INGOT_MOLD.toStack());
-        scene.overlay().showText(80).text("Insert a reusable mold before supplying molten Luviteium.")
-                .pointAt(util.vector().topOf(table)).placeNearTarget();
-        scene.world().modifyBlockEntity(table, CastingTableBlockEntity.class,
-                be -> be.getItemHandler(null).insertItem(0, ModItems.INGOT_MOLD.toStack(), false));
+        scene.overlay().showControls(util.vector().topOf(basin), Pointing.DOWN, 60)
+                .withItem(ModItems.RAW_LUVITEIUM.toStack());
+        scene.overlay().showText(80).text("1. Put Raw Luviteium in a heated Basin. A powered Mechanical Mixer produces 144 mB of Molten Luviteium per ore.")
+                .independent(65);
         scene.idle(90);
         scene.addKeyframe();
-        scene.world().setBlock(util.grid().at(1, 1, 3), AllBlocks.FLUID_TANK.getDefaultState(), false);
-        scene.world().setBlock(util.grid().at(2, 1, 3), AllBlocks.MECHANICAL_PUMP.getDefaultState()
+        scene.world().modifyBlockEntity(basin, com.simibubi.create.content.processing.basin.BasinBlockEntity.class, be -> {
+            be.getInputInventory().extractItem(0, 1, false);
+            be.inputTank.getPrimaryHandler().fill(new FluidStack(ModFluids.MOLTEN_LUVITEIUM.get(), 144),
+                    IFluidHandler.FluidAction.EXECUTE);
+        });
+        scene.world().setBlock(table, ModBlocks.CASTING_TABLE.get().defaultBlockState(), false);
+        scene.world().showSection(util.select().position(table), Direction.DOWN);
+        scene.overlay().showControls(util.vector().topOf(table), Pointing.DOWN, 60)
+                .rightClick().withItem(ModItems.INGOT_MOLD.toStack());
+        scene.world().modifyBlockEntity(table, CastingTableBlockEntity.class,
+                be -> be.getItemHandler(null).insertItem(0, ModItems.INGOT_MOLD.toStack(), false));
+        scene.world().setBlock(util.grid().at(2, 2, 3), AllBlocks.MECHANICAL_PUMP.getDefaultState()
                 .setValue(DirectionalKineticBlock.FACING, Direction.EAST), false);
-        scene.world().setBlock(util.grid().at(3, 1, 3), AllBlocks.FLUID_PIPE.getDefaultState()
+        scene.world().setBlock(util.grid().at(3, 2, 3), AllBlocks.FLUID_PIPE.getDefaultState()
                 .setValue(BlockStateProperties.EAST, true).setValue(BlockStateProperties.WEST, true), false);
-        scene.world().showSection(util.select().fromTo(1, 1, 3, 3, 1, 3), Direction.DOWN);
-        scene.world().setKineticSpeed(util.select().position(2, 1, 3), 32);
-        scene.overlay().showText(100).text("Heated mixing produces 144 mB per Raw Luviteium. Power the pump to feed the table through pipes.")
-                .pointAt(util.vector().centerOf(2, 1, 3)).placeNearTarget();
+        scene.world().showSection(util.select().fromTo(2, 2, 3, 3, 2, 3), Direction.DOWN);
+        scene.world().setKineticSpeed(util.select().position(2, 2, 3), 32);
+        scene.overlay().showText(100).text("2. Insert a reusable mold into the Casting Machine. Pump molten metal directly from the Basin into it.")
+                .independent(65);
         scene.idle(110);
         scene.addKeyframe();
+        scene.world().modifyBlockEntity(basin, com.simibubi.create.content.processing.basin.BasinBlockEntity.class,
+                be -> be.inputTank.getPrimaryHandler().drain(144, IFluidHandler.FluidAction.EXECUTE));
         scene.world().modifyBlockEntity(table, CastingTableBlockEntity.class, be -> {
             be.getFluidHandler(null).fill(new FluidStack(ModFluids.MOLTEN_LUVITEIUM.get(), 144),
                     IFluidHandler.FluidAction.EXECUTE);
             // Ponder worlds do not run ordinary server-side casting ticks.
         });
-        scene.overlay().showText(80).text("The ingot mold holds exactly 144 mB and casts in 20 ticks. Tool heads need 288 mB and 40 ticks.")
-                .pointAt(util.vector().topOf(table)).placeNearTarget();
+        scene.overlay().showText(80).text("3. The machine accepts only the mold's required amount. Once full, it automatically casts a Hot Luviteium product. Armor comes out hot too.")
+                .independent(65);
         scene.idle(20);
         scene.world().modifyBlockEntity(table, CastingTableBlockEntity.class, be -> {
             for (int i = 0; i < 20; i++) CastingTableBlockEntity.serverTick(be.getLevel(), table, be.getBlockState(), be);
@@ -65,9 +87,20 @@ public final class LuviteiumScenes {
                 util.vector().of(0, 0, 0), ModItems.HOT_LUVITEIUM_INGOT.toStack());
         scene.idle(70);
         scene.addKeyframe();
-        scene.overlay().showText(100).text("Collect the hot output, then fan-wash it into an ingot. Press the ingot into a panel. Sneak-right-click empty-handed to remove an idle mold.")
-                .pointAt(util.vector().topOf(table)).placeNearTarget();
-        scene.idle(110);
+        BlockPos cooling = util.grid().at(4, 1, 1);
+        scene.world().setBlock(cooling, AllBlocks.DEPOT.getDefaultState(), false);
+        scene.world().setBlock(util.grid().at(2, 1, 1), AllBlocks.ENCASED_FAN.getDefaultState()
+                .setValue(DirectionalKineticBlock.FACING, Direction.EAST), false);
+        scene.world().setBlock(util.grid().at(3, 1, 1), Blocks.WATER.defaultBlockState(), false);
+        scene.world().showSection(util.select().fromTo(2, 1, 1, 4, 1, 1), Direction.DOWN);
+        scene.world().setKineticSpeed(util.select().position(2, 1, 1), 32);
+        scene.world().createItemOnBeltLike(cooling, Direction.NORTH, ModItems.HOT_LUVITEIUM_INGOT.toStack());
+        scene.overlay().showText(100).text("4. Blow air through water with an Encased Fan to cool the hot product. The result is the normal, cooled Luviteium item.")
+                .independent(65);
+        scene.idle(70);
+        scene.world().removeItemsFromBelt(cooling);
+        scene.world().createItemOnBeltLike(cooling, Direction.NORTH, ModItems.LUVITEIUM_INGOT.toStack());
+        scene.idle(40);
         scene.markAsFinished();
     }
 

@@ -1,5 +1,9 @@
 # Milestone 8 QA report
 
+Current production revision: **nine GameTests pass**; heated Basin conversion,
+all ten hot casts and washing outputs, and one-head tool assembly are covered in
+[`processing.md`](processing.md). This supersedes the old direct-armor behavior.
+
 For the latest runtime regression and Ponder results, see
 [`debugging-and-ponder.md`](debugging-and-ponder.md). The sections below retain
 earlier validation history; old recipe counts and artifact sizes are not current.

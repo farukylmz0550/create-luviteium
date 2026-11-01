@@ -56,6 +56,10 @@ public final class ModCreativeTabs {
                         output.accept(ModItems.LUVITEIUM_SWORD.get());
 
                         output.accept(ModItems.LUVITEIUM_HELMET.get());
+                        output.accept(ModItems.HOT_LUVITEIUM_HELMET.get());
+                        output.accept(ModItems.HOT_LUVITEIUM_CHESTPLATE.get());
+                        output.accept(ModItems.HOT_LUVITEIUM_LEGGINGS.get());
+                        output.accept(ModItems.HOT_LUVITEIUM_BOOTS.get());
                         output.accept(ModItems.LUVITEIUM_CHESTPLATE.get());
                         output.accept(ModItems.LUVITEIUM_LEGGINGS.get());
                         output.accept(ModItems.LUVITEIUM_BOOTS.get());

@@ -55,6 +55,10 @@ public final class ModItems {
     public static final DeferredItem<Item> HOT_LUVITEIUM_SHOVEL_HEAD = ITEMS.registerSimpleItem("hot_luviteium_shovel_head");
     public static final DeferredItem<Item> HOT_LUVITEIUM_HOE_HEAD = ITEMS.registerSimpleItem("hot_luviteium_hoe_head");
     public static final DeferredItem<Item> HOT_LUVITEIUM_SWORD_BLADE = ITEMS.registerSimpleItem("hot_luviteium_sword_blade");
+    public static final DeferredItem<Item> HOT_LUVITEIUM_HELMET = ITEMS.registerSimpleItem("hot_luviteium_helmet");
+    public static final DeferredItem<Item> HOT_LUVITEIUM_CHESTPLATE = ITEMS.registerSimpleItem("hot_luviteium_chestplate");
+    public static final DeferredItem<Item> HOT_LUVITEIUM_LEGGINGS = ITEMS.registerSimpleItem("hot_luviteium_leggings");
+    public static final DeferredItem<Item> HOT_LUVITEIUM_BOOTS = ITEMS.registerSimpleItem("hot_luviteium_boots");
     public static final DeferredItem<Item> LUVITEIUM_PICKAXE_HEAD = ITEMS.registerSimpleItem("luviteium_pickaxe_head");
     public static final DeferredItem<Item> LUVITEIUM_AXE_HEAD = ITEMS.registerSimpleItem("luviteium_axe_head");
     public static final DeferredItem<Item> LUVITEIUM_SHOVEL_HEAD = ITEMS.registerSimpleItem("luviteium_shovel_head");

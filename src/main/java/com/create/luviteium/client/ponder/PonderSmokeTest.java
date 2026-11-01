@@ -31,8 +31,9 @@ public final class PonderSmokeTest {
     private static int screenshotTicks;
     private static final String[] ITEMS = {"casting_table", "blank_mold", "biomass_generator"};
     private static final String[] SHOTS = {"casting_table", "blank_mold", "biomass_generator",
-            "biomass_generator-turning", "biomass_generator-stopped", "biomass_generator-stopped-later"};
-    private static final int[] SHOT_TIMES = {150, 270, 150, 157, 360, 365};
+            "biomass_generator-turning", "biomass_generator-stopped", "biomass_generator-stopped-later",
+            "processing-mixing", "processing-hot-cast", "processing-cooling"};
+    private static final int[] SHOT_TIMES = {150, 270, 150, 157, 360, 365, 60, 250, 340};
     private static float previousShaftAngle;
 
     @SubscribeEvent
@@ -70,7 +71,7 @@ public final class PonderSmokeTest {
                     for (int i = 0; i < 650; i++) scene.tick();
                     if (!scene.isFinished()) throw new IllegalStateException("Scene did not finish: " + item);
                     var machine = switch (item) {
-                        case "casting_table" -> new net.minecraft.core.BlockPos(4, 1, 3);
+                        case "casting_table" -> new net.minecraft.core.BlockPos(4, 2, 3);
                         case "blank_mold" -> new net.minecraft.core.BlockPos(2, 3, 3);
                         default -> new net.minecraft.core.BlockPos(3, 1, 3);
                     };
@@ -87,7 +88,8 @@ public final class PonderSmokeTest {
     }
 
     private static void showScene(Minecraft mc) {
-        PonderUI ui = PonderUI.of(ResourceLocation.fromNamespaceAndPath("luviteium", ITEMS[Math.min(screenshotIndex, 2)]));
+        PonderUI ui = PonderUI.of(ResourceLocation.fromNamespaceAndPath("luviteium",
+                ITEMS[screenshotIndex >= 6 ? 0 : Math.min(screenshotIndex, 2)]));
         mc.setScreen(ui);
         ui.seekToTime(SHOT_TIMES[screenshotIndex]);
         screenshotTicks = 0;
@@ -96,7 +98,7 @@ public final class PonderSmokeTest {
     private static void capture(Minecraft mc) {
         if (screenshotIndex >= SHOTS.length) return;
         if (++screenshotTicks < 25) return;
-        if (screenshotIndex >= 2) {
+        if (screenshotIndex >= 2 && screenshotIndex <= 5) {
             var ui = (PonderUI) mc.screen;
             var generator = (com.create.luviteium.content.BiomassGeneratorBlockEntity)
                     ui.getActiveScene().getWorld().getBlockEntity(new net.minecraft.core.BlockPos(3, 1, 3));

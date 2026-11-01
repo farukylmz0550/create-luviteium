@@ -131,10 +131,10 @@ public class CastingTableBlockEntity extends BlockEntity {
         if (mold.is(ModItems.SHOVEL_HEAD_MOLD.get())) return ModItems.HOT_LUVITEIUM_SHOVEL_HEAD.get();
         if (mold.is(ModItems.HOE_HEAD_MOLD.get())) return ModItems.HOT_LUVITEIUM_HOE_HEAD.get();
         if (mold.is(ModItems.SWORD_BLADE_MOLD.get())) return ModItems.HOT_LUVITEIUM_SWORD_BLADE.get();
-        if (mold.is(ModItems.HELMET_MOLD.get())) return ModItems.LUVITEIUM_HELMET.get();
-        if (mold.is(ModItems.CHESTPLATE_MOLD.get())) return ModItems.LUVITEIUM_CHESTPLATE.get();
-        if (mold.is(ModItems.LEGGINGS_MOLD.get())) return ModItems.LUVITEIUM_LEGGINGS.get();
-        if (mold.is(ModItems.BOOTS_MOLD.get())) return ModItems.LUVITEIUM_BOOTS.get();
+        if (mold.is(ModItems.HELMET_MOLD.get())) return ModItems.HOT_LUVITEIUM_HELMET.get();
+        if (mold.is(ModItems.CHESTPLATE_MOLD.get())) return ModItems.HOT_LUVITEIUM_CHESTPLATE.get();
+        if (mold.is(ModItems.LEGGINGS_MOLD.get())) return ModItems.HOT_LUVITEIUM_LEGGINGS.get();
+        if (mold.is(ModItems.BOOTS_MOLD.get())) return ModItems.HOT_LUVITEIUM_BOOTS.get();
         return ModItems.HOT_LUVITEIUM_INGOT.get();
     }
 

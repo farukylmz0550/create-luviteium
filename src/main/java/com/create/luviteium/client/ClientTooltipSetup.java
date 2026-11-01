@@ -23,7 +23,11 @@ public final class ClientTooltipSetup {
                 || stack.is(ModItems.HOT_LUVITEIUM_AXE_HEAD.get())
                 || stack.is(ModItems.HOT_LUVITEIUM_SHOVEL_HEAD.get())
                 || stack.is(ModItems.HOT_LUVITEIUM_HOE_HEAD.get())
-                || stack.is(ModItems.HOT_LUVITEIUM_SWORD_BLADE.get());
+                || stack.is(ModItems.HOT_LUVITEIUM_SWORD_BLADE.get())
+                || stack.is(ModItems.HOT_LUVITEIUM_HELMET.get())
+                || stack.is(ModItems.HOT_LUVITEIUM_CHESTPLATE.get())
+                || stack.is(ModItems.HOT_LUVITEIUM_LEGGINGS.get())
+                || stack.is(ModItems.HOT_LUVITEIUM_BOOTS.get());
         if (hot) {
             event.getToolTip().add(Component.translatable("tooltip.luviteium.cool_hint")
                     .withStyle(ChatFormatting.GOLD));
@@ -32,6 +36,17 @@ public final class ClientTooltipSetup {
         if (stack.is(ModItems.BLANK_MOLD.get())) {
             event.getToolTip().add(Component.translatable("tooltip.luviteium.blank_mold")
                     .withStyle(ChatFormatting.GRAY));
+        }
+
+        if (stack.is(ModItems.RAW_LUVITEIUM.get())) {
+            event.getToolTip().add(Component.translatable("tooltip.luviteium.raw_processing")
+                    .withStyle(ChatFormatting.GRAY));
+        }
+        if (stack.is(ModItems.CASTING_TABLE.get())) {
+            event.getToolTip().add(Component.translatable("tooltip.luviteium.casting_input")
+                    .withStyle(ChatFormatting.GRAY));
+            event.getToolTip().add(Component.translatable("tooltip.luviteium.casting_output")
+                    .withStyle(ChatFormatting.GOLD));
         }
 
         if (stack.is(ModItems.INGOT_MOLD.get())

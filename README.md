@@ -3,6 +3,15 @@
 Create: Luviteium is a Minecraft 1.21.1 NeoForge addon built around a rare,
 green-tinted material and Create automation.
 
+## Metal processing
+
+**Raw ore → heated Basin + Mechanical Mixer → Molten Luviteium → Casting
+Machine + mold → hot product → Encased Fan blowing through water → cooled item.**
+
+All casts, including armor, must be cooled. Tools use one cooled head plus sticks;
+the sword uses one cooled blade plus one stick. See
+[`docs/processing.md`](docs/processing.md) for setup, exact amounts and validation.
+
 ## Development baseline
 
 - Java 21
@@ -57,7 +66,7 @@ power with Chute input. Scene text is available in English and Turkish.
 ./gradlew runClient -PponderSmokeTest
 ```
 
-The first command runs six Minecraft GameTests. The second requires a desktop,
+The first command runs nine Minecraft GameTests. The second requires a desktop,
 creates a separate disposable flat world, plays and replays all three Ponder
 scenes, captures screenshots in `runs/client/screenshots/`, and exits.
 Ordinary client startup does not run this test. See

@@ -124,3 +124,7 @@ See [animation documentation](docs/animations.md) for the current render checks.
 Include your Minecraft, NeoForge, Create and Luviteium versions, steps to reproduce
 the problem, and the relevant log or crash report. Screenshots help with visual
 issues. Remove personal information from logs before sharing them.
+
+## License
+
+Create: Luviteium is available under the [MIT License](LICENSE).

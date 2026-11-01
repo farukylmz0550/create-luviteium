@@ -24,7 +24,8 @@ public final class LuviteiumTier implements Tier {
 
     @Override
     public float getAttackDamageBonus() {
-        return 4.5f;
+        // Player base 1 + pickaxe modifier 1 + tier bonus 2.5 = 4.5 damage.
+        return 2.5f;
     }
 
     @Override

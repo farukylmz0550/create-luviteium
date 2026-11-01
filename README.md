@@ -42,3 +42,24 @@ See
 [`docs/implementation-status.md`](docs/implementation-status.md) and
 [`docs/qa-report.md`](docs/qa-report.md) for verified behavior and remaining manual
 gameplay checks.
+
+## Create Ponder
+
+Hover over a Casting Table, Blank Mold or Biomass Generator and hold the
+Ponder key (default **W**) to open its tutorial. Three animated scenes explain
+casting and pipe input, Deployer mold imprinting and fan washing, and biomass
+power with Chute input. Scene text is available in English and Turkish.
+
+## Regression checks
+
+```sh
+./gradlew build runGameTestServer
+./gradlew runClient -PponderSmokeTest
+```
+
+The first command runs six Minecraft GameTests. The second requires a desktop,
+creates a separate disposable flat world, plays and replays all three Ponder
+scenes, captures screenshots in `runs/client/screenshots/`, and exits.
+Ordinary client startup does not run this test. See
+[`docs/debugging-and-ponder.md`](docs/debugging-and-ponder.md) for fixes, test
+coverage and remaining gameplay checks. Machine and item art is still placeholder.

@@ -28,6 +28,11 @@ public class BiomassGeneratorBlockEntity extends GeneratingKineticBlockEntity {
         }
 
         @Override
+        public int getSlotLimit(int slot) {
+            return 64;
+        }
+
+        @Override
         protected int getStackLimit(int slot, ItemStack stack) {
             return 64;
         }
@@ -46,20 +51,22 @@ public class BiomassGeneratorBlockEntity extends GeneratingKineticBlockEntity {
     public void tick() {
         super.tick();
         if (level == null || level.isClientSide) return;
-        if (burnTime > 0) {
-            burnTime--;
-            if (burnTime == 0) updateGeneratedRotation();
-        }
+        boolean wasBurning = burnTime > 0;
+        if (wasBurning) burnTime--;
         if (burnTime == 0) {
             ItemStack fuel = inventory.getStackInSlot(0);
             if (!fuel.isEmpty() && isValidFuel(fuel)) {
                 totalBurnTime = burnTimeFor(fuel);
                 burnTime = totalBurnTime;
-                fuel.shrink(1);
-                setChanged();
-                updateGeneratedRotation();
+                inventory.extractItem(0, 1, false);
             }
         }
+        // Refuelling must not detach and reattach a live kinetic network.
+        if (wasBurning != (burnTime > 0)) {
+            updateGeneratedRotation();
+            sendData();
+        }
+        if (wasBurning || burnTime > 0) setChanged();
     }
 
     @Override
@@ -69,7 +76,25 @@ public class BiomassGeneratorBlockEntity extends GeneratingKineticBlockEntity {
 
     @Override
     public float calculateAddedStressCapacity() {
-        return STRESS_CAPACITY;
+        // Create multiplies this per-RPM value by the generated speed.
+        lastCapacityProvided = (float) STRESS_CAPACITY / GENERATED_RPM;
+        return lastCapacityProvided;
+    }
+
+    @Override
+    public float calculateStressApplied() {
+        lastStressApplied = 0;
+        return 0;
+    }
+
+    @Override
+    public void destroy() {
+        if (level != null && !level.isClientSide) {
+            ItemStack remaining = inventory.extractItem(0, 64, false);
+            net.minecraft.world.Containers.dropItemStack(level, worldPosition.getX() + 0.5,
+                    worldPosition.getY() + 0.5, worldPosition.getZ() + 0.5, remaining);
+        }
+        super.destroy();
     }
 
     public ItemStackHandler getItemHandler(Direction side) {

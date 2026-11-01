@@ -1,5 +1,9 @@
 # Milestone 8 QA report
 
+For the latest runtime regression and Ponder results, see
+[`debugging-and-ponder.md`](debugging-and-ponder.md). The sections below retain
+earlier validation history; old recipe counts and artifact sizes are not current.
+
 ## Verified automatically
 
 - Clean `./gradlew clean build`: passed.
@@ -81,17 +85,17 @@
   dried kelp, cactus, bamboo, sugar cane, vines, melon/pumpkin seeds,
   wheat/beetroot produce) are no longer fuels. Other mods opt into the
   generator simply by matching the same vanilla tags.
-- Fractional fuel durations are rounded to the nearest whole tick: 1.875 s → 38
-  ticks, 0.9375 s → 19 ticks, and 0.75 s → 15 ticks.
+- Current fractional fuel durations are rounded to the nearest whole tick:
+  1.875 s → 38 ticks and 0.75 s → 15 ticks.
 - Product flow update from the accuracy pass: cooled-ingot crafting via fan
   splashing was reintroduced (hot ingot → Luviteium Ingot), while panel
   pressing consumes the cooled ingot. The earlier direct hot-ingot pressing is
   superseded; tool heads still use the existing washing recipes before tool
   crafting.
-- Slots removed by hand, world drops, and block removal all preserve contents
-  because the Casting Table drops its mold, output, and drains molten fluid in
-  `onRemove`, and host loot tables (`casting_table`, `biomass_generator`,
-  `luviteium_block`) were added in the same pass.
+- Breaking the Casting Table drops its mold and output; stored molten fluid is
+  discarded, not returned as an item. Block loot tables exist for the table,
+  generator and storage block. The latest runtime fix also drops queued generator
+  fuel when the generator is removed.
 - Biomass fuel insertion uses the generator's NeoForge item capability, which is the
   standard inventory path used by Create Funnel/Chute transport.
 
@@ -101,9 +105,10 @@ These require a client or an interactive survival test and are not claimed as
 automatically verified here:
 
 - survival progression and actual ore rarity sampling;
-- physical Create pipe, Funnel/Chute, Depot, Deployer, and Mechanical Press behavior;
-- casting interruption, chunk unload/reload, and inventory automation;
-- cumulative timing of a full 64-item fuel stack and visible kinetic output;
+- physical Create pipe, Funnel, Depot, Deployer, and Mechanical Press behavior;
+- real chunk unload/reload and broader inventory automation (NBT round-trip,
+  interrupted casting, Chute feeding, a 64-leaf fuel stack and a connected shaft
+  now have passing GameTests);
 - final texture art replacement (armor already renders with the dedicated
   `luviteium_layer_1/2` textures; item and machine art remains
   placeholder-quality).

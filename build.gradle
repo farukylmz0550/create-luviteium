@@ -13,6 +13,17 @@ base {
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
+runs {
+    client {
+        if (project.hasProperty('ponderSmokeTest')) {
+            systemProperty 'luviteium.ponderSmokeTest', 'true'
+        }
+    }
+    gameTestServer {
+        systemProperty 'neoforge.enabledGameTestNamespaces', 'luviteium'
+    }
+}
+
 repositories {
     maven { url = 'https://maven.createmod.net' }
     maven { url = 'https://maven.ithundxr.dev/snapshots' }

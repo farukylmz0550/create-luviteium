@@ -1,5 +1,9 @@
 # Implementation status
 
+Latest gameplay fixes and Ponder coverage are recorded in
+[`debugging-and-ponder.md`](debugging-and-ponder.md). Earlier milestone entries
+describe implementation scope, not proof that every survival interaction passed.
+
 ## Verified baseline
 
 - Minecraft: 1.21.1
@@ -71,13 +75,14 @@ Deployer interaction remains part of the final gameplay QA pass.
 
 **Complete for the products and processing scope.** Cooled tool heads now craft into
 functional Luviteium pickaxe, axe, shovel, hoe, and sword items using the vanilla
-shapes. The tool tier centralizes the 1,250 durability, 7.5 mining speed, 4.5 attack
-bonus, enchantability, and Luviteium-ingot repair values. Cast armor outputs are real
+shapes. The tool tier centralizes the 1,250 durability, 7.5 mining speed,
+enchantability, and Luviteium-ingot repair values. Explicit tool attributes now
+give the pickaxe 4.5 total attack damage (tier bonus 2.5). Cast armor outputs are real
 helmet, chestplate, leggings, and boots with an 18-point total defense target,
 toughness, knockback resistance, and the same ingot repair ingredient. Hot ingots and
-all hot tool heads have Create bulk-washing recipes; hot ingots produce panels via the
-Mechanical Press after the cooled-ingot intermediate was removed from the product
-family. JSON validation, the full Gradle build, and dedicated-server recipe loading
+all hot tool heads have Create bulk-washing recipes; hot ingots wash into the
+ordinary Luviteium Ingot, which the Mechanical Press turns into a panel. There is
+no separate cooled-ingot registry entry. JSON validation, the full Gradle build, and dedicated-server recipe loading
 all pass; the server reaches `Done` with 2,841 recipes loaded.
 
 ## Milestone 7 status
@@ -88,8 +93,9 @@ fuel inventory capped at 64 items, automatic restart, no redstone gate, 64 RPM o
 and 512 SU stress capacity. Fuel acceptance is governed by existing vanilla item tags
 (see the documentation-accuracy pass below), which inherently excludes coal, charcoal,
 lava, and bone meal. The inventory capability is exposed for Create Funnel/Chute
-insertion. Full survival interaction and cumulative 64-stack timing checks remain
-Milestone 8 QA.
+insertion. GameTests now verify a real 512 SU kinetic network, a 64-leaf fuel
+stack, automatic restart, Chute insertion, and queued-fuel drops on removal.
+Funnel behavior and full survival progression remain manual QA.
 
 ## Milestone 8 status
 
@@ -235,9 +241,9 @@ wired through the model 1.21.1 actually uses.
 - Added the remaining eight Deployer mold recipes and explicit casting amount mapping:
   tool heads at 288 mB, helmet/boots at 432 mB, chestplate at 576 mB, and leggings at
   720 mB. Placeholder hot-head/armor output items and basic palette assets are present.
-- Added Create fan washing recipes that convert hot tool heads into cooled parts, plus a
-  Mechanical Press recipe that converts one hot ingot into one Luviteium Panel. The separate
-  cooled-ingot item was removed during Milestone 7.
+- Added Create fan washing recipes that convert hot tool heads into cooled parts.
+  The current ingot chain is hot ingot → ordinary ingot by washing → panel by
+  pressing. The separate cooled-ingot item was removed during Milestone 7.
 - Replaced the first-pass placeholder art with recolored 1.21.1 vanilla-style 16x16 item
   silhouettes for tools, armor, ingots, raw material, panels, and molds. Cool Luviteium uses
   a green palette; hot variants retain a distinct orange heat palette.
@@ -258,11 +264,11 @@ wired through the model 1.21.1 actually uses.
   Table now has a dedicated front panel in addition to its side, top, and bottom textures;
   Biomass Generator keeps distinct front fan, side casing, pipe-port, top, and bottom faces.
 
-## Not yet implemented
+## Remaining validation and polish
 
-The Casting Table implements all ten mold paths as registered outputs with
-hand-based mold insertion and output extraction, but still has no player GUI;
-casting-table visual polish and hot armor cooling remain. Create Depot recipes
-and gear/material registration also remain later passes. The Biomass Generator
-has its functional kinetic and fuel implementation; its machine assets remain
-documented placeholders until the final texture pass.
+The Casting Table has hand interaction and automation capabilities, but no
+dedicated GUI. Armor is cast as finished armor and requires no cooling step.
+Deployer recipes, gear/material registration and three Ponder scenes are present.
+Longer survival progression, physical pipe/Funnel integration, real chunk
+unload/reload and ore rarity sampling still need validation. Machine and item
+assets remain documented placeholders until the final texture pass.

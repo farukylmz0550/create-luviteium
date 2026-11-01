@@ -1,0 +1,16 @@
+{
+  "luviteium.ponder.casting.header": "Tekrar kullanılabilir kalıplarla Luviteium dökümü",
+  "luviteium.ponder.casting.text_1": "Erimiş Luviteium vermeden önce tekrar kullanılabilir bir kalıp yerleştir.",
+  "luviteium.ponder.casting.text_2": "Isıtılmış karıştırma, her ham Luviteium için 144 mB üretir. Borulardan masaya sıvı taşımak için pompaya güç ver.",
+  "luviteium.ponder.casting.text_3": "Külçe kalıbı tam 144 mB alır ve 20 tikte döker. Alet başları için 288 mB ve 40 tik gerekir.",
+  "luviteium.ponder.casting.text_4": "Sıcak ürünü al, fanla yıkayarak külçeye dönüştür. Külçeyi presleyerek panel yap. Boşta duran kalıbı çıkarmak için boş elle eğilerek sağ tıkla.",
+  "luviteium.ponder.molds.header": "Kalıp çıkarma ve alet parçalarını soğutma",
+  "luviteium.ponder.molds.text_1": "Depo üzerine boş kalıp koy. Güç verilen Deployer'a hasarsız bir örnek alet veya zırh parçası ver.",
+  "luviteium.ponder.molds.text_2": "Örnek eşya tüketilir. Oluşan kalıp tekrar kullanılabilir; hasarlı örneklerden kalıp çıkarılamaz.",
+  "luviteium.ponder.molds.text_3": "Alet başını dök, sonra suyun içinden üfleyen güçlü bir fanla yıka. Çubuklarla üretimde yalnızca soğumuş alet başları kullanılır.",
+  "luviteium.ponder.biomass.header": "Biyokütleyle makinelere güç sağlama",
+  "luviteium.ponder.biomass.text_1": "Biyokütleyi Chute veya Funnel ile aktar. Jeneratörün en fazla 64 eşya alan tek yakıt yuvası vardır.",
+  "luviteium.ponder.biomass.text_2": "Şaftları jeneratörün ekseni boyunca bağla. Yakıt yanarken 64 RPM hız ve toplam 512 SU kapasite sağlar.",
+  "luviteium.ponder.biomass.text_3": "Yanabilir kütükler, tahtalar, fidanlar, yapraklar, çiçekler ve köylülerin ekebildiği tohumlar kabul edilir. Kömür, odun kömürü ve lav reddedilir.",
+  "luviteium.ponder.biomass.text_4": "Yük olmasa da yakıt yanar. Yakıt bitince jeneratör durur, yeni yakıt gelince yeniden çalışır; kızıltaşla kontrol edilmez."
+}

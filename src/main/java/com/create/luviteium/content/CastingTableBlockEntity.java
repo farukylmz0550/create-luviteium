@@ -71,11 +71,10 @@ public class CastingTableBlockEntity extends BlockEntity {
     public static void serverTick(net.minecraft.world.level.Level level, BlockPos pos, BlockState state, CastingTableBlockEntity table) {
         if (table.canCastIngot()) {
             table.progress++;
+            table.setChanged();
             if (table.progress >= table.requiredTicks()) {
                 table.completeIngotCast();
             }
-        } else {
-            table.progress = 0;
         }
     }
 
@@ -161,6 +160,12 @@ public class CastingTableBlockEntity extends BlockEntity {
      */
     public boolean interactWithPlayer(Player player, InteractionHand hand) {
         ItemStack held = player.getItemInHand(hand);
+        if (held.isEmpty() && player.isShiftKeyDown()) {
+            ItemStack removed = inventory.extractItem(MOLD_SLOT, 1, false);
+            if (removed.isEmpty()) return false;
+            if (!player.getInventory().add(removed)) player.drop(removed, false);
+            return true;
+        }
         ItemStack moldSlot = inventory.getStackInSlot(MOLD_SLOT);
         if (isSupportedMold(held)) {
             if (!moldSlot.isEmpty() || !fluidTank.isEmpty() || progress > 0) {
@@ -168,7 +173,7 @@ public class CastingTableBlockEntity extends BlockEntity {
             }
             ItemStack remaining = inventory.insertItem(MOLD_SLOT, held.copyWithCount(1), false);
             if (remaining.isEmpty()) {
-                held.shrink(1);
+                if (!player.getAbilities().instabuild) held.shrink(1);
                 setChanged();
                 return true;
             }
@@ -187,14 +192,14 @@ public class CastingTableBlockEntity extends BlockEntity {
 
     /**
      * Pour one bucket charge (one ingot's worth, 144 mB) of Molten Luviteium into the tank.
-     * Returns false when the tank has no room for a full charge, so the empty bucket stays.
+     * Returns false when the tank has no room for a full charge; the held full bucket stays.
      */
     public boolean pourBucket(Player player, ItemStack held) {
         FluidStack charge = new FluidStack(ModFluids.MOLTEN_LUVITEIUM.get(), INGOT_AMOUNT);
-        int filled = fluidTank.fill(charge, IFluidHandler.FluidAction.EXECUTE);
-        if (filled < INGOT_AMOUNT) {
+        if (fluidTank.fill(charge, IFluidHandler.FluidAction.SIMULATE) < INGOT_AMOUNT) {
             return false;
         }
+        fluidTank.fill(charge, IFluidHandler.FluidAction.EXECUTE);
         setChanged();
         swapHeld(player, held, new ItemStack(Items.BUCKET));
         return true;
@@ -205,16 +210,18 @@ public class CastingTableBlockEntity extends BlockEntity {
      * Returns false when the tank holds less than a full charge.
      */
     public boolean fillBucket(Player player, ItemStack held) {
-        FluidStack drained = fluidTank.drain(INGOT_AMOUNT, IFluidHandler.FluidAction.EXECUTE);
+        FluidStack drained = fluidTank.drain(INGOT_AMOUNT, IFluidHandler.FluidAction.SIMULATE);
         if (drained.getAmount() < INGOT_AMOUNT) {
             return false;
         }
+        fluidTank.drain(INGOT_AMOUNT, IFluidHandler.FluidAction.EXECUTE);
         setChanged();
         swapHeld(player, held, new ItemStack(ModItems.LUVITEIUM_BUCKET.get()));
         return true;
     }
 
     private static void swapHeld(Player player, ItemStack held, ItemStack result) {
+        if (player.getAbilities().instabuild) return;
         held.shrink(1);
         if (!player.getInventory().add(result)) {
             player.drop(result, false);

@@ -46,5 +46,19 @@
   "tooltip.luviteium.bucket_charge": "Carries 144 mB of Molten Luviteium, one ingot charge.",
   "tooltip.luviteium.bucket_use": "Right-click a Casting Table to pour it in, or use an empty bucket to take some out.",
   "tooltip.luviteium.generator_fuels": "Burns plant biomass only (wood, planks, saplings, leaves, flowers, seeds). Rejects coal, charcoal, lava and bone meal.",
-  "tooltip.luviteium.generator_insertion": "Insert fuel through a Create Funnel or Chute."
+  "tooltip.luviteium.generator_insertion": "Insert fuel through a Create Funnel or Chute.",
+  "luviteium.ponder.casting.header": "Casting Luviteium with reusable molds",
+  "luviteium.ponder.casting.text_1": "Insert a reusable mold before supplying molten Luviteium.",
+  "luviteium.ponder.casting.text_2": "Heated mixing produces 144 mB per Raw Luviteium. Power the pump to feed the table through pipes.",
+  "luviteium.ponder.casting.text_3": "The ingot mold holds exactly 144 mB and casts in 20 ticks. Tool heads need 288 mB and 40 ticks.",
+  "luviteium.ponder.casting.text_4": "Collect the hot output, then fan-wash it into an ingot. Press the ingot into a panel. Sneak-right-click empty-handed to remove an idle mold.",
+  "luviteium.ponder.molds.header": "Imprinting and cooling tool parts",
+  "luviteium.ponder.molds.text_1": "Place a Blank Mold on a Depot. Give the powered Deployer an undamaged sample tool or armor piece.",
+  "luviteium.ponder.molds.text_2": "The sample is consumed. The resulting mold is reusable; damaged samples cannot imprint it.",
+  "luviteium.ponder.molds.text_3": "Cast the head, then wash it with a powered fan blowing through water. Only cooled heads can be crafted with sticks.",
+  "luviteium.ponder.biomass.header": "Powering machines with biomass",
+  "luviteium.ponder.biomass.text_1": "Feed biomass through a Chute or Funnel. The generator has one inventory slot holding up to 64 items.",
+  "luviteium.ponder.biomass.text_2": "Connect shafts along the generator axis. While fuel burns, it generates 64 RPM with a total capacity of 512 SU.",
+  "luviteium.ponder.biomass.text_3": "Burnable logs, planks, saplings, leaves, flowers and villager-plantable seeds are accepted. Coal, charcoal and lava are rejected.",
+  "luviteium.ponder.biomass.text_4": "Fuel burns even without a load. The generator stops when empty and restarts when fuel arrives; redstone does not control it."
 }

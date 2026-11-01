@@ -50,6 +50,8 @@ metal, a visible completed product during its ejection lift, and moving/stopped 
 demonstrates gradual fluid input and per-tick casting instead of a duplicate item
 entity standing in for the output. Screenshots are saved under
 `runs/client/screenshots/` for visual inspection.
+Capture runs after rendering the frame, so a short completion effect is not
+mistakenly documented with the previous frame's image.
 
 Validation on 2026-11-01: all ten GameTests passed; all three Ponder scenes passed
 playback and replay, and both machine renderers passed the real client checks.

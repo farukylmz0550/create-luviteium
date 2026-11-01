@@ -29,6 +29,7 @@ public final class PonderSmokeTest {
     private static boolean opening;
     private static int screenshotIndex;
     private static int screenshotTicks;
+    private static boolean capturePending;
     private static final String[] ITEMS = {"casting_table", "blank_mold", "biomass_generator"};
     private static final String[] SHOTS = {"casting_table", "blank_mold", "biomass_generator",
             "biomass_generator-turning", "biomass_generator-stopped", "biomass_generator-stopped-later",
@@ -96,7 +97,7 @@ public final class PonderSmokeTest {
     }
 
     private static void capture(Minecraft mc) {
-        if (screenshotIndex >= SHOTS.length) return;
+        if (screenshotIndex >= SHOTS.length || capturePending) return;
         if (++screenshotTicks < (screenshotIndex == 7 ? 8 : 25)) return;
         if (screenshotIndex == 0 || screenshotIndex == 7) {
             var scene = ((PonderUI) mc.screen).getActiveScene();
@@ -135,6 +136,15 @@ public final class PonderSmokeTest {
             previousShaftAngle = angle;
             LogUtils.getLogger().info("LUVITEIUM_SHAFT_RENDER_PASS {} speed={} angle={}", SHOTS[screenshotIndex], expectedSpeed, angle);
         }
+        capturePending = true;
+    }
+
+    @SubscribeEvent
+    public static void captureRenderedFrame(net.neoforged.neoforge.client.event.RenderFrameEvent.Post event) {
+        if (!capturePending) return;
+        capturePending = false;
+        Minecraft mc = Minecraft.getInstance();
+        // Client ticks precede rendering; reading the target there captures an older frame.
         try (var image = Screenshot.takeScreenshot(mc.getMainRenderTarget())) {
             Files.createDirectories(Path.of("screenshots"));
             image.writeToFile(Path.of("screenshots", "ponder-" + SHOTS[screenshotIndex] + ".png"));

@@ -172,6 +172,41 @@ in one sweep. The changes below are verified by `./gradlew build` and a dedicate
   `luviteium:luviteium_bucket` resolves to "Molten Luviteium Bucket" while
   an intentionally invalid item id is rejected with a registry error.
 
+## Harvest-gate namespace fix (1.21.1 tool rules)
+
+**Complete.** The ore's iron-pickaxe requirement was silently dead and is now
+wired through the model 1.21.1 actually uses.
+
+- The old `data/luviteium/tags/block/needs_iron_tool.json` and
+  `data/luviteium/tags/block/mineable/pickaxe.json` files defined
+  `#luviteium:needs_iron_tool` and `#luviteium:mineable/pickaxe`. Vanilla
+  harvest checks never read tags in the mod's namespace, so the ore and the
+  storage block were in *no* vanilla mining tag: they had no pickaxe mining
+  speed and dropped nothing in survival with every tool, including a
+  netherite pickaxe.
+- Verified from the 1.21.1 bytecode: `ItemStack.isCorrectToolForDrops` ->
+  `Item.isCorrectToolForDrops` -> `Tool.isCorrectForDrops`, and
+  `Tier.createToolProperties` builds exactly two rules in order:
+  `Rule.deniesDrops(tier.getIncorrectBlocksForDrops())` then
+  `Rule.minesAndDrops(miningBlocks, speed)`. The `needs_*_tool` tag keys
+  still exist in `BlockTags` but vanilla 1.21.1 ships no datapack files for
+  them and no vanilla tool references them, so gating through
+  `needs_iron_tool` has no effect.
+- The fix moves both blocks into the vanilla namespace:
+  `data/minecraft/tags/block/mineable/pickaxe.json` (mining speed and the
+  allow-drops rule for every pickaxe tier) plus
+  `data/minecraft/tags/block/incorrect_for_wooden_tool.json` and
+  `incorrect_for_stone_tool.json` (the earlier `deniesDrops` rules that make
+  wooden and stone pickaxes drop nothing). Iron and better pickaxes match
+  only the second rule and harvest normally, which is exactly the spec's
+  "Minimum tool: iron pickaxe" requirement.
+- The dead `luviteium`-namespace block tag files were deleted. The
+  `data/luviteium/tags/item/ingots/luviteium.json` item tag stays: it is a
+  mod-namespace convenience tag, not a vanilla gate.
+- The QA harness now audits this statically (`HG1`): the three vanilla-namespace
+  tag files must exist with the ore id, and no `needs_iron_tool` file may
+  remain in any namespace.
+
 ## Completed in this pass
 
 - Gradle/NeoForge project skeleton and Create Maven repositories.

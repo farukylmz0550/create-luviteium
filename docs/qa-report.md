@@ -48,6 +48,28 @@
   `recipe/deploying/*.json` files present, matching the ten rows in
   `docs/molds.md`.
 
+## Harvest-gate verification (1.21.1 tool rules)
+
+- Found and fixed a silent gameplay bug: the ore's iron-pickaxe requirement
+  lived in `data/luviteium/tags/block/needs_iron_tool.json`, which defines
+  `#luviteium:needs_iron_tool`. Vanilla harvest checks only read
+  `#minecraft:*` tags, so the ore and the Luviteium block were in no vanilla
+  mining tag at all and dropped nothing in survival with any tool.
+- 1.21.1 gate model confirmed from bytecode (`Tier.createToolProperties`):
+  each pickaxe's `minecraft:tool` component applies
+  `deniesDrops(#minecraft:incorrect_for_<tier>_tool)` first, then
+  `minesAndDrops(#minecraft:mineable/pickaxe)`. Vanilla 1.21.1 ships no
+  `needs_*_tool` datapack files and no tool reads those keys, so gating via
+  `needs_iron_tool` is a no-op in this version.
+- Fix in place: `data/minecraft/tags/block/mineable/pickaxe.json`,
+  `incorrect_for_wooden_tool.json`, and `incorrect_for_stone_tool.json`
+  each contain `luviteium:luviteium_ore` and `luviteium:luviteium_block`;
+  the dead mod-namespace block tags are deleted. Wooden and stone pickaxes
+  match the earlier `deniesDrops` rule (no drops); iron and better match the
+  allow rule and harvest normally, matching the spec's iron-pickaxe minimum.
+- Harness assertion `HG1` re-audits the three vanilla-namespace files and the
+  absence of `needs_iron_tool` on every run.
+
 ## Implementation decisions recorded
 
 - Fuel governance update from the accuracy pass: the biomass whitelist and burn

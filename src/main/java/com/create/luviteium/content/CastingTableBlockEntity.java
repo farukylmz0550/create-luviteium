@@ -8,6 +8,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.Containers;
@@ -182,6 +183,42 @@ public class CastingTableBlockEntity extends BlockEntity {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Pour one bucket charge (one ingot's worth, 144 mB) of Molten Luviteium into the tank.
+     * Returns false when the tank has no room for a full charge, so the empty bucket stays.
+     */
+    public boolean pourBucket(Player player, ItemStack held) {
+        FluidStack charge = new FluidStack(ModFluids.MOLTEN_LUVITEIUM.get(), INGOT_AMOUNT);
+        int filled = fluidTank.fill(charge, IFluidHandler.FluidAction.EXECUTE);
+        if (filled < INGOT_AMOUNT) {
+            return false;
+        }
+        setChanged();
+        swapHeld(player, held, new ItemStack(Items.BUCKET));
+        return true;
+    }
+
+    /**
+     * Fill an empty bucket from the tank, one charge (144 mB) at a time.
+     * Returns false when the tank holds less than a full charge.
+     */
+    public boolean fillBucket(Player player, ItemStack held) {
+        FluidStack drained = fluidTank.drain(INGOT_AMOUNT, IFluidHandler.FluidAction.EXECUTE);
+        if (drained.getAmount() < INGOT_AMOUNT) {
+            return false;
+        }
+        setChanged();
+        swapHeld(player, held, new ItemStack(ModItems.LUVITEIUM_BUCKET.get()));
+        return true;
+    }
+
+    private static void swapHeld(Player player, ItemStack held, ItemStack result) {
+        held.shrink(1);
+        if (!player.getInventory().add(result)) {
+            player.drop(result, false);
+        }
     }
 
     public void dropContents(Level level, BlockPos pos) {

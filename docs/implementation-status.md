@@ -148,6 +148,30 @@ in one sweep. The changes below are verified by `./gradlew build` and a dedicate
 - A Luviteium creative-mode tab was added with the full item list, and client
   tooltips explain cooled-item hints, mold usage, and accepted generator fuels.
 
+## Molten bucket and tool-icon pass
+
+**Complete.** Adds the missing player-facing forms of the material.
+
+- The five tool item icons (pickaxe, axe, shovel, hoe, sword) previously
+  pointed at their head-only component textures, so a finished tool rendered
+  as a floating head with no handle. Each tool model now uses a dedicated
+  full-tool texture generated in the existing Luviteium item palette, keeping
+  the vanilla wooden handle.
+- A new `luviteium_bucket` item ("Molten Luviteium Bucket") carries one
+  ingot charge of 144 mB. Right-clicking a Casting Table with it pours the
+  charge into the tank (up to the exact capacity of the selected mold), and
+  right-clicking with an empty `minecraft:bucket` draws one charge back out.
+  The bucket swaps with the empty bucket and falls back to dropping the
+  result when the inventory is full. It is registered in the creative tab
+  with English name and two explanatory tooltip lines.
+- The mold family itself required no change: the blank mold recipe, all ten
+  reusable molds, their textures/models, and the ten `create:deploying`
+  recipes were re-verified present and consistent with `docs/molds.md`.
+- Verified with a clean `./gradlew build`, a dedicated-server startup
+  reaching `Done`, and an RCON `/summon` check where
+  `luviteium:luviteium_bucket` resolves to "Molten Luviteium Bucket" while
+  an intentionally invalid item id is rejected with a registry error.
+
 ## Completed in this pass
 
 - Gradle/NeoForge project skeleton and Create Maven repositories.

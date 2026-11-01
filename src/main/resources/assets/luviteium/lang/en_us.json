@@ -26,6 +26,7 @@
   "item.luviteium.luviteium_leggings": "Luviteium Leggings",
   "item.luviteium.luviteium_boots": "Luviteium Boots",
   "item.luviteium.luviteium_panel": "Luviteium Panel",
+  "item.luviteium.luviteium_bucket": "Molten Luviteium Bucket",
   "item.luviteium.blank_mold": "Blank Mold",
   "item.luviteium.ingot_mold": "Luviteium Ingot Mold",
   "item.luviteium.pickaxe_head_mold": "Luviteium Pickaxe Head Mold",
@@ -42,6 +43,8 @@
   "tooltip.luviteium.cool_hint": "Still hot. Cool with a Create fan and water before crafting.",
   "tooltip.luviteium.blank_mold": "Create an undamaged sample with a Deployer on a Depot to imprint a reusable mold.",
   "tooltip.luviteium.mold_hint": "Reusable mold. Casts from Molten Luviteium.",
+  "tooltip.luviteium.bucket_charge": "Carries 144 mB of Molten Luviteium, one ingot charge.",
+  "tooltip.luviteium.bucket_use": "Right-click a Casting Table to pour it in, or use an empty bucket to take some out.",
   "tooltip.luviteium.generator_fuels": "Burns plant biomass only (wood, planks, saplings, leaves, flowers, seeds). Rejects coal, charcoal, lava and bone meal.",
   "tooltip.luviteium.generator_insertion": "Insert fuel through a Create Funnel or Chute."
 }

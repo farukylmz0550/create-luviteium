@@ -31,6 +31,23 @@
   `net.minecraft.world.InteractionResult`, matching the 1.21.1
   `BlockBehaviour` signatures.
 
+## Molten bucket and tool-icon verification
+
+- `./gradlew build`: passed; jar contains the five tool textures, the bucket
+  texture, and the bucket item model.
+- Model/texture reference audit: every `layer0` in `assets/luviteium/models`
+  resolves to an existing PNG, and all blockstate model references resolve.
+- Item model count matches registration count (39 item models for 39
+  registered items).
+- Dedicated server startup after the change: reached `Done` with no Luviteium
+  errors.
+- RCON `/summon` item-id check: `luviteium:luviteium_bucket` resolves to
+  "Molten Luviteium Bucket"; the control id `luviteium:does_not_exist` is
+  rejected with `Tried to load invalid item`, proving the check is real.
+- Mold contract re-audit: `blank_mold.json` plus all ten
+  `recipe/deploying/*.json` files present, matching the ten rows in
+  `docs/molds.md`.
+
 ## Implementation decisions recorded
 
 - Fuel governance update from the accuracy pass: the biomass whitelist and burn

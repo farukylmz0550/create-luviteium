@@ -24,6 +24,7 @@ public final class ModCreativeTabs {
                         output.accept(ModItems.HOT_LUVITEIUM_INGOT.get());
                         output.accept(ModItems.LUVITEIUM_BLOCK.get());
                         output.accept(ModItems.LUVITEIUM_PANEL.get());
+                        output.accept(ModItems.LUVITEIUM_BUCKET.get());
 
                         output.accept(ModItems.BLANK_MOLD.get());
                         output.accept(ModItems.INGOT_MOLD.get());

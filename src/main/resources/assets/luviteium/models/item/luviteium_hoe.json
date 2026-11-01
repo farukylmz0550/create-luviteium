@@ -1,1 +1,6 @@
-{"parent":"minecraft:item/handheld","textures":{"layer0":"luviteium:item/luviteium_hoe_head"}}
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "luviteium:item/luviteium_hoe"
+  }
+}

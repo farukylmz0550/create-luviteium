@@ -48,6 +48,13 @@ public final class ClientTooltipSetup {
                     .withStyle(ChatFormatting.GRAY));
         }
 
+        if (stack.is(ModItems.LUVITEIUM_BUCKET.get())) {
+            event.getToolTip().add(Component.translatable("tooltip.luviteium.bucket_charge")
+                    .withStyle(ChatFormatting.GRAY));
+            event.getToolTip().add(Component.translatable("tooltip.luviteium.bucket_use")
+                    .withStyle(ChatFormatting.GRAY));
+        }
+
         if (stack.is(ModItems.BIOMASS_GENERATOR.get())) {
             event.getToolTip().add(Component.translatable("tooltip.luviteium.generator_fuels")
                     .withStyle(ChatFormatting.GRAY));

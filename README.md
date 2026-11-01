@@ -33,10 +33,12 @@ Once Java 21 is installed, run:
 
 The first Gradle sync downloads and decompiles Minecraft/NeoForge dependencies.
 The current implementation includes the casting table with hand-based mold
-insertion and output extraction, Create fluid processing, Deployer mold flow,
+insertion and output extraction, a Molten Luviteium Bucket for pouring or
+drawing molten charges by hand, Create fluid processing, Deployer mold flow,
 the cooled-ingot product loop (fan splashing, panel pressing, block packing),
-tool and armor sets with real vanilla tool classes, the 18-point armor set, the
-Biomass Generator, and a Luviteium creative tab. See
+tool and armor sets with real vanilla tool classes and complete tool icons,
+the 18-point armor set, the Biomass Generator, and a Luviteium creative tab.
+See
 [`docs/implementation-status.md`](docs/implementation-status.md) and
 [`docs/qa-report.md`](docs/qa-report.md) for verified behavior and remaining manual
 gameplay checks.

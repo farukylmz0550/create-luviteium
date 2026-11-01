@@ -11,3 +11,4 @@ eclipse/
 /.settings/
 *.log
 hs_err_pid*
+__pycache__/

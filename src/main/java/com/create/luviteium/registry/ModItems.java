@@ -48,6 +48,7 @@ public final class ModItems {
     public static final DeferredItem<Item> RAW_LUVITEIUM = ITEMS.registerSimpleItem("raw_luviteium");
     public static final DeferredItem<Item> LUVITEIUM_INGOT = ITEMS.registerSimpleItem("luviteium_ingot");
     public static final DeferredItem<Item> LUVITEIUM_PANEL = ITEMS.registerSimpleItem("luviteium_panel");
+    public static final DeferredItem<Item> LUVITEIUM_BUCKET = ITEMS.registerSimpleItem("luviteium_bucket");
     public static final DeferredItem<Item> HOT_LUVITEIUM_INGOT = ITEMS.registerSimpleItem("hot_luviteium_ingot");
     public static final DeferredItem<Item> HOT_LUVITEIUM_PICKAXE_HEAD = ITEMS.registerSimpleItem("hot_luviteium_pickaxe_head");
     public static final DeferredItem<Item> HOT_LUVITEIUM_AXE_HEAD = ITEMS.registerSimpleItem("hot_luviteium_axe_head");

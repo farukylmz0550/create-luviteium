@@ -56,9 +56,9 @@ holding a Blank Mold, and the resulting mold can be reused indefinitely.
   captions are updated; hot armor and armor molds also link to this scene.
 - Four hot armor item IDs and four washing recipes were added. Existing finished
   armor stays usable; new armor casts require cooling.
-- Hot armor uses the existing original 16×16 armor silhouettes with a temporary
-  warm item tint. These are placeholders, like the existing art. No PNGs were
-  replaced and no emissive renderer was added.
+- Hot armor now has dedicated 16×16 orange placeholder PNGs from the later
+  [texture refresh](textures.md). There is no extra runtime warm tint or emissive
+  renderer. The user will replace this art later.
 
 ## Verification
 

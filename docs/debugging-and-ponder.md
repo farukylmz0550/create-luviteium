@@ -117,7 +117,8 @@ at zero speed they stay visible and stationary, including an overstressed networ
 There is no burn-time-only animation that could continue while the network stops.
 The renderer uses the regular block-entity path without a separate Flywheel visual,
 so there is only one owner drawing the generator's shaft ends.
-The light-metal UV region comes from the existing Blank Mold texture. Resource
+The later [placeholder texture refresh](textures.md) supplies dedicated collar,
+brass and dark-iron textures instead of sampling the Blank Mold icon. Resource
 references and model bounds were checked; `build runClient -PponderSmokeTest`
 passes and the generator's Ponder screenshot was visually inspected.
 The client smoke test checks renderer registration, 64 RPM moving snapshots with

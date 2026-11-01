@@ -1,0 +1,25 @@
+Create an ORIGINAL production-ready pixel-art texture atlas for a Minecraft Create-style addon called Luviteium. This is raw texture data, NOT an illustration, mockup, sheet of 3D cubes or labeled diagram.
+OUTPUT: exactly square 1024x1024, a perfectly aligned 4 columns by 4 rows grid, each tile exactly 256x256. No margins, gaps, lines between tiles, labels, text, numbers or shadows outside tiles. EACH TILE IS A TRUE 16x16 PIXEL DESIGN enlarged 16x with nearest-neighbor: visible big square pixels, no subpixel detail, gradients or antialiasing. Every tile is fully opaque and fills its square edge to edge.
+Style: Minecraft vanilla-compatible industrial machinery; dark charcoal steel, weathered gray iron, thin brass fasteners, tiny subdued moss/emerald-green status accents. Not mostly green, NOT blue. Clean legible large functional details, beveled edges, sparse rivets, tactile restrained material shading. Newly authored art, not copied existing vanilla/Create textures.
+Tile contents in EXACT row-major order:
+Row 1:
+1 casting machine FRONT: charcoal metal face, thin brass perimeter, centered dark square fluid inlet bordered iron, tiny green gauge off-center.
+2 casting machine SIDE: dark steel panel, two brass reinforcing rails, four rivets, small restrained recessed green inspection slot.
+3 casting machine TOP: dark cast-iron rim surrounding a recessed empty horizontal ingot-shaped mold cavity, short pouring channel, small brass corners. No actual ingot.
+4 casting machine BOTTOM: steel bolted base, dark cross bracing, four feet pads, no status lamp.
+Row 2:
+1 biomass generator FRONT: large centered shaft socket, silver square ring around near-black centered 4x4 opening, thin brass frame. This is an axial mechanical output.
+2 biomass generator SIDE: charcoal metal casing, horizontal black ventilation slats, brass corner fasteners, one tiny subdued green status light.
+3 biomass generator TOP: dark biomass feed hatch, gray hinge, brass latch, compact green leaf stamp on one corner.
+4 biomass generator BOTTOM: heavy charcoal bolted mounting plate, broad gray rib across, no port or green panel.
+Row 3:
+1 biomass generator NON-AXIAL SERVICE SIDE: two dark vertical ventilation slots, a small bolted service cover and brass screws. No shaft socket here.
+2 dedicated SHAFT COLLAR texture: symmetrical centered square silver iron bearing ring with brass outer border and dark 4x4 central square; lit upper left, darker lower right.
+3 dedicated BRASS material: seamless warm desaturated brass with restrained 3-color mottled pixels, no icon.
+4 dedicated DARK IRON material: seamless charcoal iron with very restrained pixel variation, no icon.
+Row 4:
+1 LUVITEIUM STORAGE BLOCK: dark forest-green metal plates with one subtle seam, muted emerald highlights and tiny brass corner pins, no glowing neon.
+2 LUVITEIUM ORE: neutral gray Minecraft-style stone with distinct scattered deep-green metal ore clusters and pale green edge highlights, fills all tile.
+3 MOLTEN LUVITEIUM STILL: seamless liquid muted olive-green metal with swirling darker green and warm pale highlights, no glowing emission or outline.
+4 MOLTEN LUVITEIUM FLOWING: seamless streaked liquid olive-green metal vertical flow lines, related to still but visibly different.
+All 16 tiles unique. Straight-on orthographic square surfaces, no 3D perspective. Design explicitly for FINAL 16x16 PNG use.

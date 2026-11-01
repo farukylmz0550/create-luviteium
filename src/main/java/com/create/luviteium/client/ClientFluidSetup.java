@@ -18,7 +18,8 @@ public final class ClientFluidSetup {
         event.registerFluidType(new IClientFluidTypeExtensions() {
             @Override
             public int getTintColor() {
-                return 0xFFA6AA70;
+                // The placeholder PNG already contains the intended green metal palette.
+                return 0xFFFFFFFF;
             }
 
             @Override

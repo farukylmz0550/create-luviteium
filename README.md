@@ -25,12 +25,17 @@ specification remains in [`create-luviteium-implementation-spec.md`](create-luvi
 
 ## Texture status
 
-The current 16x16 item and machine textures are placeholder-quality originals
-in Create's visual language; worn armor already uses the dedicated green
+**All current textures, including the refreshed set, are still placeholders.**
+The user will replace them with final artwork later. The refreshed 16x16 item
+and machine PNGs use dark metal, brass details and restrained green accents in
+Create's visual language; worn armor uses the dedicated green
 `luviteium_layer_1`/`luviteium_layer_2` files. Textures exist to validate
 silhouettes, transparency, face orientation, and machine readability, and are
 expected to be replaced with final art later without changing the registry
 names or model-facing texture paths.
+See [`docs/textures.md`](docs/textures.md) for the source atlases, exact imagegen
+prompts, extraction command and replacement guidance. The refresh is not a final
+art milestone.
 
 ## Build
 

@@ -41,6 +41,37 @@ The current armor palette uses dark metal, aged brass and muted green accents.
 
 </details>
 
+## In-game gallery
+
+These screenshots come from the animated Ponder scenes. The screenshots show the
+current placeholder art and are included to make the processing flow easy to scan.
+
+<table>
+  <tr>
+    <td><img src="docs/images/processing-mixing.png" alt="Heated Basin and Mechanical Mixer processing Raw Luviteium"></td>
+    <td><img src="docs/images/processing-hot-cast.png" alt="Casting Machine producing a hot Luviteium item"></td>
+  </tr>
+  <tr>
+    <td align="center">Heated mixing</td>
+    <td align="center">Hot casting</td>
+  </tr>
+  <tr>
+    <td><img src="docs/images/processing-cooling.png" alt="Encased Fan blowing through water to cool a hot Luviteium item"></td>
+    <td><img src="docs/images/biomass-generator.png" alt="Biomass Generator connected to a rotating Create shaft"></td>
+  </tr>
+  <tr>
+    <td align="center">Fan cooling</td>
+    <td align="center">Biomass power</td>
+  </tr>
+</table>
+
+<details>
+<summary>Blank Mold and Deployer tutorial</summary>
+
+![Blank Mold being imprinted by a Create Deployer](docs/images/blank-mold.png)
+
+</details>
+
 ## Requirements and installation
 
 The current development build is tested with:

@@ -19,7 +19,7 @@ and will be replaced. Recipes, balance and visuals may change as development con
   set, pressed panels and a storage block.
 - **Mold-based casting:** ten reusable molds for ingots, tool heads, a sword
   blade and armor pieces. The Casting Machine accepts exactly the molten metal
-  required by its mold.
+  required by its mold, with the installed mold displayed on its sides.
 - **Create automation:** heated mixing, fluid pipes, Deployer mold imprinting,
   fan cooling and mechanical pressing form one production chain.
 - **Biomass power:** a fuel-burning generator supplies **64 RPM / 512 SU** and
@@ -27,6 +27,15 @@ and will be replaced. Recipes, balance and visuals may change as development con
 - **Working machine animations:** visible molds and molten fill, a short product
   ejection animation, rotating generator drive wheels and combustion smoke.
 - **In-game guidance:** three Ponder tutorials, with English and Turkish text.
+
+<details>
+<summary>Armor preview (placeholder artwork)</summary>
+
+![Luviteium armor on armor stands, shown from four angles in Minecraft](docs/images/armor-preview.png)
+
+The current armor palette uses dark metal, aged brass and muted green accents.
+
+</details>
 
 ## Requirements and installation
 

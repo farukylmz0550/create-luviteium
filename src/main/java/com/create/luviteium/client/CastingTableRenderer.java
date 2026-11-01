@@ -9,6 +9,7 @@ import net.createmod.catnip.platform.NeoForgeCatnipServices;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.fluids.FluidStack;
@@ -26,6 +27,7 @@ public final class CastingTableRenderer extends SafeBlockEntityRenderer<CastingT
         pose.translate(shake, 0, 0);
         renderItem(table, table.getDisplayedMold(), 1.025f, 0.7f, pose, buffers, light, overlay);
         pose.popPose();
+        renderMoldIndicators(table, pose, buffers, light, overlay);
 
         float fill = table.getVisualFill(partialTicks);
         if (fill > 0.01f) {
@@ -36,6 +38,23 @@ public final class CastingTableRenderer extends SafeBlockEntityRenderer<CastingT
         }
         renderItem(table, table.getDisplayedOutput(), 1.10f + table.getEjectionLift(partialTicks),
                 0.6f, pose, buffers, light, overlay);
+    }
+
+    private static void renderMoldIndicators(CastingTableBlockEntity table, PoseStack pose,
+                                            MultiBufferSource buffers, int light, int overlay) {
+        ItemStack mold = table.getDisplayedMold();
+        if (mold.isEmpty()) return;
+        // The actual installed mold remains readable even when molten metal covers the bed.
+        // All four sides are labeled so pipes or adjacent machinery can obscure one side.
+        for (Direction side : Direction.Plane.HORIZONTAL) {
+            pose.pushPose();
+            pose.translate(0.5 + side.getStepX() * 0.52, 0.58, 0.5 + side.getStepZ() * 0.52);
+            pose.mulPose(Axis.YP.rotationDegrees(side.toYRot()));
+            pose.scale(0.62f, 0.62f, 0.18f);
+            Minecraft.getInstance().getItemRenderer().renderStatic(mold, ItemDisplayContext.FIXED,
+                    light, overlay, pose, buffers, table.getLevel(), 0);
+            pose.popPose();
+        }
     }
 
     private static void renderItem(CastingTableBlockEntity table, ItemStack stack, float height, float scale,

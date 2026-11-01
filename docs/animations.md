@@ -6,6 +6,11 @@ processing and kinetic systems without changing costs, recipes or timing.
 ## Casting Machine
 
 - The inserted mold is visible on the upper casting bed.
+- The actual installed mold also appears as a small plate on all four vertical
+  faces, identifying the selected shape even while molten metal covers the bed.
+  Changing or removing the mold updates these plates through the same inventory
+  synchronization. Empty machines have no mold plate; the markers are visual only
+  and do not alter pipe or item connections.
 - Molten metal gradually spreads across the mold as fluid arrives. Client-side
   interpolation smooths updates instead of changing the actual fluid quantity.
 - While casting can advance, the mold has a small vibration and sparse smoke.

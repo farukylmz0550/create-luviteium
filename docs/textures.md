@@ -24,8 +24,37 @@ green accents. Cool Luviteium items are forest green; hot casts are orange.
   still references Create's own model and is unchanged by this art pass.
 - Ore, storage block and still/flowing molten metal also have new 16×16 PNGs.
   Molten color is in the PNGs; the fluid tint is now white to avoid double tinting.
-- Worn armor retains the existing placeholder 64×32 layer UV layout. It is not
-  a 16×16 inventory sprite and was not regenerated in this refresh.
+- Worn armor now uses warm gunmetal, muted forest-green panels and restrained
+  aged-brass accents. Both placeholder layers retain their existing 64×32 UV
+  layout and exact original alpha mask; they are not 16×16 inventory sprites.
+
+## Worn armor color refresh
+
+The two worn-armor PNGs were edited with the built-in **imagegen** tool. The first
+layer covers the helmet, chestplate and boots; the second covers leggings. No
+Java, armor geometry, item icons or runtime tint was changed by this pass.
+The textures remain **placeholder artwork**, including the worn armor.
+
+Original inputs, enlarged references, generated sources, exact prompts, inspected
+1024×512 nearest-neighbor previews and a machine-readable validation report are
+kept in [`art/armor-refresh/`](../art/armor-refresh/README.md), outside runtime
+resources. The layer-2 retry is the accepted source; its first attempt was rejected
+because it copied the wrong UV islands from the style reference.
+
+```sh
+python3 tools/art/prepare_armor.py
+```
+
+Requires Pillow. This script resizes generated colors, extends nearby opaque
+source colors across minor generated edge drift, rejects blue fringe samples,
+and restores the original alpha mask byte-for-byte. It does not draw replacement
+armor surfaces. The resulting PNGs are both RGBA 64×32 with binary alpha and
+exactly 632 / 280 occupied pixels respectively. Both enlarged UV previews were
+visually inspected. A subsequent real-client check rendered the full set on an
+armor stand from the front, back and both oblique angles. The inspected
+[in-game preview](images/armor-preview.png) shows the standard Minecraft armor
+renderer, with no missing-texture surfaces. The temporary preview screen was
+removed before the release build; the normal Ponder test remains unchanged.
 
 ## Source and reproducibility
 

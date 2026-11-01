@@ -1,0 +1,38 @@
+[
+  {
+    "layer": 1,
+    "source_size": [
+      1774,
+      887
+    ],
+    "runtime_size": [
+      64,
+      32
+    ],
+    "visible_pixels": 632,
+    "alpha_identical": true,
+    "edge_samples_corrected": 51,
+    "max_edge_distance_in_uv_pixels": 0.613,
+    "input_sha256": "a8c941bba7955327bfc91e14415e83b14d19dc33035f52c5698507d4672a25c5",
+    "source_sha256": "46bad38cb43c6457cab7b19a19224e56f7fc65b3314d6258ed1fe6a1b42fb476",
+    "runtime_sha256": "840ab47419422f2a744dd472f1297ef32f6b3acf7bea880fad354eb0ecc9818e"
+  },
+  {
+    "layer": 2,
+    "source_size": [
+      1774,
+      887
+    ],
+    "runtime_size": [
+      64,
+      32
+    ],
+    "visible_pixels": 280,
+    "alpha_identical": true,
+    "edge_samples_corrected": 0,
+    "max_edge_distance_in_uv_pixels": 0.0,
+    "input_sha256": "b973000844fe640c9006f136f44f16ed82b1232b3588b3df2e509c3bbc056164",
+    "source_sha256": "6c114acc5d071d8ec27754ba62f9b3606b426a2b9feed6cf710eda6d9681dca7",
+    "runtime_sha256": "d0300d6e829202cdff1d8b6b33b4e032c965471a00ef0ecf5679a5d228b581b1"
+  }
+]

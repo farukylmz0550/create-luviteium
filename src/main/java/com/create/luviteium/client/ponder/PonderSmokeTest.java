@@ -33,7 +33,7 @@ public final class PonderSmokeTest {
     private static final String[] SHOTS = {"casting_table", "blank_mold", "biomass_generator",
             "biomass_generator-turning", "biomass_generator-stopped", "biomass_generator-stopped-later",
             "processing-mixing", "processing-hot-cast", "processing-cooling"};
-    private static final int[] SHOT_TIMES = {150, 270, 150, 157, 360, 365, 60, 250, 340};
+    private static final int[] SHOT_TIMES = {150, 270, 150, 157, 360, 365, 60, 238, 340};
     private static float previousShaftAngle;
 
     @SubscribeEvent
@@ -97,7 +97,25 @@ public final class PonderSmokeTest {
 
     private static void capture(Minecraft mc) {
         if (screenshotIndex >= SHOTS.length) return;
-        if (++screenshotTicks < 25) return;
+        if (++screenshotTicks < (screenshotIndex == 7 ? 8 : 25)) return;
+        if (screenshotIndex == 0 || screenshotIndex == 7) {
+            var scene = ((PonderUI) mc.screen).getActiveScene();
+            var table = (com.create.luviteium.content.CastingTableBlockEntity)
+                    scene.getWorld().getBlockEntity(new net.minecraft.core.BlockPos(4, 2, 3));
+            if (!(mc.getBlockEntityRenderDispatcher().getRenderer(table)
+                    instanceof com.create.luviteium.client.CastingTableRenderer))
+                throw new IllegalStateException("Missing casting animation renderer");
+            if (screenshotIndex == 0 && table.getVisualFill(1) <= 0)
+                throw new IllegalStateException("Filled mold has no visible liquid");
+            // Seeking replays instructions over multiple UI ticks. Capture the actual
+            // completion pulse rather than assuming the seek finished on a fixed frame.
+            if (screenshotIndex == 7 && (table.getDisplayedOutput().isEmpty() || table.getEjectionLift(0) < 0.12f)) {
+                if (screenshotTicks < 100) return;
+                throw new IllegalStateException("Cast did not show a completed product with an ejection animation");
+            }
+            LogUtils.getLogger().info("LUVITEIUM_CASTING_RENDER_PASS {} fill={} lift={}",
+                    SHOTS[screenshotIndex], table.getVisualFill(1), table.getEjectionLift(0));
+        }
         if (screenshotIndex >= 2 && screenshotIndex <= 5) {
             var ui = (PonderUI) mc.screen;
             var generator = (com.create.luviteium.content.BiomassGeneratorBlockEntity)

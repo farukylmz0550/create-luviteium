@@ -14,5 +14,6 @@ public final class ClientRendererSetup {
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(ModBlockEntities.BIOMASS_GENERATOR.get(), BiomassGeneratorRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.CASTING_TABLE.get(), CastingTableRenderer::new);
     }
 }

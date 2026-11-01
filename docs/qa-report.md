@@ -1,6 +1,7 @@
 # Milestone 8 QA report
 
-Current production revision: **nine GameTests pass**; heated Basin conversion,
+Current suite: **ten GameTests**, including the [animation sync regression](animations.md).
+The production revision's heated Basin conversion,
 all ten hot casts and washing outputs, and one-head tool assembly are covered in
 [`processing.md`](processing.md). This supersedes the old direct-armor behavior.
 

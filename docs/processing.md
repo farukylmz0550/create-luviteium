@@ -62,8 +62,9 @@ holding a Blank Mold, and the resulting mold can be reused indefinitely.
 
 ## Verification
 
-`./gradlew build runGameTestServer` passes all **nine** required GameTests, including
-the six earlier machine/gear regressions and three production tests:
+`./gradlew build runGameTestServer` runs **ten** required GameTests, including
+the six earlier machine/gear regressions, the later animation-sync regression
+described in [animations.md](animations.md), and these three production tests:
 
 - Create's actual Basin recipe matcher rejects an unheated Basin. With heat, the
   Basin processing code consumes one raw item and exposes exactly 144 mB of molten

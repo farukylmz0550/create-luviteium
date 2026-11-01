@@ -32,6 +32,20 @@ public class BiomassGeneratorBlock extends DirectionalKineticBlock implements IB
     }
 
     @Override
+    public void animateTick(BlockState state, net.minecraft.world.level.Level level, BlockPos pos,
+                            net.minecraft.util.RandomSource random) {
+        if (level.getBlockEntity(pos) instanceof BiomassGeneratorBlockEntity generator
+                && generator.isBurning() && random.nextInt(4) == 0) {
+            Direction facing = state.getValue(FACING);
+            Direction vent = facing.getAxis() == Direction.Axis.Y ? Direction.EAST : facing.getClockWise();
+            level.addParticle(net.minecraft.core.particles.ParticleTypes.SMOKE,
+                    pos.getX() + 0.5 + vent.getStepX() * 0.56, pos.getY() + 0.68,
+                    pos.getZ() + 0.5 + vent.getStepZ() * 0.56,
+                    0, 0.025, 0);
+        }
+    }
+
+    @Override
     public Class<BiomassGeneratorBlockEntity> getBlockEntityClass() {
         return BiomassGeneratorBlockEntity.class;
     }

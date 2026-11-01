@@ -30,7 +30,7 @@ public class CastingTableBlockEntity extends BlockEntity {
             stack -> stack.getFluid() == ModFluids.MOLTEN_LUVITEIUM.get()) {
         @Override
         protected void onContentsChanged() {
-            setChanged();
+            markVisualChange();
         }
     };
 
@@ -50,7 +50,7 @@ public class CastingTableBlockEntity extends BlockEntity {
             if (slot == MOLD_SLOT) {
                 fluidTank.setCapacity(requiredAmount());
             }
-            setChanged();
+            markVisualChange();
         }
 
         @Override
@@ -63,6 +63,11 @@ public class CastingTableBlockEntity extends BlockEntity {
     };
 
     private int progress;
+    private boolean visualSyncDirty;
+    private float visualFill, previousVisualFill;
+    private float visualProgress, previousVisualProgress;
+    private int ejectTicks;
+    private ItemStack recentCast = ItemStack.EMPTY;
 
     public CastingTableBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.CASTING_TABLE.get(), pos, state);
@@ -72,10 +77,79 @@ public class CastingTableBlockEntity extends BlockEntity {
         if (table.canCastIngot()) {
             table.progress++;
             table.setChanged();
+            if (table.progress % 4 == 0) table.visualSyncDirty = true;
             if (table.progress >= table.requiredTicks()) {
                 table.completeIngotCast();
             }
         }
+        if (table.visualSyncDirty && level != null && !level.isClientSide) {
+            table.visualSyncDirty = false;
+            level.sendBlockUpdated(pos, state, state, net.minecraft.world.level.block.Block.UPDATE_CLIENTS);
+        }
+    }
+
+    private void markVisualChange() {
+        setChanged();
+        visualSyncDirty = true;
+    }
+
+    public static void clientTick(Level level, BlockPos pos, BlockState state, CastingTableBlockEntity table) {
+        table.previousVisualFill = table.visualFill;
+        table.previousVisualProgress = table.visualProgress;
+        table.visualFill += (table.getFillRatio() - table.visualFill) * 0.35f;
+        table.visualProgress += (table.getProgressRatio() - table.visualProgress) * 0.35f;
+        if (table.ejectTicks > 0 && --table.ejectTicks == 0) table.recentCast = ItemStack.EMPTY;
+    }
+
+    public float getFillRatio() {
+        return fluidTank.getCapacity() == 0 ? 0 : (float) fluidTank.getFluidAmount() / fluidTank.getCapacity();
+    }
+
+    public float getProgressRatio() {
+        return requiredTicks() == 0 ? 0 : (float) progress / requiredTicks();
+    }
+
+    public boolean isCasting() {
+        return canCastIngot();
+    }
+
+    public float getVisualFill(float partialTicks) {
+        return net.minecraft.util.Mth.lerp(partialTicks, previousVisualFill, visualFill);
+    }
+
+    public float getVisualProgress(float partialTicks) {
+        return net.minecraft.util.Mth.lerp(partialTicks, previousVisualProgress, visualProgress);
+    }
+
+    public float getEjectionLift(float partialTicks) {
+        if (ejectTicks == 0) return 0;
+        float time = (12 - ejectTicks + partialTicks) / 12f;
+        return net.minecraft.util.Mth.sin(time * net.minecraft.util.Mth.PI) * 0.18f;
+    }
+
+    public ItemStack getDisplayedMold() {
+        return inventory.getStackInSlot(MOLD_SLOT).copyWithCount(1);
+    }
+
+    public ItemStack getDisplayedOutput() {
+        ItemStack output = inventory.getStackInSlot(OUTPUT_SLOT);
+        return (output.isEmpty() ? recentCast : output).copyWithCount(1);
+    }
+
+    @Override
+    public boolean triggerEvent(int id, int parameter) {
+        if (id != 1) return super.triggerEvent(id, parameter);
+        if (level != null && level.isClientSide) {
+            ejectTicks = 12;
+            recentCast = new ItemStack(net.minecraft.world.item.Item.byId(parameter));
+            for (int i = 0; i < 3; i++) {
+                level.addParticle(net.minecraft.core.particles.ParticleTypes.SMOKE,
+                        worldPosition.getX() + 0.35 + level.random.nextDouble() * 0.3,
+                        worldPosition.getY() + 1.08, worldPosition.getZ() + 0.5,
+                        0, 0.025, 0);
+            }
+        }
+        return true;
     }
 
     private boolean canCastIngot() {
@@ -95,7 +169,11 @@ public class CastingTableBlockEntity extends BlockEntity {
             output.grow(1);
         }
         progress = 0;
-        setChanged();
+        markVisualChange();
+        if (level != null && !level.isClientSide) {
+            level.blockEvent(worldPosition, getBlockState().getBlock(), 1,
+                    net.minecraft.world.item.Item.getId(outputItem()));
+        }
     }
 
     private int requiredAmount() {
@@ -253,5 +331,15 @@ public class CastingTableBlockEntity extends BlockEntity {
         fluidTank.readFromNBT(registries, tag.getCompound("Fluid"));
         progress = tag.getInt("Progress");
         fluidTank.setCapacity(requiredAmount());
+    }
+
+    @Override
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+        return saveWithoutMetadata(registries);
+    }
+
+    @Override
+    public net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket getUpdatePacket() {
+        return net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket.create(this);
     }
 }

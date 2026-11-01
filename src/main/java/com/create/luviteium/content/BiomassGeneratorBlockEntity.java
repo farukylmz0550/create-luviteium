@@ -74,6 +74,10 @@ public class BiomassGeneratorBlockEntity extends GeneratingKineticBlockEntity {
         return burnTime > 0 ? GENERATED_RPM : 0;
     }
 
+    public boolean isBurning() {
+        return burnTime > 0;
+    }
+
     @Override
     public float calculateAddedStressCapacity() {
         // Create multiplies this per-RPM value by the generated speed.

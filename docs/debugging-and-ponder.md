@@ -1,7 +1,8 @@
 # Runtime debugging and Create Ponder
 
 This records the initial debugging pass. The later unified hot-cast production
-chain and current nine-test coverage are described in [`processing.md`](processing.md).
+chain is described in [`processing.md`](processing.md). The current ten-test suite
+also includes the [animation sync regression](animations.md).
 
 ## Fixes
 

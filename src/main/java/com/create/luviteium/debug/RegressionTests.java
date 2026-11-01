@@ -46,6 +46,32 @@ public final class RegressionTests {
     }
 
     @GameTest(template = "empty")
+    public static void castingAnimationSyncDoesNotAdvanceProduction(GameTestHelper h) {
+        CastingTableBlockEntity server = table(h);
+        server.getFluidHandler(null).fill(new FluidStack(ModFluids.MOLTEN_LUVITEIUM.get(), 72), IFluidHandler.FluidAction.EXECUTE);
+        h.assertTrue(server.getUpdatePacket() != null, "Casting machine provides an update packet");
+        CastingTableBlockEntity client = new CastingTableBlockEntity(server.getBlockPos(), server.getBlockState());
+        client.loadWithComponents(server.getUpdateTag(h.getLevel().registryAccess()), h.getLevel().registryAccess());
+        h.assertTrue(client.getFillRatio() == 0.5f && !client.getDisplayedMold().isEmpty(), "Initial chunk tag carries mold and partial fluid");
+        for (int i = 0; i < 40; i++) CastingTableBlockEntity.clientTick(h.getLevel(), client.getBlockPos(), client.getBlockState(), client);
+        h.assertTrue(Math.abs(client.getVisualFill(1) - 0.5f) < 0.001f, "Client filling animation converges");
+        h.assertTrue(client.getProgressRatio() == 0 && client.getDisplayedOutput().isEmpty(), "Visual ticking cannot cast or duplicate an item");
+        server.getFluidHandler(null).fill(new FluidStack(ModFluids.MOLTEN_LUVITEIUM.get(), 72), IFluidHandler.FluidAction.EXECUTE);
+        step(server, 8);
+        client.loadWithComponents(server.getUpdateTag(h.getLevel().registryAccess()), h.getLevel().registryAccess());
+        h.assertTrue(client.getProgressRatio() == 0.4f && client.isCasting(), "Active progress is synchronized");
+        server.getItemHandler(null).setStackInSlot(1, ModItems.HOT_LUVITEIUM_INGOT.toStack(64));
+        client.loadWithComponents(server.getUpdateTag(h.getLevel().registryAccess()), h.getLevel().registryAccess());
+        h.assertFalse(client.isCasting(), "Blocked output stops the working animation");
+        server.getItemHandler(null).extractItem(1, 64, false);
+        step(server, 12);
+        client.loadWithComponents(server.getUpdateTag(h.getLevel().registryAccess()), h.getLevel().registryAccess());
+        h.assertTrue(client.getDisplayedOutput().is(ModItems.HOT_LUVITEIUM_INGOT.get()) && client.getFillRatio() == 0,
+                "Completion sync drains visual fluid and shows the real output");
+        h.succeed();
+    }
+
+    @GameTest(template = "empty")
     public static void castingLimitsAndPersistence(GameTestHelper h) {
         CastingTableBlockEntity be = table(h);
         var fluid = be.getFluidHandler(null);

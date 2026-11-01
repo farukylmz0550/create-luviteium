@@ -95,6 +95,18 @@ public class CastingTableBlock extends BaseEntityBlock {
     @Override
     @Nullable
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return level.isClientSide ? null : createTickerHelper(type, ModBlockEntities.CASTING_TABLE.get(), CastingTableBlockEntity::serverTick);
+        return level.isClientSide
+                ? createTickerHelper(type, ModBlockEntities.CASTING_TABLE.get(), CastingTableBlockEntity::clientTick)
+                : createTickerHelper(type, ModBlockEntities.CASTING_TABLE.get(), CastingTableBlockEntity::serverTick);
+    }
+
+    @Override
+    public void animateTick(BlockState state, Level level, BlockPos pos, net.minecraft.util.RandomSource random) {
+        if (level.getBlockEntity(pos) instanceof CastingTableBlockEntity table
+                && table.isCasting() && random.nextInt(4) == 0) {
+            level.addParticle(net.minecraft.core.particles.ParticleTypes.SMOKE,
+                    pos.getX() + 0.3 + random.nextDouble() * 0.4, pos.getY() + 1.08,
+                    pos.getZ() + 0.3 + random.nextDouble() * 0.4, 0, 0.015, 0);
+        }
     }
 }

@@ -68,23 +68,26 @@ public final class LuviteiumScenes {
         scene.world().setKineticSpeed(util.select().position(2, 2, 3), 32);
         scene.overlay().showText(100).text("2. Insert a reusable mold into the Casting Machine. Pump molten metal directly from the Basin into it.")
                 .independent(65);
-        scene.idle(110);
+        for (int portion = 0; portion < 4; portion++) {
+            scene.world().modifyBlockEntity(basin, com.simibubi.create.content.processing.basin.BasinBlockEntity.class,
+                    be -> be.inputTank.getPrimaryHandler().drain(36, IFluidHandler.FluidAction.EXECUTE));
+            scene.world().modifyBlockEntity(table, CastingTableBlockEntity.class,
+                    be -> be.getFluidHandler(null).fill(new FluidStack(ModFluids.MOLTEN_LUVITEIUM.get(), 36),
+                            IFluidHandler.FluidAction.EXECUTE));
+            scene.idle(20);
+        }
+        scene.idle(30);
         scene.addKeyframe();
-        scene.world().modifyBlockEntity(basin, com.simibubi.create.content.processing.basin.BasinBlockEntity.class,
-                be -> be.inputTank.getPrimaryHandler().drain(144, IFluidHandler.FluidAction.EXECUTE));
-        scene.world().modifyBlockEntity(table, CastingTableBlockEntity.class, be -> {
-            be.getFluidHandler(null).fill(new FluidStack(ModFluids.MOLTEN_LUVITEIUM.get(), 144),
-                    IFluidHandler.FluidAction.EXECUTE);
-            // Ponder worlds do not run ordinary server-side casting ticks.
-        });
         scene.overlay().showText(80).text("3. The machine accepts only the mold's required amount. Once full, it automatically casts a Hot Luviteium product. Armor comes out hot too.")
                 .independent(65);
-        scene.idle(20);
-        scene.world().modifyBlockEntity(table, CastingTableBlockEntity.class, be -> {
-            for (int i = 0; i < 20; i++) CastingTableBlockEntity.serverTick(be.getLevel(), table, be.getBlockState(), be);
-        });
-        scene.world().createItemEntity(util.vector().topOf(table).add(0, 0.3, 0),
-                util.vector().of(0, 0, 0), ModItems.HOT_LUVITEIUM_INGOT.toStack());
+        // Ponder runs on the client, so explicitly demonstrate the server's 20 casting ticks.
+        for (int tick = 0; tick < 20; tick++) {
+            scene.world().modifyBlockEntity(table, CastingTableBlockEntity.class,
+                    be -> CastingTableBlockEntity.serverTick(be.getLevel(), table, be.getBlockState(), be));
+            scene.idle(1);
+        }
+        scene.world().modifyBlockEntity(table, CastingTableBlockEntity.class,
+                be -> be.triggerEvent(1, net.minecraft.world.item.Item.getId(ModItems.HOT_LUVITEIUM_INGOT.get())));
         scene.idle(70);
         scene.addKeyframe();
         BlockPos cooling = util.grid().at(4, 1, 1);
@@ -94,6 +97,8 @@ public final class LuviteiumScenes {
         scene.world().setBlock(util.grid().at(3, 1, 1), Blocks.WATER.defaultBlockState(), false);
         scene.world().showSection(util.select().fromTo(2, 1, 1, 4, 1, 1), Direction.DOWN);
         scene.world().setKineticSpeed(util.select().position(2, 1, 1), 32);
+        scene.world().modifyBlockEntity(table, CastingTableBlockEntity.class,
+                be -> be.getItemHandler(null).extractItem(1, 1, false));
         scene.world().createItemOnBeltLike(cooling, Direction.NORTH, ModItems.HOT_LUVITEIUM_INGOT.toStack());
         scene.overlay().showText(100).text("4. Blow air through water with an Encased Fan to cool the hot product. The result is the normal, cooled Luviteium item.")
                 .independent(65);

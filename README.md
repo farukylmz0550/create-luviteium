@@ -66,12 +66,16 @@ power with Chute input. Scene text is available in English and Turkish.
 
 ## Regression checks
 
+Machine animations show the inserted mold, molten fill and completed hot product;
+the generator has rotating drive wheels and combustion smoke. Effects follow real
+processing/network state. See [`docs/animations.md`](docs/animations.md).
+
 ```sh
 ./gradlew build runGameTestServer
 ./gradlew runClient -PponderSmokeTest
 ```
 
-The first command runs nine Minecraft GameTests. The second requires a desktop,
+The first command runs ten Minecraft GameTests. The second requires a desktop,
 creates a separate disposable flat world, plays and replays all three Ponder
 scenes, captures screenshots in `runs/client/screenshots/`, and exits.
 Ordinary client startup does not run this test. See

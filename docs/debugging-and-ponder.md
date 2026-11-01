@@ -89,3 +89,16 @@ replace those checks. The Casting Table still has no dedicated GUI, and breaking
 it discards stored molten fluid while dropping mold/output items.
 
 The distributable is `build/libs/luviteium-0.1.0.jar`.
+
+## Shaft connection visibility
+
+The Biomass Generator model now has a raised brass mounting plate, a smaller
+light-metal collar and a dark 4×4 shaft center on each end of its kinetic axis. Both connectors rotate
+with the existing six facing variants, matching `hasShaftTowards`. The item model
+inherits the same geometry. The existing original 16×16 textures supply the
+surfaces; no replacement PNGs or borrowed artwork were added. The collars project
+two model pixels out from the casing and meet the center of a connected shaft.
+They are static socket housings; the attached Create shaft supplies rotation.
+The light-metal UV region comes from the existing Blank Mold texture. Resource
+references and model bounds were checked; `build runClient -PponderSmokeTest`
+passes and the generator's Ponder screenshot was visually inspected.

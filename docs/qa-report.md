@@ -14,9 +14,9 @@ earlier validation history; old recipe counts and artifact sizes are not current
 - Clean `./gradlew clean build`: passed.
 - All resource JSON files validated with `jq`: passed.
 - Dedicated development server: passed; NeoForge 21.1.229, Create 6.0.10, and
-  Luviteium 0.1.0 load successfully and reach `Done`.
+  Luviteium 1.0.0 load successfully and reach `Done`.
 - Recipe load: 2,841 recipes loaded without a Luviteium parse error.
-- Final distributable: `build/libs/luviteium-0.1.0.jar` (80 KB).
+- Final distributable: `build/libs/luviteium-1.0.0.jar`.
 - Jar inspection: Biomass Generator classes, panel assets, casting/mixing/deploying,
   washing, pressing, and tool recipes are packaged.
 - Removed-item audit: no `cooled_luviteium_ingot` or
@@ -27,7 +27,7 @@ earlier validation history; old recipe counts and artifact sizes are not current
 
 - `./gradlew build`: passed after all accuracy fixes.
 - Dedicated development server restarted fresh and reached `Done` with
-  Luviteium 0.1.0 and Create 6.0.10 loaded; no missing-model or missing-data
+  Luviteium 1.0.0 and Create 6.0.10 loaded; no missing-model or missing-data
   errors appear after the `loot_table`/`tags` directory renames.
 - Resource JSON re-validated with `jq` after the ore predicate rewrite and the
   three new block loot tables, splashing, pressing, and block recipes.

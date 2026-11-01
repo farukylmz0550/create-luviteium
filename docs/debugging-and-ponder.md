@@ -98,7 +98,7 @@ interaction remain separate QA work. NBT round-trip and Ponder playback do not
 replace those checks. The Casting Table still has no dedicated GUI, and breaking
 it discards stored molten fluid while dropping mold/output items.
 
-The distributable is `build/libs/luviteium-0.1.0.jar`.
+The distributable is `build/libs/luviteium-1.0.0.jar`.
 
 ## Shaft connection visibility
 

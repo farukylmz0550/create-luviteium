@@ -10,8 +10,8 @@ Create: Luviteium is a Minecraft addon that brings a rare green metal, reusable
 casting molds and biomass-powered machinery to Create. Turn raw Luviteium into
 molten metal, cast it into hot components, then cool and assemble your equipment.
 
-**Status: early development · 0.1.0.** All current textures are **placeholders**
-and will be replaced. Recipes, balance and visuals may change as development continues.
+**Status: first public release · 1.0.0.** All current textures are **placeholders**
+and will be replaced. Recipes, balance and visuals may change in future releases.
 
 ![The Casting Machine producing a hot Luviteium ingot in its in-game Ponder tutorial](docs/images/casting-ponder.png)
 

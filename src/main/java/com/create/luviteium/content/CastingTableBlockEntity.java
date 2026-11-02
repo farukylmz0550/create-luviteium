@@ -19,6 +19,7 @@ import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.items.IItemHandler;
 
 public class CastingTableBlockEntity extends BlockEntity {
     public static final int INGOT_AMOUNT = 144;
@@ -59,6 +60,43 @@ public class CastingTableBlockEntity extends BlockEntity {
                 return ItemStack.EMPTY;
             }
             return super.extractItem(slot, amount, simulate);
+        }
+    };
+
+    /**
+     * Automation may insert into either slot, but a reusable mold is never an
+     * automation output. Without this view, a Funnel can extract slot 0 in the
+     * same tick that a cast completes and make the mold appear to drop/dupe.
+     */
+    private final IItemHandler automationInventory = new IItemHandler() {
+        @Override
+        public int getSlots() {
+            return inventory.getSlots();
+        }
+
+        @Override
+        public ItemStack getStackInSlot(int slot) {
+            return inventory.getStackInSlot(slot);
+        }
+
+        @Override
+        public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
+            return inventory.insertItem(slot, stack, simulate);
+        }
+
+        @Override
+        public ItemStack extractItem(int slot, int amount, boolean simulate) {
+            return slot == MOLD_SLOT ? ItemStack.EMPTY : inventory.extractItem(slot, amount, simulate);
+        }
+
+        @Override
+        public int getSlotLimit(int slot) {
+            return inventory.getSlotLimit(slot);
+        }
+
+        @Override
+        public boolean isItemValid(int slot, ItemStack stack) {
+            return inventory.isItemValid(slot, stack);
         }
     };
 
@@ -226,6 +264,10 @@ public class CastingTableBlockEntity extends BlockEntity {
 
     public ItemStackHandler getItemHandler(Direction side) {
         return inventory;
+    }
+
+    public IItemHandler getAutomationItemHandler(Direction side) {
+        return automationInventory;
     }
 
     public FluidTank getFluidHandler(Direction side) {

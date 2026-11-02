@@ -110,6 +110,25 @@ public final class RegressionTests {
     }
 
     @GameTest(template = "empty")
+    public static void castingAutomationCannotExtractReusableMold(GameTestHelper h) {
+        CastingTableBlockEntity be = table(h);
+        be.getFluidHandler(null).fill(new FluidStack(ModFluids.MOLTEN_LUVITEIUM.get(), 144),
+                IFluidHandler.FluidAction.EXECUTE);
+        step(be, 20);
+
+        IItemHandler automation = h.getLevel().getCapability(
+                Capabilities.ItemHandler.BLOCK, h.absolutePos(POS), Direction.NORTH);
+        h.assertTrue(automation != null, "Casting table exposes an automation item capability");
+        h.assertTrue(automation.extractItem(0, 1, false).isEmpty(),
+                "Automation must never extract the reusable mold slot");
+        h.assertTrue(automation.extractItem(1, 1, false).is(ModItems.HOT_LUVITEIUM_INGOT.get()),
+                "Automation can extract the completed hot output");
+        h.assertTrue(be.getItemHandler(null).getStackInSlot(0).is(ModItems.INGOT_MOLD.get()),
+                "Reusable mold remains installed after automated extraction");
+        h.succeed();
+    }
+
+    @GameTest(template = "empty")
     public static void bucketTransfersAreAtomic(GameTestHelper h) {
         CastingTableBlockEntity be = table(h);
         var player = FakePlayerFactory.getMinecraft(h.getLevel());

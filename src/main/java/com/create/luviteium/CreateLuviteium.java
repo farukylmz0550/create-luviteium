@@ -33,7 +33,7 @@ public final class CreateLuviteium {
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, ModBlockEntities.CASTING_TABLE.get(),
                 (table, side) -> table.getFluidHandler(side));
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, ModBlockEntities.CASTING_TABLE.get(),
-                (table, side) -> table.getItemHandler(side));
+                (table, side) -> table.getAutomationItemHandler(side));
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, ModBlockEntities.BIOMASS_GENERATOR.get(),
                 (generator, side) -> generator.getItemHandler(side));
     }

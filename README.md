@@ -10,10 +10,10 @@ Create: Luviteium is a Minecraft addon that brings a rare green metal, reusable
 casting molds and biomass-powered machinery to Create. Turn raw Luviteium into
 molten metal, cast it into hot components, then cool and assemble your equipment.
 
-**Status: released · 1.1.1.**
+**Status: released · 1.2.0.**
 
-This repository contains the 1.1.1 release line. Recipes, balance and visuals may
-change in future releases.
+This repository contains the 1.2.0 release line. Registry IDs and world/automation
+compatibility are preserved while production balance is updated.
 
 ![The Casting Machine producing a hot Luviteium ingot in its in-game Ponder tutorial](docs/images/casting-ponder.png)
 
@@ -77,7 +77,7 @@ current placeholder art and are included to make the processing flow easy to sca
 
 ## Requirements and installation
 
-The 1.1.1 release build is tested with:
+The 1.2.0 release build is tested with:
 
 | Component | Version |
 | --- | --- |
@@ -110,6 +110,14 @@ mod loaders has not been established.
    blade with one stick. Cooled armor is ready to equip. Ingots can also be
    be pressed with Create's Mechanical Press into Luviteium Panels, or crafted
    into storage blocks.
+
+Armor casting uses vanilla-equivalent material counts: helmet 5 Luviteium
+(720 mB, 100 ticks), chestplate 8 (1152 mB, 160 ticks), leggings 7
+(1008 mB, 140 ticks), and boots 4 (576 mB, 80 ticks). Armor keeps 3/7/5/3
+defense and has 1.0 toughness, 0.05 knockback resistance and enchantability 9;
+tools also use enchantability 9. The Biomass Generator accepts the documented
+wood, plant, crop, moss, hay and dried-kelp fuels while rejecting unsupported
+fuels such as coal, charcoal, lava and bone meal.
 
 Hover over a **Casting Machine**, **Blank Mold** or **Biomass Generator** and
 hold the Ponder key (default **W**) for an animated walkthrough.

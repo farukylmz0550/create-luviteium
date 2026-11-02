@@ -68,7 +68,7 @@ public final class ProcessingTests {
                 {ModItems.LEGGINGS_MOLD.get(), ModItems.HOT_LUVITEIUM_LEGGINGS.get(), ModItems.LUVITEIUM_LEGGINGS.get()},
                 {ModItems.BOOTS_MOLD.get(), ModItems.HOT_LUVITEIUM_BOOTS.get(), ModItems.LUVITEIUM_BOOTS.get()}
         };
-        int[] amounts = {144, 288, 288, 288, 288, 288, 432, 576, 720, 432};
+        int[] amounts = {144, 288, 288, 288, 288, 288, 720, 1152, 1008, 576};
         BlockPos pos = new BlockPos(3, 1, 3);
         h.setBlock(pos, ModBlocks.CASTING_TABLE.get());
         CastingTableBlockEntity machine = h.getBlockEntity(pos);

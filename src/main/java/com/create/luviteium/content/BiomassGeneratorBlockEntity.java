@@ -6,9 +6,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.ItemStackHandler;
@@ -105,33 +102,12 @@ public class BiomassGeneratorBlockEntity extends GeneratingKineticBlockEntity {
         return inventory;
     }
 
-    /**
-     * Fuel governance is purely data-driven through existing vanilla item tags:
-     * the whitelist and burn values below are the only fuel source of truth, so
-     * other mods can opt into the generator by matching these tags, and new
-     * vanilla entries are picked up automatically.
-     */
-    private static final List<TagKey<Item>> FUEL_TAGS = List.of(
-            ItemTags.LOGS_THAT_BURN,        // 150 ticks: logs, wood, and stripped variants
-            ItemTags.PLANKS,                // 38 ticks
-            ItemTags.SAPLINGS,              // 75 ticks
-            ItemTags.LEAVES,                // 15 ticks
-            ItemTags.FLOWERS,               // 15 ticks
-            ItemTags.VILLAGER_PLANTABLE_SEEDS); // 15 ticks: seeds, carrots, potatoes
-
-    private static final int[] FUEL_TICKS = {150, 38, 75, 15, 15, 15};
-
     public static boolean isValidFuel(ItemStack stack) {
-        return !stack.isEmpty() && burnTimeFor(stack) > 0;
+        return BiomassFuelRegistry.burnTimeFor(stack) > 0;
     }
 
-    private static int burnTimeFor(ItemStack stack) {
-        for (int i = 0; i < FUEL_TAGS.size(); i++) {
-            if (stack.is(FUEL_TAGS.get(i))) {
-                return FUEL_TICKS[i];
-            }
-        }
-        return 0;
+    public static int burnTimeFor(ItemStack stack) {
+        return BiomassFuelRegistry.burnTimeFor(stack);
     }
 
     @Override

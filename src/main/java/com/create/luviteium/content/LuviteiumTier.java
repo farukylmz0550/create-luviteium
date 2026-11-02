@@ -35,7 +35,7 @@ public final class LuviteiumTier implements Tier {
 
     @Override
     public int getEnchantmentValue() {
-        return 18;
+        return 9;
     }
 
     @Override

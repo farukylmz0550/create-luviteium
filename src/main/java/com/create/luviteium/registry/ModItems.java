@@ -33,12 +33,12 @@ public final class ModItems {
                             ArmorItem.Type.CHESTPLATE, 7,
                             ArmorItem.Type.LEGGINGS, 5,
                             ArmorItem.Type.BOOTS, 3),
-                    18,
+                    9,
                     net.minecraft.sounds.SoundEvents.ARMOR_EQUIP_DIAMOND,
                     () -> Ingredient.of(ModItems.LUVITEIUM_INGOT.get()),
                     List.of(new ArmorMaterial.Layer(ResourceLocation.fromNamespaceAndPath(CreateLuviteium.MOD_ID, "luviteium"))),
-                    2.0f,
-                    0.1f));
+                    1.0f,
+                    0.05f));
 
     public static final DeferredItem<BlockItem> LUVITEIUM_ORE = ITEMS.registerSimpleBlockItem("luviteium_ore", ModBlocks.LUVITEIUM_ORE);
     public static final DeferredItem<BlockItem> LUVITEIUM_BLOCK = ITEMS.registerSimpleBlockItem("luviteium_block", ModBlocks.LUVITEIUM_BLOCK);
@@ -85,16 +85,20 @@ public final class ModItems {
     public static final DeferredItem<Item> BLANK_MOLD = ITEMS.registerSimpleItem("blank_mold");
 
     // The ten intentionally supported mold shapes. Source mappings are recorded in docs/molds.md.
-    public static final DeferredItem<Item> INGOT_MOLD = ITEMS.registerSimpleItem("ingot_mold");
-    public static final DeferredItem<Item> PICKAXE_HEAD_MOLD = ITEMS.registerSimpleItem("pickaxe_head_mold");
-    public static final DeferredItem<Item> AXE_HEAD_MOLD = ITEMS.registerSimpleItem("axe_head_mold");
-    public static final DeferredItem<Item> SHOVEL_HEAD_MOLD = ITEMS.registerSimpleItem("shovel_head_mold");
-    public static final DeferredItem<Item> HOE_HEAD_MOLD = ITEMS.registerSimpleItem("hoe_head_mold");
-    public static final DeferredItem<Item> SWORD_BLADE_MOLD = ITEMS.registerSimpleItem("sword_blade_mold");
-    public static final DeferredItem<Item> HELMET_MOLD = ITEMS.registerSimpleItem("helmet_mold");
-    public static final DeferredItem<Item> CHESTPLATE_MOLD = ITEMS.registerSimpleItem("chestplate_mold");
-    public static final DeferredItem<Item> LEGGINGS_MOLD = ITEMS.registerSimpleItem("leggings_mold");
-    public static final DeferredItem<Item> BOOTS_MOLD = ITEMS.registerSimpleItem("boots_mold");
+    public static final DeferredItem<Item> INGOT_MOLD = registerSpecializedMold("ingot_mold");
+    public static final DeferredItem<Item> PICKAXE_HEAD_MOLD = registerSpecializedMold("pickaxe_head_mold");
+    public static final DeferredItem<Item> AXE_HEAD_MOLD = registerSpecializedMold("axe_head_mold");
+    public static final DeferredItem<Item> SHOVEL_HEAD_MOLD = registerSpecializedMold("shovel_head_mold");
+    public static final DeferredItem<Item> HOE_HEAD_MOLD = registerSpecializedMold("hoe_head_mold");
+    public static final DeferredItem<Item> SWORD_BLADE_MOLD = registerSpecializedMold("sword_blade_mold");
+    public static final DeferredItem<Item> HELMET_MOLD = registerSpecializedMold("helmet_mold");
+    public static final DeferredItem<Item> CHESTPLATE_MOLD = registerSpecializedMold("chestplate_mold");
+    public static final DeferredItem<Item> LEGGINGS_MOLD = registerSpecializedMold("leggings_mold");
+    public static final DeferredItem<Item> BOOTS_MOLD = registerSpecializedMold("boots_mold");
+
+    private static DeferredItem<Item> registerSpecializedMold(String name) {
+        return ITEMS.register(name, () -> new Item(new Item.Properties().stacksTo(1)));
+    }
 
     private ModItems() {}
 }

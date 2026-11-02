@@ -224,14 +224,17 @@ public class CastingTableBlockEntity extends BlockEntity {
                 || mold.is(ModItems.SWORD_BLADE_MOLD.get())) {
             return PICKAXE_HEAD_AMOUNT;
         }
-        if (mold.is(ModItems.HELMET_MOLD.get()) || mold.is(ModItems.BOOTS_MOLD.get())) {
-            return 432;
+        if (mold.is(ModItems.HELMET_MOLD.get())) {
+            return 720;
         }
         if (mold.is(ModItems.CHESTPLATE_MOLD.get())) {
-            return 576;
+            return 1152;
         }
         if (mold.is(ModItems.LEGGINGS_MOLD.get())) {
-            return 720;
+            return 1008;
+        }
+        if (mold.is(ModItems.BOOTS_MOLD.get())) {
+            return 576;
         }
         return 0;
     }

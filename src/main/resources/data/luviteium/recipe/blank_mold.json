@@ -1,6 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": ["DDD", "III", "   "],
-  "key": {"D": {"item": "minecraft:diamond"}, "I": {"item": "minecraft:iron_ingot"}},
+  "pattern": ["   ", " E ", "DDD"],
+  "key": {"E": {"item": "minecraft:diamond"}, "D": {"item": "minecraft:iron_ingot"}},
   "result": {"id": "luviteium:blank_mold", "count": 1}
 }

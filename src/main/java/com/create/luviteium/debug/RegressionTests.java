@@ -1,6 +1,7 @@
 package com.create.luviteium.debug;
 
 import com.create.luviteium.content.BiomassGeneratorBlockEntity;
+import com.create.luviteium.content.BiomassFuelRegistry;
 import com.create.luviteium.content.CastingTableBlockEntity;
 import com.create.luviteium.registry.ModBlocks;
 import com.create.luviteium.registry.ModFluids;
@@ -151,6 +152,8 @@ public final class RegressionTests {
     public static void gearAttributesAndRepair(GameTestHelper h) {
         ItemStack pickaxe = ModItems.LUVITEIUM_PICKAXE.toStack();
         h.assertTrue(pickaxe.getMaxDamage() == 1250, "Pickaxe durability");
+        h.assertTrue(com.create.luviteium.content.LuviteiumTier.INSTANCE.getEnchantmentValue() == 9,
+                "Tools use enchantability 9");
         h.assertTrue(pickaxe.is(net.minecraft.tags.ItemTags.MINING_ENCHANTABLE), "Tool receives mining enchantments");
         double[] damage = {1};
         pickaxe.forEachModifier(EquipmentSlot.MAINHAND, (attribute, modifier) -> {
@@ -164,7 +167,40 @@ public final class RegressionTests {
             h.assertTrue(stack.is(net.minecraft.tags.ItemTags.ARMOR_ENCHANTABLE), "Armor receives armor enchantments");
             h.assertTrue(stack.getItem().isValidRepairItem(stack, ModItems.LUVITEIUM_INGOT.toStack()), "Ingot repairs armor");
         }
+        var armorMaterial = ModItems.LUVITEIUM_ARMOR_MATERIAL.get();
+        h.assertTrue(armorMaterial.enchantmentValue() == 9, "Armor uses enchantability 9");
+        h.assertTrue(armorMaterial.toughness() == 1.0f, "Armor toughness is 1");
+        h.assertTrue(armorMaterial.knockbackResistance() == 0.05f, "Armor knockback resistance is 0.05");
+        h.assertTrue(ModItems.BLANK_MOLD.toStack().getMaxStackSize() == 64, "Blank molds stack to 64");
+        h.assertTrue(ModItems.HELMET_MOLD.toStack().getMaxStackSize() == 1, "Specialized molds do not stack");
         h.assertTrue(pickaxe.getItem().isValidRepairItem(pickaxe, ModItems.LUVITEIUM_INGOT.toStack()), "Ingot repairs tools");
+        h.succeed();
+    }
+
+    @GameTest(template = "empty")
+    public static void biomassFuelRegistryMatchesBalanceTable(GameTestHelper h) {
+        ItemStack[] fuels = {
+                new ItemStack(Items.OAK_LOG), new ItemStack(Items.STRIPPED_OAK_LOG),
+                new ItemStack(Items.OAK_PLANKS), new ItemStack(Items.OAK_SAPLING),
+                new ItemStack(Items.OAK_LEAVES), new ItemStack(Items.STICK),
+                new ItemStack(Items.BAMBOO), new ItemStack(Items.CACTUS),
+                new ItemStack(Items.SUGAR_CANE), new ItemStack(Items.VINE),
+                new ItemStack(Items.DANDELION), new ItemStack(Items.MOSS_BLOCK),
+                new ItemStack(Items.MOSS_CARPET), new ItemStack(Items.DRIED_KELP_BLOCK),
+                new ItemStack(Items.HAY_BLOCK), new ItemStack(Items.WHEAT_SEEDS),
+                new ItemStack(Items.WHEAT), new ItemStack(Items.CARROT),
+                new ItemStack(Items.POTATO), new ItemStack(Items.BEETROOT)
+        };
+        int[] expected = {150, 120, 38, 75, 15, 19, 38, 38, 30, 15,
+                15, 120, 15, 300, 270, 15, 30, 30, 30, 30};
+        for (int i = 0; i < fuels.length; i++) {
+            h.assertTrue(BiomassFuelRegistry.burnTimeFor(fuels[i]) == expected[i],
+                    "Unexpected biomass burn time for " + fuels[i].getHoverName().getString());
+        }
+        for (ItemStack rejected : java.util.List.of(new ItemStack(Items.COAL), new ItemStack(Items.CHARCOAL),
+                new ItemStack(Items.LAVA_BUCKET), new ItemStack(Items.BONE_MEAL))) {
+            h.assertTrue(BiomassFuelRegistry.burnTimeFor(rejected) == 0, "Unsupported fuel must be rejected");
+        }
         h.succeed();
     }
 

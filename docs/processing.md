@@ -29,10 +29,10 @@ not wearable armor; only the washed result can be equipped. No separate
 | Ingot | 144 mB | 20 ticks | Hot ingot → ingot |
 | Pickaxe / axe / shovel / hoe head | 288 mB | 40 ticks | Hot head → head |
 | Sword blade | 288 mB | 40 ticks | Hot blade → blade |
-| Helmet | 432 mB | 60 ticks | Hot helmet → wearable helmet |
-| Chestplate | 576 mB | 80 ticks | Hot chestplate → wearable chestplate |
-| Leggings | 720 mB | 100 ticks | Hot leggings → wearable leggings |
-| Boots | 432 mB | 60 ticks | Hot boots → wearable boots |
+| Helmet | 720 mB | 100 ticks | Hot helmet → wearable helmet |
+| Chestplate | 1152 mB | 160 ticks | Hot chestplate → wearable chestplate |
+| Leggings | 1008 mB | 140 ticks | Hot leggings → wearable leggings |
+| Boots | 576 mB | 80 ticks | Hot boots → wearable boots |
 
 As requested, tool heads still need a handle after cooling. Assemble **one cooled
 head above two sticks** in a vertical column for pickaxe, axe, shovel or hoe.

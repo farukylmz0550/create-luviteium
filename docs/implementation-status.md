@@ -23,7 +23,7 @@ the committed wrapper performs the Gradle sync without a globally installed Grad
 **Complete.** The project, verified Create development dependencies, core registries,
 and dedicated-server startup are now validated together. `./gradlew compileJava`,
 `./gradlew build`, and `./gradlew runServer` all pass; the dedicated server loads
-NeoForge 21.1.229, Create 6.0.10, and Luviteium 1.0.1 and reaches `Done`. The Create
+NeoForge 21.1.229, Create 6.0.10, and Luviteium 1.1.0 and reaches `Done`. The Create
 runtime setup uses the documented non-transitive slim dependency plus Ponder, Flywheel,
 and Registrate runtime/development dependencies. The 1.21.1 fluid-result field was also
 corrected so startup loads the Luviteium mixing recipe without a parse error.
@@ -103,7 +103,7 @@ Funnel behavior and full survival progression remain manual QA.
 
 **Complete for automated QA and packaging.** A clean Gradle build, JSON validation,
 dedicated-server startup, recipe loading, stale cooled-ingot reference audit, and jar
-content inspection all pass. The final artifact is `build/libs/luviteium-1.0.1.jar`.
+content inspection all pass. The final artifact is `build/libs/luviteium-1.1.0.jar`.
 The remaining items are explicitly documented in `docs/qa-report.md` as manual client
 or survival-world checks; they are not represented as automatically verified.
 

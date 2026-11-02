@@ -34,7 +34,8 @@ public final class PonderSmokeTest {
     private static final String[] SHOTS = {"casting_table", "blank_mold", "biomass_generator",
             "biomass_generator-turning", "biomass_generator-stopped", "biomass_generator-stopped-later",
             "processing-mixing", "processing-hot-cast", "processing-cooling"};
-    private static final int[] SHOT_TIMES = {150, 270, 150, 157, 360, 365, 60, 238, 340};
+    // The casting scene now spends 60 ticks showing the Basin filling before pumping.
+    private static final int[] SHOT_TIMES = {150, 270, 150, 157, 360, 365, 60, 298, 400};
     private static float previousShaftAngle;
 
     @SubscribeEvent

@@ -51,9 +51,15 @@ public final class LuviteiumScenes {
         scene.addKeyframe();
         scene.world().modifyBlockEntity(basin, com.simibubi.create.content.processing.basin.BasinBlockEntity.class, be -> {
             be.getInputInventory().extractItem(0, 1, false);
-            be.inputTank.getPrimaryHandler().fill(new FluidStack(ModFluids.MOLTEN_LUVITEIUM.get(), 144),
-                    IFluidHandler.FluidAction.EXECUTE);
         });
+        // Let the Basin visibly fill as the mixer finishes instead of appearing full instantly.
+        for (int portion = 0; portion < 12; portion++) {
+            scene.world().modifyBlockEntity(basin, com.simibubi.create.content.processing.basin.BasinBlockEntity.class,
+                    be -> be.inputTank.getPrimaryHandler().fill(
+                            new FluidStack(ModFluids.MOLTEN_LUVITEIUM.get(), 12),
+                            IFluidHandler.FluidAction.EXECUTE));
+            scene.idle(5);
+        }
         scene.world().setBlock(table, ModBlocks.CASTING_TABLE.get().defaultBlockState(), false);
         scene.world().showSection(util.select().position(table), Direction.DOWN);
         scene.overlay().showControls(util.vector().topOf(table), Pointing.DOWN, 60)

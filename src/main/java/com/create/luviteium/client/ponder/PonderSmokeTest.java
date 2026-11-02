@@ -104,24 +104,40 @@ public final class PonderSmokeTest {
             var scene = ((PonderUI) mc.screen).getActiveScene();
             var table = (com.create.luviteium.content.CastingTableBlockEntity)
                     scene.getWorld().getBlockEntity(new net.minecraft.core.BlockPos(4, 2, 3));
-            if (!(mc.getBlockEntityRenderDispatcher().getRenderer(table)
-                    instanceof com.create.luviteium.client.CastingTableRenderer))
-                throw new IllegalStateException("Missing casting animation renderer");
-            if (screenshotIndex == 0 && table.getVisualFill(1) <= 0)
-                throw new IllegalStateException("Filled mold has no visible liquid");
+            // Ponder's virtual world can temporarily expose the block state before
+            // its block entity is attached. Do not pass null to the dispatcher; the
+            // scene renderer itself will validate the frame once the entity exists.
+            if (table == null) {
+                LogUtils.getLogger().warn("Casting table block entity is not available yet for {}", SHOTS[screenshotIndex]);
+                capturePending = true;
+            } else {
+                if (!(mc.getBlockEntityRenderDispatcher().getRenderer(table)
+                        instanceof com.create.luviteium.client.CastingTableRenderer))
+                    throw new IllegalStateException("Missing casting animation renderer");
+                if (screenshotIndex == 0 && table.getVisualFill(1) <= 0)
+                    throw new IllegalStateException("Filled mold has no visible liquid");
+            }
             // Seeking replays instructions over multiple UI ticks. Capture the actual
             // completion pulse rather than assuming the seek finished on a fixed frame.
-            if (screenshotIndex == 7 && (table.getDisplayedOutput().isEmpty() || table.getEjectionLift(0) < 0.12f)) {
+            if (screenshotIndex == 7 && table != null
+                    && (table.getDisplayedOutput().isEmpty() || table.getEjectionLift(0) < 0.12f)) {
                 if (screenshotTicks < 100) return;
                 throw new IllegalStateException("Cast did not show a completed product with an ejection animation");
             }
-            LogUtils.getLogger().info("LUVITEIUM_CASTING_RENDER_PASS {} fill={} lift={}",
-                    SHOTS[screenshotIndex], table.getVisualFill(1), table.getEjectionLift(0));
+            if (table != null) {
+                LogUtils.getLogger().info("LUVITEIUM_CASTING_RENDER_PASS {} fill={} lift={}",
+                        SHOTS[screenshotIndex], table.getVisualFill(1), table.getEjectionLift(0));
+            }
         }
         if (screenshotIndex >= 2 && screenshotIndex <= 5) {
             var ui = (PonderUI) mc.screen;
             var generator = (com.create.luviteium.content.BiomassGeneratorBlockEntity)
                     ui.getActiveScene().getWorld().getBlockEntity(new net.minecraft.core.BlockPos(3, 1, 3));
+            if (generator == null) {
+                LogUtils.getLogger().warn("Biomass generator block entity is not available yet for {}", SHOTS[screenshotIndex]);
+                capturePending = true;
+                return;
+            }
             if (!(mc.getBlockEntityRenderDispatcher().getRenderer(generator)
                     instanceof com.create.luviteium.client.BiomassGeneratorRenderer))
                 throw new IllegalStateException("Missing generator shaft renderer");

@@ -7,6 +7,7 @@ import com.mojang.math.Axis;
 import com.simibubi.create.foundation.blockEntity.renderer.SafeBlockEntityRenderer;
 import net.createmod.catnip.platform.NeoForgeCatnipServices;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.Direction;
@@ -25,7 +26,10 @@ public final class CastingTableRenderer extends SafeBlockEntityRenderer<CastingT
         float shake = table.isCasting() ? (float) Math.sin(progress * Math.PI * 8) * 0.008f : 0;
         pose.pushPose();
         pose.translate(shake, 0, 0);
-        renderItem(table, table.getDisplayedMold(), 1.025f, 0.7f, pose, buffers, light, overlay);
+        // Mold textures are dark metal and can become unreadable under the table's
+        // normal block light, especially when rendered on a vertical indicator.
+        renderItem(table, table.getDisplayedMold(), 1.025f, 0.7f, pose, buffers,
+                LightTexture.FULL_BRIGHT, overlay);
         pose.popPose();
         renderMoldIndicators(table, pose, buffers, light, overlay);
 
@@ -52,7 +56,7 @@ public final class CastingTableRenderer extends SafeBlockEntityRenderer<CastingT
             pose.mulPose(Axis.YP.rotationDegrees(side.toYRot()));
             pose.scale(0.62f, 0.62f, 0.18f);
             Minecraft.getInstance().getItemRenderer().renderStatic(mold, ItemDisplayContext.FIXED,
-                    light, overlay, pose, buffers, table.getLevel(), 0);
+                    LightTexture.FULL_BRIGHT, overlay, pose, buffers, table.getLevel(), 0);
             pose.popPose();
         }
     }

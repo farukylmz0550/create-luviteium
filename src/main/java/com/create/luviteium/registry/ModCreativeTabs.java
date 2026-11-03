@@ -37,6 +37,10 @@ public final class ModCreativeTabs {
                         output.accept(ModItems.CHESTPLATE_MOLD.get());
                         output.accept(ModItems.LEGGINGS_MOLD.get());
                         output.accept(ModItems.BOOTS_MOLD.get());
+                        output.accept(ModItems.PAXEL_HEAD_MOLD.get());
+                        output.accept(ModItems.LUVITEIUM_PAXEL_HEAD.get());
+                        output.accept(ModItems.NAZAR_BONCUGU.get());
+                        output.accept(ModItems.BAYRAMIN_BEREKETI.get());
 
                         output.accept(ModItems.HOT_LUVITEIUM_PICKAXE_HEAD.get());
                         output.accept(ModItems.HOT_LUVITEIUM_AXE_HEAD.get());
@@ -54,6 +58,13 @@ public final class ModCreativeTabs {
                         output.accept(ModItems.LUVITEIUM_SHOVEL.get());
                         output.accept(ModItems.LUVITEIUM_HOE.get());
                         output.accept(ModItems.LUVITEIUM_SWORD.get());
+                        output.accept(ModItems.WOODEN_PAXEL.get());
+                        output.accept(ModItems.STONE_PAXEL.get());
+                        output.accept(ModItems.IRON_PAXEL.get());
+                        output.accept(ModItems.GOLDEN_PAXEL.get());
+                        output.accept(ModItems.DIAMOND_PAXEL.get());
+                        output.accept(ModItems.NETHERITE_PAXEL.get());
+                        output.accept(ModItems.LUVITEIUM_PAXEL.get());
 
                         output.accept(ModItems.LUVITEIUM_HELMET.get());
                         output.accept(ModItems.HOT_LUVITEIUM_HELMET.get());

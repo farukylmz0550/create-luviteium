@@ -12,6 +12,9 @@ import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SwordItem;
+import net.minecraft.world.item.Tiers;
+import com.create.luviteium.content.PaxelItem;
+import com.create.luviteium.content.CharmItem;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -70,10 +73,18 @@ public final class ModItems {
             .attributes(AxeItem.createAttributes(LuviteiumTier.INSTANCE, 5.5f, -3.1f))));
     public static final DeferredItem<Item> LUVITEIUM_SHOVEL = ITEMS.register("luviteium_shovel", () -> new ShovelItem(LuviteiumTier.INSTANCE, new Item.Properties()
             .attributes(ShovelItem.createAttributes(LuviteiumTier.INSTANCE, 1.5f, -3.0f))));
+    public static final DeferredItem<Item> WOODEN_PAXEL = ITEMS.register("wooden_paxel", () -> new PaxelItem(Tiers.WOOD, new Item.Properties().attributes(PaxelItem.createAttributes(Tiers.WOOD, 1.0f, -2.8f))));
+    public static final DeferredItem<Item> STONE_PAXEL = ITEMS.register("stone_paxel", () -> new PaxelItem(Tiers.STONE, new Item.Properties().attributes(PaxelItem.createAttributes(Tiers.STONE, 1.0f, -2.8f))));
+    public static final DeferredItem<Item> IRON_PAXEL = ITEMS.register("iron_paxel", () -> new PaxelItem(Tiers.IRON, new Item.Properties().attributes(PaxelItem.createAttributes(Tiers.IRON, 1.0f, -2.8f))));
+    public static final DeferredItem<Item> GOLDEN_PAXEL = ITEMS.register("golden_paxel", () -> new PaxelItem(Tiers.GOLD, new Item.Properties().attributes(PaxelItem.createAttributes(Tiers.GOLD, 1.0f, -2.8f))));
+    public static final DeferredItem<Item> DIAMOND_PAXEL = ITEMS.register("diamond_paxel", () -> new PaxelItem(Tiers.DIAMOND, new Item.Properties().attributes(PaxelItem.createAttributes(Tiers.DIAMOND, 1.0f, -2.8f))));
+    public static final DeferredItem<Item> NETHERITE_PAXEL = ITEMS.register("netherite_paxel", () -> new PaxelItem(Tiers.NETHERITE, new Item.Properties().fireResistant().attributes(PaxelItem.createAttributes(Tiers.NETHERITE, 1.0f, -2.8f))));
     public static final DeferredItem<Item> LUVITEIUM_HOE = ITEMS.register("luviteium_hoe", () -> new HoeItem(LuviteiumTier.INSTANCE, new Item.Properties()
             .attributes(HoeItem.createAttributes(LuviteiumTier.INSTANCE, -2.5f, -1.0f))));
     public static final DeferredItem<Item> LUVITEIUM_SWORD = ITEMS.register("luviteium_sword", () -> new SwordItem(LuviteiumTier.INSTANCE, new Item.Properties()
             .attributes(SwordItem.createAttributes(LuviteiumTier.INSTANCE, 3, -2.4f))));
+    public static final DeferredItem<Item> LUVITEIUM_PAXEL = ITEMS.register("luviteium_paxel", () -> new PaxelItem(LuviteiumTier.INSTANCE, new Item.Properties()
+            .attributes(PaxelItem.createAttributes(LuviteiumTier.INSTANCE, 1.0f, -2.8f))));
     public static final DeferredItem<Item> LUVITEIUM_HELMET = ITEMS.register("luviteium_helmet", () -> new ArmorItem(LUVITEIUM_ARMOR_MATERIAL, ArmorItem.Type.HELMET, new Item.Properties()
             .durability(ArmorItem.Type.HELMET.getDurability(30))));
     public static final DeferredItem<Item> LUVITEIUM_CHESTPLATE = ITEMS.register("luviteium_chestplate", () -> new ArmorItem(LUVITEIUM_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Properties()
@@ -95,6 +106,11 @@ public final class ModItems {
     public static final DeferredItem<Item> CHESTPLATE_MOLD = registerSpecializedMold("chestplate_mold");
     public static final DeferredItem<Item> LEGGINGS_MOLD = registerSpecializedMold("leggings_mold");
     public static final DeferredItem<Item> BOOTS_MOLD = registerSpecializedMold("boots_mold");
+    public static final DeferredItem<Item> PAXEL_HEAD_MOLD = registerSpecializedMold("paxel_head_mold");
+    public static final DeferredItem<Item> LUVITEIUM_PAXEL_HEAD = ITEMS.registerSimpleItem("luviteium_paxel_head");
+
+    public static final DeferredItem<Item> NAZAR_BONCUGU = ITEMS.register("nazar_boncugu", CharmItem::new);
+    public static final DeferredItem<Item> BAYRAMIN_BEREKETI = ITEMS.register("bayramin_bereketi", CharmItem::new);
 
     private static DeferredItem<Item> registerSpecializedMold(String name) {
         return ITEMS.register(name, () -> new Item(new Item.Properties().stacksTo(1)));

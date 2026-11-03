@@ -224,6 +224,7 @@ public class CastingTableBlockEntity extends BlockEntity {
                 || mold.is(ModItems.SWORD_BLADE_MOLD.get())) {
             return PICKAXE_HEAD_AMOUNT;
         }
+        if (mold.is(ModItems.PAXEL_HEAD_MOLD.get())) return 1008;
         if (mold.is(ModItems.HELMET_MOLD.get())) {
             return 720;
         }
@@ -250,6 +251,7 @@ public class CastingTableBlockEntity extends BlockEntity {
         if (mold.is(ModItems.SHOVEL_HEAD_MOLD.get())) return ModItems.HOT_LUVITEIUM_SHOVEL_HEAD.get();
         if (mold.is(ModItems.HOE_HEAD_MOLD.get())) return ModItems.HOT_LUVITEIUM_HOE_HEAD.get();
         if (mold.is(ModItems.SWORD_BLADE_MOLD.get())) return ModItems.HOT_LUVITEIUM_SWORD_BLADE.get();
+        if (mold.is(ModItems.PAXEL_HEAD_MOLD.get())) return ModItems.LUVITEIUM_PAXEL_HEAD.get();
         if (mold.is(ModItems.HELMET_MOLD.get())) return ModItems.HOT_LUVITEIUM_HELMET.get();
         if (mold.is(ModItems.CHESTPLATE_MOLD.get())) return ModItems.HOT_LUVITEIUM_CHESTPLATE.get();
         if (mold.is(ModItems.LEGGINGS_MOLD.get())) return ModItems.HOT_LUVITEIUM_LEGGINGS.get();
@@ -261,6 +263,7 @@ public class CastingTableBlockEntity extends BlockEntity {
         return stack.is(ModItems.INGOT_MOLD.get()) || stack.is(ModItems.PICKAXE_HEAD_MOLD.get())
                 || stack.is(ModItems.AXE_HEAD_MOLD.get()) || stack.is(ModItems.SHOVEL_HEAD_MOLD.get())
                 || stack.is(ModItems.HOE_HEAD_MOLD.get()) || stack.is(ModItems.SWORD_BLADE_MOLD.get())
+                || stack.is(ModItems.PAXEL_HEAD_MOLD.get())
                 || stack.is(ModItems.HELMET_MOLD.get()) || stack.is(ModItems.CHESTPLATE_MOLD.get())
                 || stack.is(ModItems.LEGGINGS_MOLD.get()) || stack.is(ModItems.BOOTS_MOLD.get());
     }

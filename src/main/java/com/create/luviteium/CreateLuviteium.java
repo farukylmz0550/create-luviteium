@@ -27,6 +27,7 @@ public final class CreateLuviteium {
         ModCreativeTabs.TABS.register(modBus);
         modBus.addListener(this::registerCapabilities);
         NeoForge.EVENT_BUS.addListener(this::rejectDamagedMoldSamples);
+        NeoForge.EVENT_BUS.register(com.create.luviteium.content.CharmEffects.class);
     }
 
     private void registerCapabilities(RegisterCapabilitiesEvent event) {

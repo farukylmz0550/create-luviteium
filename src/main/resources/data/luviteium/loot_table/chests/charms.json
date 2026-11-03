@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {"rolls": 1, "entries": [{"type":"minecraft:item","name":"luviteium:nazar_boncugu","weight":1}], "conditions":[{"condition":"minecraft:random_chance","chance":0.03}]},
+    {"rolls": 1, "entries": [{"type":"minecraft:item","name":"luviteium:bayramin_bereketi","weight":1}], "conditions":[{"condition":"minecraft:random_chance","chance":0.03}]}
+  ]
+}

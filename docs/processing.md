@@ -48,7 +48,7 @@ holding a Blank Mold, and the resulting mold can be reused indefinitely.
 
 ## Player-facing changes and compatibility
 
-- The machine is displayed as **Casting Machine** / **Kalıp Makinesi**. Its
+- The machine is displayed as **Casting Machine**. Its
   `luviteium:casting_table` registry ID stays the same, preserving placed blocks,
   inventory items and recipes in existing worlds.
 - Raw ore, mold, machine and hot-item tooltips describe the next processing step.
